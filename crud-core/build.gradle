@@ -1,0 +1,35 @@
+plugins {
+    id 'java'
+}
+
+group 'org.crud.core'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    maven {
+        url = uri('https://oss.sonatype.org/content/groups/public/')
+    }
+
+    maven {
+        url = uri('http://repo.spring.io/milestone')
+    }
+
+    maven {
+        url = uri('http://repo.maven.apache.org/maven2')
+    }
+}
+
+dependencies {
+    api project(':crud-db')
+    compile 'commons-lang:commons-lang:2.6'
+    compile 'org.apache.commons:commons-lang3:3.11'
+    compile 'commons-beanutils:commons-beanutils:1.9.4'
+    compile 'org.springframework.boot:spring-boot-starter-web:2.3.9.RELEASE'
+    compile 'org.springframework.boot:spring-boot-starter-data-redis:2.3.9.RELEASE'
+    compile 'org.springframework:spring-context:5.2.9.RELEASE'
+    compile 'org.springframework:spring-beans:5.2.9.RELEASE'
+    compile 'org.dbflute:dbflute-runtime:1.2.4'
+    compile 'com.github.dozermapper:dozer-spring-boot-starter:6.5.0'
+    compile 'com.google.guava:guava:30.0-jre'
+}

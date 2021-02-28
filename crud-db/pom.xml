@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- DBFluteインストール用 -->
+
+    <groupId>org.crud.db.dbflute</groupId>
+    <artifactId>crud-db</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <properties>
+        <dbflute.version>1.2.4</dbflute.version>
+        <dbflute.schema>crud</dbflute.schema>
+        <dbflute.package>org.crud.db.dbflute</dbflute.package>
+        <spring-framework.version>5.3.4.RELEASE</spring-framework.version>
+        <mysql.version>8.0.23</mysql.version>
+    </properties>
+
+    <build>
+        <defaultGoal>jar</defaultGoal>
+        <finalName>${project.artifactId}</finalName>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>11</source>
+                    <target>11</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+        </plugins>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.dbflute</groupId>
+                    <artifactId>dbflute-maven-plugin</artifactId>
+                    <version>1.1.0</version>
+                    <configuration>
+                        <clientProject>${dbflute.schema}</clientProject>
+                        <packageBase>${dbflute.package}</packageBase>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>maven2</id>
+            <url>https://repo.maven.apache.org/maven2/</url>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <repositories>
+        <!-- for dbflute snapshot -->
+        <repository>
+            <id>sonatype-oss-public</id>
+            <url>https://oss.sonatype.org/content/groups/public/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <!-- for spring boot snapshot -->
+        <repository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>http://repo.spring.io/milestone</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+
+    <dependencies>
+        <!-- spring -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring</artifactId>
+            <version>${spring-framework.version}</version>
+            <type>pom</type>
+        </dependency>
+
+        <!-- db -->
+        <dependency>
+            <groupId>org.dbflute</groupId>
+            <artifactId>dbflute-runtime</artifactId>
+            <version>${dbflute.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+    </dependencies>
+</project>

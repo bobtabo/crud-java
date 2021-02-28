@@ -1,0 +1,55 @@
+buildscript {
+    ext {
+        springBootVersion = '2.3.9.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+group = 'org.crud.api'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    api project(':crud-db')
+    api project(':crud-core')
+    compile 'org.springframework.boot:spring-boot:2.3.9.RELEASE'
+    compile 'org.springframework.boot:spring-boot-starter-web:2.3.9.RELEASE'
+    compile 'org.springframework.boot:spring-boot-starter-integration:2.3.9.RELEASE'
+    compile 'org.springframework.boot:spring-boot-starter-security:2.3.9.RELEASE'
+    compile 'org.springframework.boot:spring-boot-starter-tomcat:2.3.9.RELEASE'
+    compile 'org.springframework.boot:spring-boot-autoconfigure:2.3.9.RELEASE'
+    compile 'org.springframework.boot:spring-boot-starter-data-redis:2.3.9.RELEASE'
+    compile 'org.springframework:spring-context-support:5.2.9.RELEASE'
+    compileOnly 'org.projectlombok:lombok'
+    runtimeOnly 'mysql:mysql-connector-java:8.0.23'
+    compile 'com.github.dozermapper:dozer-spring-boot-starter:6.5.0'
+    compile 'net.sf.dozer:dozer:5.5.1'
+    compile 'net.sf.dozer:dozer-spring:5.5.1'
+    implementation "javax.xml.bind:jaxb-api:2.3.1"
+    implementation "org.glassfish.jaxb:jaxb-runtime:2.3.1"
+    compile 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+    compile 'com.zaxxer:HikariCP:3.4.5'
+    implementation 'javax.validation:validation-api:2.0.1.Final'
+    runtimeOnly 'org.hibernate.validator:hibernate-validator:6.1.6.Final'
+    runtimeOnly 'org.glassfish:javax.el:3.0.1-b12'
+}

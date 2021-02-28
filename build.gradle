@@ -1,0 +1,137 @@
+import org.springframework.boot.gradle.plugin.SpringBootPlugin
+
+buildscript {
+    ext {
+        spring_boot_version = '2.3.9.RELEASE'
+    }
+
+    repositories {
+        mavenCentral()
+        maven { url 'https://plugins.gradle.org/m2/' }
+        maven { url 'https://repo.spring.io/plugins-release' }
+    }
+    dependencies {
+        classpath 'com.github.ben-manes:gradle-versions-plugin:0.27.0'
+        classpath 'io.franzbecker:gradle-lombok:4.0.0'
+        classpath 'io.spring.gradle:dependency-management-plugin:1.0.10.RELEASE'
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:$spring_boot_version"
+    }
+}
+
+apply plugin: 'idea'
+apply plugin: 'jacoco'
+
+group 'org.crud'
+version '1.0-SNAPSHOT'
+
+allprojects {
+    repositories {
+        mavenCentral();
+    }
+}
+
+subprojects {
+    apply plugin: 'java-library'
+    apply plugin: 'io.franzbecker.gradle-lombok'
+    apply plugin: 'io.spring.dependency-management'
+
+    sourceCompatibility = 11
+    targetCompatibility = 11
+
+    group = rootProject.group
+    version = rootProject.version
+
+    ext['guava.version'] = '28.2-jre'
+    ext['retrofit.version'] = '2.9.0'
+
+    dependencyManagement {
+        imports {
+            mavenBom SpringBootPlugin.BOM_COORDINATES
+        }
+
+        dependencies {
+            dependency 'com.google.guava:guava:' + ext['guava.version']
+            dependency 'com.github.stefanbirkner:system-lambda:1.0.0'
+            dependencySet(group: 'com.squareup.retrofit2', version: ext['retrofit.version']) {
+                entry 'converter-jackson'
+                entry 'retrofit'
+            }
+            dependencySet(group: 'io.jsonwebtoken', version: '0.11.2') {
+                entry 'jjwt-api'
+                entry 'jjwt-impl'
+                entry 'jjwt-jackson'
+            }
+        }
+    }
+
+    dependencies {
+        annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+        // http://docs.spring.io/spring-boot/docs/current/reference/html/configuration-metadata.html#configuration-metadata-annotation-processor
+
+        testImplementation 'com.google.guava:guava'
+        testImplementation 'com.github.stefanbirkner:system-lambda'
+        testImplementation 'com.squareup.okhttp3:mockwebserver'
+        testImplementation 'org.hibernate.validator:hibernate-validator'
+        testImplementation 'org.springframework.boot:spring-boot-starter-test' // MockHttpServletRequest
+        testImplementation 'org.springframework.boot:spring-boot-starter-logging'
+    }
+
+    compileJava.dependsOn(processResources)
+    // http://docs.spring.io/spring-boot/docs/current/reference/html/configuration-metadata.html#configuration-metadata-annotation-processor
+
+    lombok {
+        version = '1.18.12'
+    }
+
+    if (!project.name.startsWith('sample-') && !project.name.startsWith('test-')) {
+        task delombok(type: io.franzbecker.gradle.lombok.task.DelombokTask, dependsOn: compileJava) {
+            ext.outputDir = file("$buildDir/delombok")
+            outputs.dir(outputDir)
+            sourceSets.main.java.srcDirs.each {
+                inputs.dir(it)
+                args(it, "-d", outputDir)
+            }
+        }
+
+        javadoc {
+            dependsOn delombok
+            source = delombok.outputDir
+            options.encoding = 'UTF-8'
+            options.locale = 'en_US'
+            options.addStringOption('Xdoclint:none', '-quiet')
+            // To create javadoc for generated method&constructor, delombok & run javadoc on delombok.outputDir.
+        }
+
+        task javadocJar(type: Jar, dependsOn: 'javadoc') {
+            archiveClassifier.set('javadoc')
+            from javadoc.destinationDir
+        }
+
+        task sourcesJar(type: Jar, dependsOn: 'classes') {
+            archiveClassifier.set('sources')
+            from sourceSets.main.allSource
+        }
+
+        artifacts {
+            archives javadocJar, sourcesJar
+        }
+    }
+
+    compileJava {
+        options.compilerArgs << '-Xlint:all' << '-Xlint:deprecation' << '-Werror' << '-Xlint:-processing' << '-parameters'
+        options.encoding = 'UTF-8'
+    }
+    compileTestJava {
+        options.encoding = 'UTF-8'
+    }
+
+    test {
+        useJUnitPlatform()
+    }
+
+    project.plugins.withType(SpringBootPlugin) {
+        bootRun {
+            systemProperties System.properties
+        }
+    }
+}
