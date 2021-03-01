@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(path = "/api/v1/user")
+@RequestMapping(path = "/api/v1/pref")
 public class ExampleController extends ControllerSupport {
     @Autowired
     private ExampleService exampleService;
@@ -27,9 +27,9 @@ public class ExampleController extends ControllerSupport {
      *
      * @return レスポンス
      */
-    @GetMapping("/{userId}/example")
+    @GetMapping("/{prefId}/example")
     @ResponseBody
-    public ResponseEntity<String> index(@PathVariable("userId") Long userId) {
+    public ResponseEntity<String> index(@PathVariable("prefId") Long userId) {
         ExampleDto dto = exampleService.search(userId);
 
         return getResponse(HttpStatus.OK, dto);
