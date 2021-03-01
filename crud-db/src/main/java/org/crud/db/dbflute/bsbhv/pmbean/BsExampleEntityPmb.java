@@ -12,10 +12,10 @@ import org.crud.db.dbflute.exentity.customize.*;
 
 /**
  * The base class for typed parameter-bean of ExampleEntity. <br>
- * This is related to "<span style="color: #AD4747">selectExampleEntity</span>" on UserBhv.
+ * This is related to "<span style="color: #AD4747">selectExampleEntity</span>" on PrefBhv.
  * @author DBFlute(AutoGenerator)
  */
-public class BsExampleEntityPmb implements ListHandlingPmb<UserBhv, ExampleEntity>, EntityHandlingPmb<UserBhv, ExampleEntity>, FetchBean {
+public class BsExampleEntityPmb implements ListHandlingPmb<PrefBhv, ExampleEntity>, EntityHandlingPmb<PrefBhv, ExampleEntity>, FetchBean {
 
     // ===================================================================================
     //                                                                           Attribute
@@ -34,7 +34,7 @@ public class BsExampleEntityPmb implements ListHandlingPmb<UserBhv, ExampleEntit
     //                                                                         ===========
     /**
      * Constructor for the typed parameter-bean of ExampleEntity. <br>
-     * This is related to "<span style="color: #AD4747">selectExampleEntity</span>" on UserBhv.
+     * This is related to "<span style="color: #AD4747">selectExampleEntity</span>" on PrefBhv.
      */
     public BsExampleEntityPmb() {
     }

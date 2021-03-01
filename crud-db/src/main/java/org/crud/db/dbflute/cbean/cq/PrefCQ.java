@@ -1,18 +1,18 @@
 package org.crud.db.dbflute.cbean.cq;
 
-import org.crud.db.dbflute.cbean.cq.bs.BsUserCQ;
 import org.dbflute.cbean.ConditionQuery;
 import org.dbflute.cbean.sqlclause.SqlClause;
+import org.crud.db.dbflute.cbean.cq.bs.BsPrefCQ;
 
 /**
- * The condition-query of user.
+ * The condition-query of pref.
  * <p>
  * You can implement your original methods here.
  * This class remains when re-generating.
  * </p>
  * @author DBFlute(AutoGenerator)
  */
-public class UserCQ extends BsUserCQ {
+public class PrefCQ extends BsPrefCQ {
 
     // ===================================================================================
     //                                                                         Constructor
@@ -25,7 +25,7 @@ public class UserCQ extends BsUserCQ {
      * @param aliasName The alias name for this query. (NotNull)
      * @param nestLevel The nest level of this query. (if zero, this is base query)
      */
-    public UserCQ(ConditionQuery referrerQuery, SqlClause sqlClause, String aliasName, int nestLevel) {
+    public PrefCQ(ConditionQuery referrerQuery, SqlClause sqlClause, String aliasName, int nestLevel) {
         super(referrerQuery, sqlClause, aliasName, nestLevel);
     }
 

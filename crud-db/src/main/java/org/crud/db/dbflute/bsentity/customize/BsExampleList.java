@@ -15,7 +15,7 @@ import org.crud.db.dbflute.exentity.customize.*;
  *     
  *
  * [column]
- *     id, token, user_name
+ *     id, pref_name
  *
  * [sequence]
  *     
@@ -40,12 +40,10 @@ import org.crud.db.dbflute.exentity.customize.*;
  *
  * [get/set template]
  * /= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
- * Long id = entity.getId();
- * String token = entity.getToken();
- * String userName = entity.getUserName();
+ * Integer id = entity.getId();
+ * String prefName = entity.getPrefName();
  * entity.setId(id);
- * entity.setToken(token);
- * entity.setUserName(userName);
+ * entity.setPrefName(prefName);
  * = = = = = = = = = =/
  * </pre>
  * @author DBFlute(AutoGenerator)
@@ -61,14 +59,11 @@ public abstract class BsExampleList extends AbstractEntity implements CustomizeE
     // ===================================================================================
     //                                                                           Attribute
     //                                                                           =========
-    /** id: {BIGINT UNSIGNED(20), refers to user.id} */
-    protected Long id;
+    /** id: {INT UNSIGNED(10), refers to pref.id} */
+    protected Integer id;
 
-    /** token: {VARCHAR(255), refers to user.token} */
-    protected String token;
-
-    /** user_name: {VARCHAR(2)} */
-    protected String userName;
+    /** pref_name: {VARCHAR(2)} */
+    protected String prefName;
 
     // ===================================================================================
     //                                                                             DB Meta
@@ -109,8 +104,7 @@ public abstract class BsExampleList extends AbstractEntity implements CustomizeE
         if (obj instanceof BsExampleList) {
             BsExampleList other = (BsExampleList)obj;
             if (!xSV(this.id, other.id)) { return false; }
-            if (!xSV(this.token, other.token)) { return false; }
-            if (!xSV(this.userName, other.userName)) { return false; }
+            if (!xSV(this.prefName, other.prefName)) { return false; }
             return true;
         } else {
             return false;
@@ -122,8 +116,7 @@ public abstract class BsExampleList extends AbstractEntity implements CustomizeE
         int hs = initial;
         hs = xCH(hs, asTableDbName());
         hs = xCH(hs, this.id);
-        hs = xCH(hs, this.token);
-        hs = xCH(hs, this.userName);
+        hs = xCH(hs, this.prefName);
         return hs;
     }
 
@@ -136,8 +129,7 @@ public abstract class BsExampleList extends AbstractEntity implements CustomizeE
     protected String doBuildColumnString(String dm) {
         StringBuilder sb = new StringBuilder();
         sb.append(dm).append(xfND(this.id));
-        sb.append(dm).append(xfND(this.token));
-        sb.append(dm).append(xfND(this.userName));
+        sb.append(dm).append(xfND(this.prefName));
         if (sb.length() > dm.length()) {
             sb.delete(0, dm.length());
         }
@@ -159,60 +151,40 @@ public abstract class BsExampleList extends AbstractEntity implements CustomizeE
     //                                                                            Accessor
     //                                                                            ========
     /**
-     * [get] id: {BIGINT UNSIGNED(20), refers to user.id} <br>
+     * [get] id: {INT UNSIGNED(10), refers to pref.id} <br>
      * ID
      * @return The value of the column 'id'. (NullAllowed even if selected: for no constraint)
      */
-    public Long getId() {
+    public Integer getId() {
         checkSpecifiedProperty("id");
         return this.id;
     }
 
     /**
-     * [set] id: {BIGINT UNSIGNED(20), refers to user.id} <br>
+     * [set] id: {INT UNSIGNED(10), refers to pref.id} <br>
      * ID
      * @param id The value of the column 'id'. (NullAllowed: null update allowed for no constraint)
      */
-    public void setId(Long id) {
+    public void setId(Integer id) {
         registerModifiedProperty("id");
         this.id = id;
     }
 
     /**
-     * [get] token: {VARCHAR(255), refers to user.token} <br>
-     * ログイントークン
-     * @return The value of the column 'token'. (NullAllowed even if selected: for no constraint)
+     * [get] pref_name: {VARCHAR(2)} <br>
+     * @return The value of the column 'pref_name'. (NullAllowed even if selected: for no constraint)
      */
-    public String getToken() {
-        checkSpecifiedProperty("token");
-        return this.token;
+    public String getPrefName() {
+        checkSpecifiedProperty("prefName");
+        return this.prefName;
     }
 
     /**
-     * [set] token: {VARCHAR(255), refers to user.token} <br>
-     * ログイントークン
-     * @param token The value of the column 'token'. (NullAllowed: null update allowed for no constraint)
+     * [set] pref_name: {VARCHAR(2)} <br>
+     * @param prefName The value of the column 'pref_name'. (NullAllowed: null update allowed for no constraint)
      */
-    public void setToken(String token) {
-        registerModifiedProperty("token");
-        this.token = token;
-    }
-
-    /**
-     * [get] user_name: {VARCHAR(2)} <br>
-     * @return The value of the column 'user_name'. (NullAllowed even if selected: for no constraint)
-     */
-    public String getUserName() {
-        checkSpecifiedProperty("userName");
-        return this.userName;
-    }
-
-    /**
-     * [set] user_name: {VARCHAR(2)} <br>
-     * @param userName The value of the column 'user_name'. (NullAllowed: null update allowed for no constraint)
-     */
-    public void setUserName(String userName) {
-        registerModifiedProperty("userName");
-        this.userName = userName;
+    public void setPrefName(String prefName) {
+        registerModifiedProperty("prefName");
+        this.prefName = prefName;
     }
 }

@@ -32,7 +32,8 @@ public class DBMetaInstanceHandler implements DBMetaProvider {
     static {
         final Map<String, String> tmpMap = newHashMap();
         tmpMap.put("CHANGELOG", "org.crud.db.dbflute.bsentity.dbmeta.ChangelogDbm");
-        tmpMap.put("user", "org.crud.db.dbflute.bsentity.dbmeta.UserDbm");
+        tmpMap.put("customer", "org.crud.db.dbflute.bsentity.dbmeta.CustomerDbm");
+        tmpMap.put("pref", "org.crud.db.dbflute.bsentity.dbmeta.PrefDbm");
         _tableDbNameClassNameMap = Collections.unmodifiableMap(tmpMap);
     }
 

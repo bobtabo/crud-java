@@ -13,17 +13,17 @@ import org.crud.db.dbflute.allcommon.*;
 import org.crud.db.dbflute.exentity.*;
 
 /**
- * The DB meta of user. (Singleton)
+ * The DB meta of pref. (Singleton)
  * @author DBFlute(AutoGenerator)
  */
-public class UserDbm extends AbstractDBMeta {
+public class PrefDbm extends AbstractDBMeta {
 
     // ===================================================================================
     //                                                                           Singleton
     //                                                                           =========
-    private static final UserDbm _instance = new UserDbm();
-    private UserDbm() {}
-    public static UserDbm getInstance() { return _instance; }
+    private static final PrefDbm _instance = new PrefDbm();
+    private PrefDbm() {}
+    public static PrefDbm getInstance() { return _instance; }
 
     // ===================================================================================
     //                                                                       Current DBDef
@@ -42,11 +42,11 @@ public class UserDbm extends AbstractDBMeta {
     protected final Map<String, PropertyGateway> _epgMap = newHashMap();
     { xsetupEpg(); }
     protected void xsetupEpg() {
-        setupEpg(_epgMap, et -> ((User)et).getId(), (et, vl) -> ((User)et).setId(ctl(vl)), "id");
-        setupEpg(_epgMap, et -> ((User)et).getToken(), (et, vl) -> ((User)et).setToken((String)vl), "token");
-        setupEpg(_epgMap, et -> ((User)et).getCreatedAt(), (et, vl) -> ((User)et).setCreatedAt(ctldt(vl)), "createdAt");
-        setupEpg(_epgMap, et -> ((User)et).getUpdatedAt(), (et, vl) -> ((User)et).setUpdatedAt(ctldt(vl)), "updatedAt");
-        setupEpg(_epgMap, et -> ((User)et).getDeletedAt(), (et, vl) -> ((User)et).setDeletedAt(ctldt(vl)), "deletedAt");
+        setupEpg(_epgMap, et -> ((Pref)et).getId(), (et, vl) -> ((Pref)et).setId(cti(vl)), "id");
+        setupEpg(_epgMap, et -> ((Pref)et).getName(), (et, vl) -> ((Pref)et).setName((String)vl), "name");
+        setupEpg(_epgMap, et -> ((Pref)et).getCreatedAt(), (et, vl) -> ((Pref)et).setCreatedAt(ctldt(vl)), "createdAt");
+        setupEpg(_epgMap, et -> ((Pref)et).getUpdatedAt(), (et, vl) -> ((Pref)et).setUpdatedAt(ctldt(vl)), "updatedAt");
+        setupEpg(_epgMap, et -> ((Pref)et).getDeletedAt(), (et, vl) -> ((Pref)et).setDeletedAt(ctldt(vl)), "deletedAt");
     }
     public PropertyGateway findPropertyGateway(String prop)
     { return doFindEpg(_epgMap, prop); }
@@ -54,10 +54,10 @@ public class UserDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                          Table Info
     //                                                                          ==========
-    protected final String _tableDbName = "user";
-    protected final String _tableDispName = "user";
-    protected final String _tablePropertyName = "user";
-    protected final TableSqlName _tableSqlName = new TableSqlName("user", _tableDbName);
+    protected final String _tableDbName = "pref";
+    protected final String _tableDispName = "pref";
+    protected final String _tablePropertyName = "pref";
+    protected final TableSqlName _tableSqlName = new TableSqlName("pref", _tableDbName);
     { _tableSqlName.xacceptFilter(DBFluteConfig.getInstance().getTableSqlNameFilter()); }
     public String getTableDbName() { return _tableDbName; }
     public String getTableDispName() { return _tableDispName; }
@@ -67,22 +67,22 @@ public class UserDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                         Column Info
     //                                                                         ===========
-    protected final ColumnInfo _columnId = cci("id", "id", null, null, Long.class, "id", null, true, true, true, "BIGINT UNSIGNED", 20, 0, null, null, false, null, null, null, null, null, false);
-    protected final ColumnInfo _columnToken = cci("token", "token", null, null, String.class, "token", null, false, false, false, "VARCHAR", 255, 0, null, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnId = cci("id", "id", null, null, Integer.class, "id", null, true, false, true, "INT UNSIGNED", 10, 0, null, null, false, null, null, null, "customerList", null, false);
+    protected final ColumnInfo _columnName = cci("name", "name", null, null, String.class, "name", null, false, false, true, "VARCHAR", 128, 0, null, null, false, null, null, null, null, null, false);
     protected final ColumnInfo _columnCreatedAt = cci("created_at", "created_at", null, null, java.time.LocalDateTime.class, "createdAt", null, false, false, true, "TIMESTAMP", 19, 0, null, "CURRENT_TIMESTAMP", false, null, null, null, null, null, false);
     protected final ColumnInfo _columnUpdatedAt = cci("updated_at", "updated_at", null, null, java.time.LocalDateTime.class, "updatedAt", null, false, false, true, "TIMESTAMP", 19, 0, null, "CURRENT_TIMESTAMP", false, null, null, null, null, null, false);
     protected final ColumnInfo _columnDeletedAt = cci("deleted_at", "deleted_at", null, null, java.time.LocalDateTime.class, "deletedAt", null, false, false, false, "TIMESTAMP", 19, 0, null, null, false, null, null, null, null, null, false);
 
     /**
-     * id: {PK, ID, NotNull, BIGINT UNSIGNED(20)}
+     * id: {PK, NotNull, INT UNSIGNED(10)}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnId() { return _columnId; }
     /**
-     * token: {VARCHAR(255)}
+     * name: {NotNull, VARCHAR(128)}
      * @return The information object of specified column. (NotNull)
      */
-    public ColumnInfo columnToken() { return _columnToken; }
+    public ColumnInfo columnName() { return _columnName; }
     /**
      * created_at: {NotNull, TIMESTAMP(19), default=[CURRENT_TIMESTAMP]}
      * @return The information object of specified column. (NotNull)
@@ -102,7 +102,7 @@ public class UserDbm extends AbstractDBMeta {
     protected List<ColumnInfo> ccil() {
         List<ColumnInfo> ls = newArrayList();
         ls.add(columnId());
-        ls.add(columnToken());
+        ls.add(columnName());
         ls.add(columnCreatedAt());
         ls.add(columnUpdatedAt());
         ls.add(columnDeletedAt());
@@ -133,36 +133,43 @@ public class UserDbm extends AbstractDBMeta {
     // -----------------------------------------------------
     //                                     Referrer Property
     //                                     -----------------
+    /**
+     * customer by pref_id, named 'customerList'.
+     * @return The information object of referrer property. (NotNull)
+     */
+    public ReferrerInfo referrerCustomerList() {
+        Map<ColumnInfo, ColumnInfo> mp = newLinkedHashMap(columnId(), CustomerDbm.getInstance().columnPrefId());
+        return cri("customer_ibfk_1", "customerList", this, CustomerDbm.getInstance(), mp, false, "pref");
+    }
 
     // ===================================================================================
     //                                                                        Various Info
     //                                                                        ============
-    public boolean hasIdentity() { return true; }
 
     // ===================================================================================
     //                                                                           Type Name
     //                                                                           =========
-    public String getEntityTypeName() { return "org.crud.db.dbflute.exentity.User"; }
-    public String getConditionBeanTypeName() { return "org.crud.db.dbflute.cbean.UserCB"; }
-    public String getBehaviorTypeName() { return "org.crud.db.dbflute.exbhv.UserBhv"; }
+    public String getEntityTypeName() { return "org.crud.db.dbflute.exentity.Pref"; }
+    public String getConditionBeanTypeName() { return "org.crud.db.dbflute.cbean.PrefCB"; }
+    public String getBehaviorTypeName() { return "org.crud.db.dbflute.exbhv.PrefBhv"; }
 
     // ===================================================================================
     //                                                                         Object Type
     //                                                                         ===========
-    public Class<User> getEntityType() { return User.class; }
+    public Class<Pref> getEntityType() { return Pref.class; }
 
     // ===================================================================================
     //                                                                     Object Instance
     //                                                                     ===============
-    public User newEntity() { return new User(); }
+    public Pref newEntity() { return new Pref(); }
 
     // ===================================================================================
     //                                                                   Map Communication
     //                                                                   =================
     public void acceptPrimaryKeyMap(Entity et, Map<String, ? extends Object> mp)
-    { doAcceptPrimaryKeyMap((User)et, mp); }
+    { doAcceptPrimaryKeyMap((Pref)et, mp); }
     public void acceptAllColumnMap(Entity et, Map<String, ? extends Object> mp)
-    { doAcceptAllColumnMap((User)et, mp); }
+    { doAcceptAllColumnMap((Pref)et, mp); }
     public Map<String, Object> extractPrimaryKeyMap(Entity et) { return doExtractPrimaryKeyMap(et); }
     public Map<String, Object> extractAllColumnMap(Entity et) { return doExtractAllColumnMap(et); }
 }

@@ -42,9 +42,8 @@ public class ExampleListDbm extends AbstractDBMeta {
     protected final Map<String, PropertyGateway> _epgMap = newHashMap();
     { xsetupEpg(); }
     protected void xsetupEpg() {
-        setupEpg(_epgMap, et -> ((ExampleList)et).getId(), (et, vl) -> ((ExampleList)et).setId(ctl(vl)), "id");
-        setupEpg(_epgMap, et -> ((ExampleList)et).getToken(), (et, vl) -> ((ExampleList)et).setToken((String)vl), "token");
-        setupEpg(_epgMap, et -> ((ExampleList)et).getUserName(), (et, vl) -> ((ExampleList)et).setUserName((String)vl), "userName");
+        setupEpg(_epgMap, et -> ((ExampleList)et).getId(), (et, vl) -> ((ExampleList)et).setId(cti(vl)), "id");
+        setupEpg(_epgMap, et -> ((ExampleList)et).getPrefName(), (et, vl) -> ((ExampleList)et).setPrefName((String)vl), "prefName");
     }
     public PropertyGateway findPropertyGateway(String prop)
     { return doFindEpg(_epgMap, prop); }
@@ -65,31 +64,24 @@ public class ExampleListDbm extends AbstractDBMeta {
     // ===================================================================================
     //                                                                         Column Info
     //                                                                         ===========
-    protected final ColumnInfo _columnId = cci("id", "id", null, null, Long.class, "id", null, false, false, false, "BIGINT UNSIGNED", 20, 0, null, null, false, null, null, null, null, null, false);
-    protected final ColumnInfo _columnToken = cci("token", "token", null, null, String.class, "token", null, false, false, false, "VARCHAR", 255, 0, null, null, false, null, null, null, null, null, false);
-    protected final ColumnInfo _columnUserName = cci("user_name", "user_name", null, null, String.class, "userName", null, false, false, false, "VARCHAR", 2, 0, null, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnId = cci("id", "id", null, null, Integer.class, "id", null, false, false, false, "INT UNSIGNED", 10, 0, null, null, false, null, null, null, null, null, false);
+    protected final ColumnInfo _columnPrefName = cci("pref_name", "pref_name", null, null, String.class, "prefName", null, false, false, false, "VARCHAR", 2, 0, null, null, false, null, null, null, null, null, false);
 
     /**
-     * id: {BIGINT UNSIGNED(20), refers to user.id}
+     * id: {INT UNSIGNED(10), refers to pref.id}
      * @return The information object of specified column. (NotNull)
      */
     public ColumnInfo columnId() { return _columnId; }
     /**
-     * token: {VARCHAR(255), refers to user.token}
+     * pref_name: {VARCHAR(2)}
      * @return The information object of specified column. (NotNull)
      */
-    public ColumnInfo columnToken() { return _columnToken; }
-    /**
-     * user_name: {VARCHAR(2)}
-     * @return The information object of specified column. (NotNull)
-     */
-    public ColumnInfo columnUserName() { return _columnUserName; }
+    public ColumnInfo columnPrefName() { return _columnPrefName; }
 
     protected List<ColumnInfo> ccil() {
         List<ColumnInfo> ls = newArrayList();
         ls.add(columnId());
-        ls.add(columnToken());
-        ls.add(columnUserName());
+        ls.add(columnPrefName());
         return ls;
     }
 

@@ -1,9 +1,9 @@
 /*
  [df:title]
- ユーザー検索
+ 都道府県検索
 
  [df:description]
- ユーザー検索の説明
+ 都道府県検索の説明
 */
 -- #df:entity#
 
@@ -11,7 +11,6 @@
 -- !!AutoDetect!!
 select
   id
-, token
-, 'ほげ' as user_name
-from user
+, 'ほげ' as pref_name
+from pref
 where id = /*pmb.id*/9999999999

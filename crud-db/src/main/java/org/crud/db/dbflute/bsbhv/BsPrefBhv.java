@@ -22,19 +22,19 @@ import org.crud.db.dbflute.bsentity.dbmeta.*;
 import org.crud.db.dbflute.cbean.*;
 
 /**
- * The behavior of user as TABLE. <br>
+ * The behavior of pref as TABLE. <br>
  * <pre>
  * [primary key]
  *     id
  *
  * [column]
- *     id, token, created_at, updated_at, deleted_at
+ *     id, name, created_at, updated_at, deleted_at
  *
  * [sequence]
  *     
  *
  * [identity]
- *     id
+ *     
  *
  * [version-no]
  *     
@@ -43,25 +43,25 @@ import org.crud.db.dbflute.cbean.*;
  *     
  *
  * [referrer table]
- *     
+ *     customer
  *
  * [foreign property]
  *     
  *
  * [referrer property]
- *     
+ *     customerList
  * </pre>
  * @author DBFlute(AutoGenerator)
  */
-public abstract class BsUserBhv extends AbstractBehaviorWritable<User, UserCB> {
+public abstract class BsPrefBhv extends AbstractBehaviorWritable<Pref, PrefCB> {
 
     // ===================================================================================
     //                                                                          Definition
     //                                                                          ==========
     /*df:beginQueryPath*/
-    /** ユーザー検索 */
+    /** 都道府県検索 */
     public static final String PATH_selectExampleEntity = "selectExampleEntity";
-    /** ユーザーリスト検索 */
+    /** 都道府県リスト検索 */
     public static final String PATH_selectExampleList = "selectExampleList";
     /*df:endQueryPath*/
 
@@ -69,15 +69,15 @@ public abstract class BsUserBhv extends AbstractBehaviorWritable<User, UserCB> {
     //                                                                             DB Meta
     //                                                                             =======
     /** {@inheritDoc} */
-    public UserDbm asDBMeta() { return UserDbm.getInstance(); }
+    public PrefDbm asDBMeta() { return PrefDbm.getInstance(); }
     /** {@inheritDoc} */
-    public String asTableDbName() { return "user"; }
+    public String asTableDbName() { return "pref"; }
 
     // ===================================================================================
     //                                                                        New Instance
     //                                                                        ============
     /** {@inheritDoc} */
-    public UserCB newConditionBean() { return new UserCB(); }
+    public PrefCB newConditionBean() { return new PrefCB(); }
 
     // ===================================================================================
     //                                                                        Count Select
@@ -86,14 +86,14 @@ public abstract class BsUserBhv extends AbstractBehaviorWritable<User, UserCB> {
      * Select the count of uniquely-selected records by the condition-bean. {IgnorePagingCondition, IgnoreSpecifyColumn}<br>
      * SpecifyColumn is ignored but you can use it only to remove text type column for union's distinct.
      * <pre>
-     * <span style="color: #70226C">int</span> count = <span style="color: #0000C0">userBhv</span>.<span style="color: #CC4747">selectCount</span>(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * <span style="color: #70226C">int</span> count = <span style="color: #0000C0">prefBhv</span>.<span style="color: #CC4747">selectCount</span>(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.query().set...
      * });
      * </pre>
-     * @param cbLambda The callback for condition-bean of User. (NotNull)
+     * @param cbLambda The callback for condition-bean of Pref. (NotNull)
      * @return The count for the condition. (NotMinus)
      */
-    public int selectCount(CBCall<UserCB> cbLambda) {
+    public int selectCount(CBCall<PrefCB> cbLambda) {
         return facadeSelectCount(createCB(cbLambda));
     }
 
@@ -107,38 +107,38 @@ public abstract class BsUserBhv extends AbstractBehaviorWritable<User, UserCB> {
      * <span style="color: #AD4747; font-size: 120%">If it might be no data, isPresent() and orElse(), ...</span>
      * <pre>
      * <span style="color: #3F7E5E">// if the data always exists as your business rule</span>
-     * <span style="color: #0000C0">userBhv</span>.<span style="color: #CC4747">selectEntity</span>(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * <span style="color: #0000C0">prefBhv</span>.<span style="color: #CC4747">selectEntity</span>(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.query().set...
-     * }).<span style="color: #CC4747">alwaysPresent</span>(<span style="color: #553000">user</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * }).<span style="color: #CC4747">alwaysPresent</span>(<span style="color: #553000">pref</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #3F7E5E">// called if present, or exception</span>
-     *     ... = <span style="color: #553000">user</span>.get...
+     *     ... = <span style="color: #553000">pref</span>.get...
      * });
      *
      * <span style="color: #3F7E5E">// if it might be no data, ...</span>
-     * <span style="color: #0000C0">userBhv</span>.<span style="color: #CC4747">selectEntity</span>(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * <span style="color: #0000C0">prefBhv</span>.<span style="color: #CC4747">selectEntity</span>(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.query().set...
-     * }).<span style="color: #CC4747">ifPresent</span>(<span style="color: #553000">user</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * }).<span style="color: #CC4747">ifPresent</span>(<span style="color: #553000">pref</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #3F7E5E">// called if present</span>
-     *     ... = <span style="color: #553000">user</span>.get...
+     *     ... = <span style="color: #553000">pref</span>.get...
      * }).<span style="color: #994747">orElse</span>(() <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #3F7E5E">// called if not present</span>
      * });
      * </pre>
-     * @param cbLambda The callback for condition-bean of User. (NotNull)
+     * @param cbLambda The callback for condition-bean of Pref. (NotNull)
      * @return The optional entity selected by the condition. (NotNull: if no data, empty entity)
      * @throws EntityAlreadyDeletedException When get(), required() of return value is called and the value is null, which means entity has already been deleted (not found).
      * @throws EntityDuplicatedException When the entity has been duplicated.
      * @throws SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
      */
-    public OptionalEntity<User> selectEntity(CBCall<UserCB> cbLambda) {
+    public OptionalEntity<Pref> selectEntity(CBCall<PrefCB> cbLambda) {
         return facadeSelectEntity(createCB(cbLambda));
     }
 
-    protected OptionalEntity<User> facadeSelectEntity(UserCB cb) {
+    protected OptionalEntity<Pref> facadeSelectEntity(PrefCB cb) {
         return doSelectOptionalEntity(cb, typeOfSelectedEntity());
     }
 
-    protected <ENTITY extends User> OptionalEntity<ENTITY> doSelectOptionalEntity(UserCB cb, Class<? extends ENTITY> tp) {
+    protected <ENTITY extends Pref> OptionalEntity<ENTITY> doSelectOptionalEntity(PrefCB cb, Class<? extends ENTITY> tp) {
         return createOptionalEntity(doSelectEntity(cb, tp), cb);
     }
 
@@ -148,44 +148,44 @@ public abstract class BsUserBhv extends AbstractBehaviorWritable<User, UserCB> {
      * Select the entity by the condition-bean with deleted check. <br>
      * <span style="color: #AD4747; font-size: 120%">If the data is always present as your business rule, this method is good.</span>
      * <pre>
-     * User <span style="color: #553000">user</span> = <span style="color: #0000C0">userBhv</span>.<span style="color: #CC4747">selectEntityWithDeletedCheck</span>(cb <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> cb.acceptPK(1));
-     * ... = <span style="color: #553000">user</span>.get...(); <span style="color: #3F7E5E">// the entity always be not null</span>
+     * Pref <span style="color: #553000">pref</span> = <span style="color: #0000C0">prefBhv</span>.<span style="color: #CC4747">selectEntityWithDeletedCheck</span>(cb <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> cb.acceptPK(1));
+     * ... = <span style="color: #553000">pref</span>.get...(); <span style="color: #3F7E5E">// the entity always be not null</span>
      * </pre>
-     * @param cbLambda The callback for condition-bean of User. (NotNull)
+     * @param cbLambda The callback for condition-bean of Pref. (NotNull)
      * @return The entity selected by the condition. (NotNull: if no data, throws exception)
      * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      * @throws EntityDuplicatedException When the entity has been duplicated.
      * @throws SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
      */
-    public User selectEntityWithDeletedCheck(CBCall<UserCB> cbLambda) {
+    public Pref selectEntityWithDeletedCheck(CBCall<PrefCB> cbLambda) {
         return facadeSelectEntityWithDeletedCheck(createCB(cbLambda));
     }
 
     /**
      * Select the entity by the primary-key value.
-     * @param id : PK, ID, NotNull, BIGINT UNSIGNED(20). (NotNull)
+     * @param id : PK, NotNull, INT UNSIGNED(10). (NotNull)
      * @return The optional entity selected by the PK. (NotNull: if no data, empty entity)
      * @throws EntityAlreadyDeletedException When get(), required() of return value is called and the value is null, which means entity has already been deleted (not found).
      * @throws EntityDuplicatedException When the entity has been duplicated.
      * @throws SelectEntityConditionNotFoundException When the condition for selecting an entity is not found.
      */
-    public OptionalEntity<User> selectByPK(Long id) {
+    public OptionalEntity<Pref> selectByPK(Integer id) {
         return facadeSelectByPK(id);
     }
 
-    protected OptionalEntity<User> facadeSelectByPK(Long id) {
+    protected OptionalEntity<Pref> facadeSelectByPK(Integer id) {
         return doSelectOptionalByPK(id, typeOfSelectedEntity());
     }
 
-    protected <ENTITY extends User> ENTITY doSelectByPK(Long id, Class<? extends ENTITY> tp) {
+    protected <ENTITY extends Pref> ENTITY doSelectByPK(Integer id, Class<? extends ENTITY> tp) {
         return doSelectEntity(xprepareCBAsPK(id), tp);
     }
 
-    protected <ENTITY extends User> OptionalEntity<ENTITY> doSelectOptionalByPK(Long id, Class<? extends ENTITY> tp) {
+    protected <ENTITY extends Pref> OptionalEntity<ENTITY> doSelectOptionalByPK(Integer id, Class<? extends ENTITY> tp) {
         return createOptionalEntity(doSelectByPK(id, tp), id);
     }
 
-    protected UserCB xprepareCBAsPK(Long id) {
+    protected PrefCB xprepareCBAsPK(Integer id) {
         assertObjectNotNull("id", id);
         return newConditionBean().acceptPK(id);
     }
@@ -196,19 +196,19 @@ public abstract class BsUserBhv extends AbstractBehaviorWritable<User, UserCB> {
     /**
      * Select the list as result bean.
      * <pre>
-     * ListResultBean&lt;User&gt; <span style="color: #553000">userList</span> = <span style="color: #0000C0">userBhv</span>.<span style="color: #CC4747">selectList</span>(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * ListResultBean&lt;Pref&gt; <span style="color: #553000">prefList</span> = <span style="color: #0000C0">prefBhv</span>.<span style="color: #CC4747">selectList</span>(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.query().set...;
      *     <span style="color: #553000">cb</span>.query().addOrderBy...;
      * });
-     * <span style="color: #70226C">for</span> (User <span style="color: #553000">user</span> : <span style="color: #553000">userList</span>) {
-     *     ... = <span style="color: #553000">user</span>.get...;
+     * <span style="color: #70226C">for</span> (Pref <span style="color: #553000">pref</span> : <span style="color: #553000">prefList</span>) {
+     *     ... = <span style="color: #553000">pref</span>.get...;
      * }
      * </pre>
-     * @param cbLambda The callback for condition-bean of User. (NotNull)
+     * @param cbLambda The callback for condition-bean of Pref. (NotNull)
      * @return The result bean of selected list. (NotNull: if no data, returns empty list)
      * @throws DangerousResultSizeException When the result size is over the specified safety size.
      */
-    public ListResultBean<User> selectList(CBCall<UserCB> cbLambda) {
+    public ListResultBean<Pref> selectList(CBCall<PrefCB> cbLambda) {
         return facadeSelectList(createCB(cbLambda));
     }
 
@@ -222,7 +222,7 @@ public abstract class BsUserBhv extends AbstractBehaviorWritable<User, UserCB> {
      * Select the page as result bean. <br>
      * (both count-select and paging-select are executed)
      * <pre>
-     * PagingResultBean&lt;User&gt; <span style="color: #553000">page</span> = <span style="color: #0000C0">userBhv</span>.<span style="color: #CC4747">selectPage</span>(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * PagingResultBean&lt;Pref&gt; <span style="color: #553000">page</span> = <span style="color: #0000C0">prefBhv</span>.<span style="color: #CC4747">selectPage</span>(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.query().set...
      *     <span style="color: #553000">cb</span>.query().addOrderBy...
      *     <span style="color: #553000">cb</span>.<span style="color: #CC4747">paging</span>(20, 3); <span style="color: #3F7E5E">// 20 records per a page and current page number is 3</span>
@@ -232,15 +232,15 @@ public abstract class BsUserBhv extends AbstractBehaviorWritable<User, UserCB> {
      * <span style="color: #70226C">boolean</span> isExistPrePage = <span style="color: #553000">page</span>.isExistPrePage();
      * <span style="color: #70226C">boolean</span> isExistNextPage = <span style="color: #553000">page</span>.isExistNextPage();
      * ...
-     * <span style="color: #70226C">for</span> (User user : <span style="color: #553000">page</span>) {
-     *     ... = user.get...;
+     * <span style="color: #70226C">for</span> (Pref pref : <span style="color: #553000">page</span>) {
+     *     ... = pref.get...;
      * }
      * </pre>
-     * @param cbLambda The callback for condition-bean of User. (NotNull)
+     * @param cbLambda The callback for condition-bean of Pref. (NotNull)
      * @return The result bean of selected page. (NotNull: if no data, returns bean as empty list)
      * @throws DangerousResultSizeException When the result size is over the specified safety size.
      */
-    public PagingResultBean<User> selectPage(CBCall<UserCB> cbLambda) {
+    public PagingResultBean<Pref> selectPage(CBCall<PrefCB> cbLambda) {
         return facadeSelectPage(createCB(cbLambda));
     }
 
@@ -250,16 +250,16 @@ public abstract class BsUserBhv extends AbstractBehaviorWritable<User, UserCB> {
     /**
      * Select the cursor by the condition-bean.
      * <pre>
-     * <span style="color: #0000C0">userBhv</span>.<span style="color: #CC4747">selectCursor</span>(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * <span style="color: #0000C0">prefBhv</span>.<span style="color: #CC4747">selectCursor</span>(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.query().set...
      * }, <span style="color: #553000">member</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     ... = <span style="color: #553000">member</span>.getMemberName();
      * });
      * </pre>
-     * @param cbLambda The callback for condition-bean of User. (NotNull)
-     * @param entityLambda The handler of entity row of User. (NotNull)
+     * @param cbLambda The callback for condition-bean of Pref. (NotNull)
+     * @param entityLambda The handler of entity row of Pref. (NotNull)
      */
-    public void selectCursor(CBCall<UserCB> cbLambda, EntityRowHandler<User> entityLambda) {
+    public void selectCursor(CBCall<PrefCB> cbLambda, EntityRowHandler<Pref> entityLambda) {
         facadeSelectCursor(createCB(cbLambda), entityLambda);
     }
 
@@ -270,7 +270,7 @@ public abstract class BsUserBhv extends AbstractBehaviorWritable<User, UserCB> {
      * Select the scalar value derived by a function from uniquely-selected records. <br>
      * You should call a function method after this method called like as follows:
      * <pre>
-     * <span style="color: #0000C0">userBhv</span>.<span style="color: #CC4747">selectScalar</span>(Date.class).max(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * <span style="color: #0000C0">prefBhv</span>.<span style="color: #CC4747">selectScalar</span>(Date.class).max(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.specify().<span style="color: #CC4747">column...</span>; <span style="color: #3F7E5E">// required for the function</span>
      *     <span style="color: #553000">cb</span>.query().set...
      * });
@@ -279,7 +279,7 @@ public abstract class BsUserBhv extends AbstractBehaviorWritable<User, UserCB> {
      * @param resultType The type of result. (NotNull)
      * @return The scalar function object to specify function for scalar value. (NotNull)
      */
-    public <RESULT> HpSLSFunction<UserCB, RESULT> selectScalar(Class<RESULT> resultType) {
+    public <RESULT> HpSLSFunction<PrefCB, RESULT> selectScalar(Class<RESULT> resultType) {
         return facadeScalarSelect(resultType);
     }
 
@@ -324,12 +324,12 @@ public abstract class BsUserBhv extends AbstractBehaviorWritable<User, UserCB> {
      * </pre>
      * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br>
      * The condition-bean, which the set-upper provides, has order by FK before callback.
-     * @param userList The entity list of user. (NotNull)
+     * @param prefList The entity list of pref. (NotNull)
      * @param loaderLambda The callback to handle the referrer loader for actually loading referrer. (NotNull)
      */
-    public void load(List<User> userList, ReferrerLoaderHandler<LoaderOfUser> loaderLambda) {
-        xassLRArg(userList, loaderLambda);
-        loaderLambda.handle(new LoaderOfUser().ready(userList, _behaviorSelector));
+    public void load(List<Pref> prefList, ReferrerLoaderHandler<LoaderOfPref> loaderLambda) {
+        xassLRArg(prefList, loaderLambda);
+        loaderLambda.handle(new LoaderOfPref().ready(prefList, _behaviorSelector));
     }
 
     /**
@@ -357,12 +357,76 @@ public abstract class BsUserBhv extends AbstractBehaviorWritable<User, UserCB> {
      * </pre>
      * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br>
      * The condition-bean, which the set-upper provides, has order by FK before callback.
-     * @param user The entity of user. (NotNull)
+     * @param pref The entity of pref. (NotNull)
      * @param loaderLambda The callback to handle the referrer loader for actually loading referrer. (NotNull)
      */
-    public void load(User user, ReferrerLoaderHandler<LoaderOfUser> loaderLambda) {
-        xassLRArg(user, loaderLambda);
-        loaderLambda.handle(new LoaderOfUser().ready(xnewLRAryLs(user), _behaviorSelector));
+    public void load(Pref pref, ReferrerLoaderHandler<LoaderOfPref> loaderLambda) {
+        xassLRArg(pref, loaderLambda);
+        loaderLambda.handle(new LoaderOfPref().ready(xnewLRAryLs(pref), _behaviorSelector));
+    }
+
+    /**
+     * Load referrer of customerList by the set-upper of referrer. <br>
+     * customer by pref_id, named 'customerList'.
+     * <pre>
+     * <span style="color: #0000C0">prefBhv</span>.<span style="color: #CC4747">loadCustomer</span>(<span style="color: #553000">prefList</span>, <span style="color: #553000">customerCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     <span style="color: #553000">customerCB</span>.setupSelect...
+     *     <span style="color: #553000">customerCB</span>.query().set...
+     *     <span style="color: #553000">customerCB</span>.query().addOrderBy...
+     * }); <span style="color: #3F7E5E">// you can load nested referrer from here</span>
+     * <span style="color: #3F7E5E">//}).withNestedReferrer(referrerList -&gt; {</span>
+     * <span style="color: #3F7E5E">//    ...</span>
+     * <span style="color: #3F7E5E">//});</span>
+     * <span style="color: #70226C">for</span> (Pref pref : <span style="color: #553000">prefList</span>) {
+     *     ... = pref.<span style="color: #CC4747">getCustomerList()</span>;
+     * }
+     * </pre>
+     * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br>
+     * The condition-bean, which the set-upper provides, has settings before callback as follows:
+     * <pre>
+     * cb.query().setPrefId_InScope(pkList);
+     * cb.query().addOrderBy_PrefId_Asc();
+     * </pre>
+     * @param prefList The entity list of pref. (NotNull)
+     * @param refCBLambda The callback to set up referrer condition-bean for loading referrer. (NotNull)
+     * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
+     */
+    public NestedReferrerListGateway<Customer> loadCustomer(List<Pref> prefList, ReferrerConditionSetupper<CustomerCB> refCBLambda) {
+        xassLRArg(prefList, refCBLambda);
+        return doLoadCustomer(prefList, new LoadReferrerOption<CustomerCB, Customer>().xinit(refCBLambda));
+    }
+
+    /**
+     * Load referrer of customerList by the set-upper of referrer. <br>
+     * customer by pref_id, named 'customerList'.
+     * <pre>
+     * <span style="color: #0000C0">prefBhv</span>.<span style="color: #CC4747">loadCustomer</span>(<span style="color: #553000">pref</span>, <span style="color: #553000">customerCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     <span style="color: #553000">customerCB</span>.setupSelect...
+     *     <span style="color: #553000">customerCB</span>.query().set...
+     *     <span style="color: #553000">customerCB</span>.query().addOrderBy...
+     * }); <span style="color: #3F7E5E">// you can load nested referrer from here</span>
+     * <span style="color: #3F7E5E">//}).withNestedReferrer(referrerList -&gt; {</span>
+     * <span style="color: #3F7E5E">//    ...</span>
+     * <span style="color: #3F7E5E">//});</span>
+     * ... = <span style="color: #553000">pref</span>.<span style="color: #CC4747">getCustomerList()</span>;
+     * </pre>
+     * About internal policy, the value of primary key (and others too) is treated as case-insensitive. <br>
+     * The condition-bean, which the set-upper provides, has settings before callback as follows:
+     * <pre>
+     * cb.query().setPrefId_InScope(pkList);
+     * cb.query().addOrderBy_PrefId_Asc();
+     * </pre>
+     * @param pref The entity of pref. (NotNull)
+     * @param refCBLambda The callback to set up referrer condition-bean for loading referrer. (NotNull)
+     * @return The callback interface which you can load nested referrer by calling withNestedReferrer(). (NotNull)
+     */
+    public NestedReferrerListGateway<Customer> loadCustomer(Pref pref, ReferrerConditionSetupper<CustomerCB> refCBLambda) {
+        xassLRArg(pref, refCBLambda);
+        return doLoadCustomer(xnewLRLs(pref), new LoadReferrerOption<CustomerCB, Customer>().xinit(refCBLambda));
+    }
+
+    protected NestedReferrerListGateway<Customer> doLoadCustomer(List<Pref> prefList, LoadReferrerOption<CustomerCB, Customer> option) {
+        return helpLoadReferrerInternally(prefList, option, "customerList");
     }
 
     // ===================================================================================
@@ -373,11 +437,11 @@ public abstract class BsUserBhv extends AbstractBehaviorWritable<User, UserCB> {
     //                                                                      ==============
     /**
      * Extract the value list of (single) primary key id.
-     * @param userList The list of user. (NotNull, EmptyAllowed)
+     * @param prefList The list of pref. (NotNull, EmptyAllowed)
      * @return The list of the column value. (NotNull, EmptyAllowed, NotNullElement)
      */
-    public List<Long> extractIdList(List<User> userList)
-    { return helpExtractListInternally(userList, "id"); }
+    public List<Integer> extractIdList(List<Pref> prefList)
+    { return helpExtractListInternally(prefList, "id"); }
 
     // ===================================================================================
     //                                                                       Entity Update
@@ -385,80 +449,80 @@ public abstract class BsUserBhv extends AbstractBehaviorWritable<User, UserCB> {
     /**
      * Insert the entity modified-only. (DefaultConstraintsEnabled)
      * <pre>
-     * User user = <span style="color: #70226C">new</span> User();
+     * Pref pref = <span style="color: #70226C">new</span> Pref();
      * <span style="color: #3F7E5E">// if auto-increment, you don't need to set the PK value</span>
-     * user.setFoo...(value);
-     * user.setBar...(value);
+     * pref.setFoo...(value);
+     * pref.setBar...(value);
      * <span style="color: #3F7E5E">// you don't need to set values of common columns</span>
-     * <span style="color: #3F7E5E">//user.setRegisterUser(value);</span>
-     * <span style="color: #3F7E5E">//user.set...;</span>
-     * <span style="color: #0000C0">userBhv</span>.<span style="color: #CC4747">insert</span>(user);
-     * ... = user.getPK...(); <span style="color: #3F7E5E">// if auto-increment, you can get the value after</span>
+     * <span style="color: #3F7E5E">//pref.setRegisterUser(value);</span>
+     * <span style="color: #3F7E5E">//pref.set...;</span>
+     * <span style="color: #0000C0">prefBhv</span>.<span style="color: #CC4747">insert</span>(pref);
+     * ... = pref.getPK...(); <span style="color: #3F7E5E">// if auto-increment, you can get the value after</span>
      * </pre>
      * <p>While, when the entity is created by select, all columns are registered.</p>
-     * @param user The entity of insert. (NotNull, PrimaryKeyNullAllowed: when auto-increment)
+     * @param pref The entity of insert. (NotNull, PrimaryKeyNullAllowed: when auto-increment)
      * @throws EntityAlreadyExistsException When the entity already exists. (unique constraint violation)
      */
-    public void insert(User user) {
-        doInsert(user, null);
+    public void insert(Pref pref) {
+        doInsert(pref, null);
     }
 
     /**
      * Update the entity modified-only. (ZeroUpdateException, NonExclusiveControl) <br>
      * By PK as default, and also you can update by unique keys using entity's uniqueOf().
      * <pre>
-     * User user = <span style="color: #70226C">new</span> User();
-     * user.setPK...(value); <span style="color: #3F7E5E">// required</span>
-     * user.setFoo...(value); <span style="color: #3F7E5E">// you should set only modified columns</span>
+     * Pref pref = <span style="color: #70226C">new</span> Pref();
+     * pref.setPK...(value); <span style="color: #3F7E5E">// required</span>
+     * pref.setFoo...(value); <span style="color: #3F7E5E">// you should set only modified columns</span>
      * <span style="color: #3F7E5E">// you don't need to set values of common columns</span>
-     * <span style="color: #3F7E5E">//user.setRegisterUser(value);</span>
-     * <span style="color: #3F7E5E">//user.set...;</span>
+     * <span style="color: #3F7E5E">//pref.setRegisterUser(value);</span>
+     * <span style="color: #3F7E5E">//pref.set...;</span>
      * <span style="color: #3F7E5E">// if exclusive control, the value of concurrency column is required</span>
-     * user.<span style="color: #CC4747">setVersionNo</span>(value);
-     * <span style="color: #0000C0">userBhv</span>.<span style="color: #CC4747">update</span>(user);
+     * pref.<span style="color: #CC4747">setVersionNo</span>(value);
+     * <span style="color: #0000C0">prefBhv</span>.<span style="color: #CC4747">update</span>(pref);
      * </pre>
-     * @param user The entity of update. (NotNull, PrimaryKeyNotNull)
+     * @param pref The entity of update. (NotNull, PrimaryKeyNotNull)
      * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      * @throws EntityDuplicatedException When the entity has been duplicated.
      * @throws EntityAlreadyExistsException When the entity already exists. (unique constraint violation)
      */
-    public void update(User user) {
-        doUpdate(user, null);
+    public void update(Pref pref) {
+        doUpdate(pref, null);
     }
 
     /**
      * Insert or update the entity modified-only. (DefaultConstraintsEnabled, NonExclusiveControl) <br>
      * if (the entity has no PK) { insert() } else { update(), but no data, insert() } <br>
      * <p><span style="color: #994747; font-size: 120%">Also you can update by unique keys using entity's uniqueOf().</span></p>
-     * @param user The entity of insert or update. (NotNull, ...depends on insert or update)
+     * @param pref The entity of insert or update. (NotNull, ...depends on insert or update)
      * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      * @throws EntityDuplicatedException When the entity has been duplicated.
      * @throws EntityAlreadyExistsException When the entity already exists. (unique constraint violation)
      */
-    public void insertOrUpdate(User user) {
-        doInsertOrUpdate(user, null, null);
+    public void insertOrUpdate(Pref pref) {
+        doInsertOrUpdate(pref, null, null);
     }
 
     /**
      * Delete the entity. (ZeroUpdateException, NonExclusiveControl) <br>
      * By PK as default, and also you can delete by unique keys using entity's uniqueOf().
      * <pre>
-     * User user = <span style="color: #70226C">new</span> User();
-     * user.setPK...(value); <span style="color: #3F7E5E">// required</span>
+     * Pref pref = <span style="color: #70226C">new</span> Pref();
+     * pref.setPK...(value); <span style="color: #3F7E5E">// required</span>
      * <span style="color: #3F7E5E">// if exclusive control, the value of concurrency column is required</span>
-     * user.<span style="color: #CC4747">setVersionNo</span>(value);
+     * pref.<span style="color: #CC4747">setVersionNo</span>(value);
      * <span style="color: #70226C">try</span> {
-     *     <span style="color: #0000C0">userBhv</span>.<span style="color: #CC4747">delete</span>(user);
+     *     <span style="color: #0000C0">prefBhv</span>.<span style="color: #CC4747">delete</span>(pref);
      * } <span style="color: #70226C">catch</span> (EntityAlreadyUpdatedException e) { <span style="color: #3F7E5E">// if concurrent update</span>
      *     ...
      * }
      * </pre>
-     * @param user The entity of delete. (NotNull, PrimaryKeyNotNull)
+     * @param pref The entity of delete. (NotNull, PrimaryKeyNotNull)
      * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      * @throws EntityDuplicatedException When the entity has been duplicated.
      */
-    public void delete(User user) {
-        doDelete(user, null);
+    public void delete(Pref pref) {
+        doDelete(pref, null);
     }
 
     // ===================================================================================
@@ -470,26 +534,26 @@ public abstract class BsUserBhv extends AbstractBehaviorWritable<User, UserCB> {
      * <p><span style="color: #CC4747; font-size: 120%">The columns of least common multiple are registered like this:</span></p>
      * <pre>
      * <span style="color: #70226C">for</span> (... : ...) {
-     *     User user = <span style="color: #70226C">new</span> User();
-     *     user.setFooName("foo");
+     *     Pref pref = <span style="color: #70226C">new</span> Pref();
+     *     pref.setFooName("foo");
      *     <span style="color: #70226C">if</span> (...) {
-     *         user.setFooPrice(123);
+     *         pref.setFooPrice(123);
      *     }
      *     <span style="color: #3F7E5E">// FOO_NAME and FOO_PRICE (and record meta columns) are registered</span>
      *     <span style="color: #3F7E5E">// FOO_PRICE not-called in any entities are registered as null without default value</span>
      *     <span style="color: #3F7E5E">// columns not-called in all entities are registered as null or default value</span>
-     *     userList.add(user);
+     *     prefList.add(pref);
      * }
-     * <span style="color: #0000C0">userBhv</span>.<span style="color: #CC4747">batchInsert</span>(userList);
+     * <span style="color: #0000C0">prefBhv</span>.<span style="color: #CC4747">batchInsert</span>(prefList);
      * </pre>
      * <p>While, when the entities are created by select, all columns are registered.</p>
      * <p>And if the table has an identity, entities after the process don't have incremented values.
      * (When you use the (normal) insert(), you can get the incremented value from your entity)</p>
-     * @param userList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNullAllowed: when auto-increment)
+     * @param prefList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNullAllowed: when auto-increment)
      * @return The array of inserted count. (NotNull, EmptyAllowed)
      */
-    public int[] batchInsert(List<User> userList) {
-        return doBatchInsert(userList, null);
+    public int[] batchInsert(List<Pref> prefList) {
+        return doBatchInsert(prefList, null);
     }
 
     /**
@@ -498,37 +562,37 @@ public abstract class BsUserBhv extends AbstractBehaviorWritable<User, UserCB> {
      * <span style="color: #CC4747; font-size: 120%">You should specify same-set columns to all entities like this:</span>
      * <pre>
      * for (... : ...) {
-     *     User user = <span style="color: #70226C">new</span> User();
-     *     user.setFooName("foo");
+     *     Pref pref = <span style="color: #70226C">new</span> Pref();
+     *     pref.setFooName("foo");
      *     <span style="color: #70226C">if</span> (...) {
-     *         user.setFooPrice(123);
+     *         pref.setFooPrice(123);
      *     } <span style="color: #70226C">else</span> {
-     *         user.setFooPrice(null); <span style="color: #3F7E5E">// updated as null</span>
-     *         <span style="color: #3F7E5E">//user.setFooDate(...); // *not allowed, fragmented</span>
+     *         pref.setFooPrice(null); <span style="color: #3F7E5E">// updated as null</span>
+     *         <span style="color: #3F7E5E">//pref.setFooDate(...); // *not allowed, fragmented</span>
      *     }
      *     <span style="color: #3F7E5E">// FOO_NAME and FOO_PRICE (and record meta columns) are updated</span>
      *     <span style="color: #3F7E5E">// (others are not updated: their values are kept)</span>
-     *     userList.add(user);
+     *     prefList.add(pref);
      * }
-     * <span style="color: #0000C0">userBhv</span>.<span style="color: #CC4747">batchUpdate</span>(userList);
+     * <span style="color: #0000C0">prefBhv</span>.<span style="color: #CC4747">batchUpdate</span>(prefList);
      * </pre>
-     * @param userList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
+     * @param prefList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
      * @return The array of updated count. (NotNull, EmptyAllowed)
      * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      */
-    public int[] batchUpdate(List<User> userList) {
-        return doBatchUpdate(userList, null);
+    public int[] batchUpdate(List<Pref> prefList) {
+        return doBatchUpdate(prefList, null);
     }
 
     /**
      * Batch-delete the entity list. (NonExclusiveControl) <br>
      * This method uses executeBatch() of java.sql.PreparedStatement.
-     * @param userList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
+     * @param prefList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
      * @return The array of deleted count. (NotNull, EmptyAllowed)
      * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      */
-    public int[] batchDelete(List<User> userList) {
-        return doBatchDelete(userList, null);
+    public int[] batchDelete(List<Pref> prefList) {
+        return doBatchDelete(prefList, null);
     }
 
     // ===================================================================================
@@ -537,8 +601,8 @@ public abstract class BsUserBhv extends AbstractBehaviorWritable<User, UserCB> {
     /**
      * Insert the several entities by query (modified-only for fixed value).
      * <pre>
-     * <span style="color: #0000C0">userBhv</span>.<span style="color: #CC4747">queryInsert</span>(new QueryInsertSetupper&lt;User, UserCB&gt;() {
-     *     public ConditionBean setup(User entity, UserCB intoCB) {
+     * <span style="color: #0000C0">prefBhv</span>.<span style="color: #CC4747">queryInsert</span>(new QueryInsertSetupper&lt;Pref, PrefCB&gt;() {
+     *     public ConditionBean setup(Pref entity, PrefCB intoCB) {
      *         FooCB cb = FooCB();
      *         cb.setupSelect_Bar();
      *
@@ -560,48 +624,48 @@ public abstract class BsUserBhv extends AbstractBehaviorWritable<User, UserCB> {
      * @param manyArgLambda The callback to set up query-insert. (NotNull)
      * @return The inserted count.
      */
-    public int queryInsert(QueryInsertSetupper<User, UserCB> manyArgLambda) {
+    public int queryInsert(QueryInsertSetupper<Pref, PrefCB> manyArgLambda) {
         return doQueryInsert(manyArgLambda, null);
     }
 
     /**
      * Update the several entities by query non-strictly modified-only. (NonExclusiveControl)
      * <pre>
-     * User user = <span style="color: #70226C">new</span> User();
+     * Pref pref = <span style="color: #70226C">new</span> Pref();
      * <span style="color: #3F7E5E">// you don't need to set PK value</span>
-     * <span style="color: #3F7E5E">//user.setPK...(value);</span>
-     * user.setFoo...(value); <span style="color: #3F7E5E">// you should set only modified columns</span>
+     * <span style="color: #3F7E5E">//pref.setPK...(value);</span>
+     * pref.setFoo...(value); <span style="color: #3F7E5E">// you should set only modified columns</span>
      * <span style="color: #3F7E5E">// you don't need to set values of common columns</span>
-     * <span style="color: #3F7E5E">//user.setRegisterUser(value);</span>
-     * <span style="color: #3F7E5E">//user.set...;</span>
+     * <span style="color: #3F7E5E">//pref.setRegisterUser(value);</span>
+     * <span style="color: #3F7E5E">//pref.set...;</span>
      * <span style="color: #3F7E5E">// you don't need to set a value of concurrency column</span>
      * <span style="color: #3F7E5E">// (auto-increment for version number is valid though non-exclusive control)</span>
-     * <span style="color: #3F7E5E">//user.setVersionNo(value);</span>
-     * <span style="color: #0000C0">userBhv</span>.<span style="color: #CC4747">queryUpdate</span>(user, <span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * <span style="color: #3F7E5E">//pref.setVersionNo(value);</span>
+     * <span style="color: #0000C0">prefBhv</span>.<span style="color: #CC4747">queryUpdate</span>(pref, <span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.query().setFoo...
      * });
      * </pre>
-     * @param user The entity that contains update values. (NotNull, PrimaryKeyNullAllowed)
-     * @param cbLambda The callback for condition-bean of User. (NotNull)
+     * @param pref The entity that contains update values. (NotNull, PrimaryKeyNullAllowed)
+     * @param cbLambda The callback for condition-bean of Pref. (NotNull)
      * @return The updated count.
      * @throws NonQueryUpdateNotAllowedException When the query has no condition.
      */
-    public int queryUpdate(User user, CBCall<UserCB> cbLambda) {
-        return doQueryUpdate(user, createCB(cbLambda), null);
+    public int queryUpdate(Pref pref, CBCall<PrefCB> cbLambda) {
+        return doQueryUpdate(pref, createCB(cbLambda), null);
     }
 
     /**
      * Delete the several entities by query. (NonExclusiveControl)
      * <pre>
-     * <span style="color: #0000C0">userBhv</span>.<span style="color: #CC4747">queryDelete</span>(user, <span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * <span style="color: #0000C0">prefBhv</span>.<span style="color: #CC4747">queryDelete</span>(pref, <span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.query().setFoo...
      * });
      * </pre>
-     * @param cbLambda The callback for condition-bean of User. (NotNull)
+     * @param cbLambda The callback for condition-bean of Pref. (NotNull)
      * @return The deleted count.
      * @throws NonQueryDeleteNotAllowedException When the query has no condition.
      */
-    public int queryDelete(CBCall<UserCB> cbLambda) {
+    public int queryDelete(CBCall<PrefCB> cbLambda) {
         return doQueryDelete(createCB(cbLambda), null);
     }
 
@@ -616,22 +680,22 @@ public abstract class BsUserBhv extends AbstractBehaviorWritable<User, UserCB> {
      * For example, disableCommonColumnAutoSetup(), disablePrimaryKeyIdentity(). <br>
      * Other specifications are same as insert(entity).
      * <pre>
-     * User user = <span style="color: #70226C">new</span> User();
+     * Pref pref = <span style="color: #70226C">new</span> Pref();
      * <span style="color: #3F7E5E">// if auto-increment, you don't need to set the PK value</span>
-     * user.setFoo...(value);
-     * user.setBar...(value);
-     * <span style="color: #0000C0">userBhv</span>.<span style="color: #CC4747">varyingInsert</span>(user, <span style="color: #553000">op</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * pref.setFoo...(value);
+     * pref.setBar...(value);
+     * <span style="color: #0000C0">prefBhv</span>.<span style="color: #CC4747">varyingInsert</span>(pref, <span style="color: #553000">op</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #3F7E5E">// you can insert by your values for common columns</span>
      *     <span style="color: #553000">op</span>.disableCommonColumnAutoSetup();
      * });
-     * ... = user.getPK...(); <span style="color: #3F7E5E">// if auto-increment, you can get the value after</span>
+     * ... = pref.getPK...(); <span style="color: #3F7E5E">// if auto-increment, you can get the value after</span>
      * </pre>
-     * @param user The entity of insert. (NotNull, PrimaryKeyNullAllowed: when auto-increment)
+     * @param pref The entity of insert. (NotNull, PrimaryKeyNullAllowed: when auto-increment)
      * @param opLambda The callback for option of insert for varying requests. (NotNull)
      * @throws EntityAlreadyExistsException When the entity already exists. (unique constraint violation)
      */
-    public void varyingInsert(User user, WritableOptionCall<UserCB, InsertOption<UserCB>> opLambda) {
-        doInsert(user, createInsertOption(opLambda));
+    public void varyingInsert(Pref pref, WritableOptionCall<PrefCB, InsertOption<PrefCB>> opLambda) {
+        doInsert(pref, createInsertOption(opLambda));
     }
 
     /**
@@ -639,53 +703,53 @@ public abstract class BsUserBhv extends AbstractBehaviorWritable<User, UserCB> {
      * For example, self(selfCalculationSpecification), specify(updateColumnSpecification), disableCommonColumnAutoSetup(). <br>
      * Other specifications are same as update(entity).
      * <pre>
-     * User user = <span style="color: #70226C">new</span> User();
-     * user.setPK...(value); <span style="color: #3F7E5E">// required</span>
-     * user.setOther...(value); <span style="color: #3F7E5E">// you should set only modified columns</span>
+     * Pref pref = <span style="color: #70226C">new</span> Pref();
+     * pref.setPK...(value); <span style="color: #3F7E5E">// required</span>
+     * pref.setOther...(value); <span style="color: #3F7E5E">// you should set only modified columns</span>
      * <span style="color: #3F7E5E">// if exclusive control, the value of concurrency column is required</span>
-     * user.<span style="color: #CC4747">setVersionNo</span>(value);
+     * pref.<span style="color: #CC4747">setVersionNo</span>(value);
      * <span style="color: #3F7E5E">// you can update by self calculation values</span>
-     * <span style="color: #0000C0">userBhv</span>.<span style="color: #CC4747">varyingUpdate</span>(user, <span style="color: #553000">op</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * <span style="color: #0000C0">prefBhv</span>.<span style="color: #CC4747">varyingUpdate</span>(pref, <span style="color: #553000">op</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">op</span>.self(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *         <span style="color: #553000">cb</span>.specify().<span style="color: #CC4747">columnXxxCount()</span>;
      *     }).plus(1); <span style="color: #3F7E5E">// XXX_COUNT = XXX_COUNT + 1</span>
      * });
      * </pre>
-     * @param user The entity of update. (NotNull, PrimaryKeyNotNull)
+     * @param pref The entity of update. (NotNull, PrimaryKeyNotNull)
      * @param opLambda The callback for option of update for varying requests. (NotNull)
      * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      * @throws EntityDuplicatedException When the entity has been duplicated.
      * @throws EntityAlreadyExistsException When the entity already exists. (unique constraint violation)
      */
-    public void varyingUpdate(User user, WritableOptionCall<UserCB, UpdateOption<UserCB>> opLambda) {
-        doUpdate(user, createUpdateOption(opLambda));
+    public void varyingUpdate(Pref pref, WritableOptionCall<PrefCB, UpdateOption<PrefCB>> opLambda) {
+        doUpdate(pref, createUpdateOption(opLambda));
     }
 
     /**
      * Insert or update the entity with varying requests. (ExclusiveControl: when update) <br>
      * Other specifications are same as insertOrUpdate(entity).
-     * @param user The entity of insert or update. (NotNull)
+     * @param pref The entity of insert or update. (NotNull)
      * @param insertOpLambda The callback for option of insert for varying requests. (NotNull)
      * @param updateOpLambda The callback for option of update for varying requests. (NotNull)
      * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      * @throws EntityDuplicatedException When the entity has been duplicated.
      * @throws EntityAlreadyExistsException When the entity already exists. (unique constraint violation)
      */
-    public void varyingInsertOrUpdate(User user, WritableOptionCall<UserCB, InsertOption<UserCB>> insertOpLambda, WritableOptionCall<UserCB, UpdateOption<UserCB>> updateOpLambda) {
-        doInsertOrUpdate(user, createInsertOption(insertOpLambda), createUpdateOption(updateOpLambda));
+    public void varyingInsertOrUpdate(Pref pref, WritableOptionCall<PrefCB, InsertOption<PrefCB>> insertOpLambda, WritableOptionCall<PrefCB, UpdateOption<PrefCB>> updateOpLambda) {
+        doInsertOrUpdate(pref, createInsertOption(insertOpLambda), createUpdateOption(updateOpLambda));
     }
 
     /**
      * Delete the entity with varying requests. (ZeroUpdateException, NonExclusiveControl) <br>
      * Now a valid option does not exist. <br>
      * Other specifications are same as delete(entity).
-     * @param user The entity of delete. (NotNull, PrimaryKeyNotNull, ConcurrencyColumnNotNull)
+     * @param pref The entity of delete. (NotNull, PrimaryKeyNotNull, ConcurrencyColumnNotNull)
      * @param opLambda The callback for option of delete for varying requests. (NotNull)
      * @throws EntityAlreadyDeletedException When the entity has already been deleted. (not found)
      * @throws EntityDuplicatedException When the entity has been duplicated.
      */
-    public void varyingDelete(User user, WritableOptionCall<UserCB, DeleteOption<UserCB>> opLambda) {
-        doDelete(user, createDeleteOption(opLambda));
+    public void varyingDelete(Pref pref, WritableOptionCall<PrefCB, DeleteOption<PrefCB>> opLambda) {
+        doDelete(pref, createDeleteOption(opLambda));
     }
 
     // -----------------------------------------------------
@@ -696,12 +760,12 @@ public abstract class BsUserBhv extends AbstractBehaviorWritable<User, UserCB> {
      * For example, disableCommonColumnAutoSetup()
      * , disablePrimaryKeyIdentity(), limitBatchInsertLogging(). <br>
      * Other specifications are same as batchInsert(entityList).
-     * @param userList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
+     * @param prefList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
      * @param opLambda The callback for option of insert for varying requests. (NotNull)
      * @return The array of updated count. (NotNull, EmptyAllowed)
      */
-    public int[] varyingBatchInsert(List<User> userList, WritableOptionCall<UserCB, InsertOption<UserCB>> opLambda) {
-        return doBatchInsert(userList, createInsertOption(opLambda));
+    public int[] varyingBatchInsert(List<Pref> prefList, WritableOptionCall<PrefCB, InsertOption<PrefCB>> opLambda) {
+        return doBatchInsert(prefList, createInsertOption(opLambda));
     }
 
     /**
@@ -709,24 +773,24 @@ public abstract class BsUserBhv extends AbstractBehaviorWritable<User, UserCB> {
      * For example, self(selfCalculationSpecification), specify(updateColumnSpecification)
      * , disableCommonColumnAutoSetup(), limitBatchUpdateLogging(). <br>
      * Other specifications are same as batchUpdate(entityList).
-     * @param userList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
+     * @param prefList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
      * @param opLambda The callback for option of update for varying requests. (NotNull)
      * @return The array of updated count. (NotNull, EmptyAllowed)
      */
-    public int[] varyingBatchUpdate(List<User> userList, WritableOptionCall<UserCB, UpdateOption<UserCB>> opLambda) {
-        return doBatchUpdate(userList, createUpdateOption(opLambda));
+    public int[] varyingBatchUpdate(List<Pref> prefList, WritableOptionCall<PrefCB, UpdateOption<PrefCB>> opLambda) {
+        return doBatchUpdate(prefList, createUpdateOption(opLambda));
     }
 
     /**
      * Batch-delete the list with varying requests. <br>
      * For example, limitBatchDeleteLogging(). <br>
      * Other specifications are same as batchDelete(entityList).
-     * @param userList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
+     * @param prefList The list of the entity. (NotNull, EmptyAllowed, PrimaryKeyNotNull)
      * @param opLambda The callback for option of delete for varying requests. (NotNull)
      * @return The array of deleted count. (NotNull, EmptyAllowed)
      */
-    public int[] varyingBatchDelete(List<User> userList, WritableOptionCall<UserCB, DeleteOption<UserCB>> opLambda) {
-        return doBatchDelete(userList, createDeleteOption(opLambda));
+    public int[] varyingBatchDelete(List<Pref> prefList, WritableOptionCall<PrefCB, DeleteOption<PrefCB>> opLambda) {
+        return doBatchDelete(prefList, createDeleteOption(opLambda));
     }
 
     // -----------------------------------------------------
@@ -740,7 +804,7 @@ public abstract class BsUserBhv extends AbstractBehaviorWritable<User, UserCB> {
      * @param opLambda The callback for option of insert for varying requests. (NotNull)
      * @return The inserted count.
      */
-    public int varyingQueryInsert(QueryInsertSetupper<User, UserCB> manyArgLambda, WritableOptionCall<UserCB, InsertOption<UserCB>> opLambda) {
+    public int varyingQueryInsert(QueryInsertSetupper<Pref, PrefCB> manyArgLambda, WritableOptionCall<PrefCB, InsertOption<PrefCB>> opLambda) {
         return doQueryInsert(manyArgLambda, createInsertOption(opLambda));
     }
 
@@ -751,14 +815,14 @@ public abstract class BsUserBhv extends AbstractBehaviorWritable<User, UserCB> {
      * Other specifications are same as queryUpdate(entity, cb).
      * <pre>
      * <span style="color: #3F7E5E">// ex) you can update by self calculation values</span>
-     * User user = <span style="color: #70226C">new</span> User();
+     * Pref pref = <span style="color: #70226C">new</span> Pref();
      * <span style="color: #3F7E5E">// you don't need to set PK value</span>
-     * <span style="color: #3F7E5E">//user.setPK...(value);</span>
-     * user.setOther...(value); <span style="color: #3F7E5E">// you should set only modified columns</span>
+     * <span style="color: #3F7E5E">//pref.setPK...(value);</span>
+     * pref.setOther...(value); <span style="color: #3F7E5E">// you should set only modified columns</span>
      * <span style="color: #3F7E5E">// you don't need to set a value of concurrency column</span>
      * <span style="color: #3F7E5E">// (auto-increment for version number is valid though non-exclusive control)</span>
-     * <span style="color: #3F7E5E">//user.setVersionNo(value);</span>
-     * <span style="color: #0000C0">userBhv</span>.<span style="color: #CC4747">varyingQueryUpdate</span>(user, <span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * <span style="color: #3F7E5E">//pref.setVersionNo(value);</span>
+     * <span style="color: #0000C0">prefBhv</span>.<span style="color: #CC4747">varyingQueryUpdate</span>(pref, <span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.query().setFoo...
      * }, <span style="color: #553000">op</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">op</span>.self(<span style="color: #553000">colCB</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
@@ -766,14 +830,14 @@ public abstract class BsUserBhv extends AbstractBehaviorWritable<User, UserCB> {
      *     }).plus(1); <span style="color: #3F7E5E">// FOO_COUNT = FOO_COUNT + 1</span>
      * });
      * </pre>
-     * @param user The entity that contains update values. (NotNull) {PrimaryKeyNotRequired}
-     * @param cbLambda The callback for condition-bean of User. (NotNull)
+     * @param pref The entity that contains update values. (NotNull) {PrimaryKeyNotRequired}
+     * @param cbLambda The callback for condition-bean of Pref. (NotNull)
      * @param opLambda The callback for option of update for varying requests. (NotNull)
      * @return The updated count.
      * @throws NonQueryUpdateNotAllowedException When the query has no condition (if not allowed).
      */
-    public int varyingQueryUpdate(User user, CBCall<UserCB> cbLambda, WritableOptionCall<UserCB, UpdateOption<UserCB>> opLambda) {
-        return doQueryUpdate(user, createCB(cbLambda), createUpdateOption(opLambda));
+    public int varyingQueryUpdate(Pref pref, CBCall<PrefCB> cbLambda, WritableOptionCall<PrefCB, UpdateOption<PrefCB>> opLambda) {
+        return doQueryUpdate(pref, createCB(cbLambda), createUpdateOption(opLambda));
     }
 
     /**
@@ -781,18 +845,18 @@ public abstract class BsUserBhv extends AbstractBehaviorWritable<User, UserCB> {
      * For example, allowNonQueryDelete(). <br>
      * Other specifications are same as queryDelete(cb).
      * <pre>
-     * <span style="color: #0000C0">userBhv</span>.<span style="color: #CC4747">queryDelete</span>(user, <span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     * <span style="color: #0000C0">prefBhv</span>.<span style="color: #CC4747">queryDelete</span>(pref, <span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">cb</span>.query().setFoo...
      * }, <span style="color: #553000">op</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
      *     <span style="color: #553000">op</span>...
      * });
      * </pre>
-     * @param cbLambda The callback for condition-bean of User. (NotNull)
+     * @param cbLambda The callback for condition-bean of Pref. (NotNull)
      * @param opLambda The callback for option of delete for varying requests. (NotNull)
      * @return The deleted count.
      * @throws NonQueryDeleteNotAllowedException When the query has no condition (if not allowed).
      */
-    public int varyingQueryDelete(CBCall<UserCB> cbLambda, WritableOptionCall<UserCB, DeleteOption<UserCB>> opLambda) {
+    public int varyingQueryDelete(CBCall<PrefCB> cbLambda, WritableOptionCall<PrefCB, DeleteOption<PrefCB>> opLambda) {
         return doQueryDelete(createCB(cbLambda), createDeleteOption(opLambda));
     }
 
@@ -803,40 +867,40 @@ public abstract class BsUserBhv extends AbstractBehaviorWritable<User, UserCB> {
      * Prepare the all facade executor of outside-SQL to execute it.
      * <pre>
      * <span style="color: #3F7E5E">// main style</span>
-     * userBhv.outideSql().selectEntity(pmb); <span style="color: #3F7E5E">// optional</span>
-     * userBhv.outideSql().selectList(pmb); <span style="color: #3F7E5E">// ListResultBean</span>
-     * userBhv.outideSql().selectPage(pmb); <span style="color: #3F7E5E">// PagingResultBean</span>
-     * userBhv.outideSql().selectPagedListOnly(pmb); <span style="color: #3F7E5E">// ListResultBean</span>
-     * userBhv.outideSql().selectCursor(pmb, handler); <span style="color: #3F7E5E">// (by handler)</span>
-     * userBhv.outideSql().execute(pmb); <span style="color: #3F7E5E">// int (updated count)</span>
-     * userBhv.outideSql().call(pmb); <span style="color: #3F7E5E">// void (pmb has OUT parameters)</span>
+     * prefBhv.outideSql().selectEntity(pmb); <span style="color: #3F7E5E">// optional</span>
+     * prefBhv.outideSql().selectList(pmb); <span style="color: #3F7E5E">// ListResultBean</span>
+     * prefBhv.outideSql().selectPage(pmb); <span style="color: #3F7E5E">// PagingResultBean</span>
+     * prefBhv.outideSql().selectPagedListOnly(pmb); <span style="color: #3F7E5E">// ListResultBean</span>
+     * prefBhv.outideSql().selectCursor(pmb, handler); <span style="color: #3F7E5E">// (by handler)</span>
+     * prefBhv.outideSql().execute(pmb); <span style="color: #3F7E5E">// int (updated count)</span>
+     * prefBhv.outideSql().call(pmb); <span style="color: #3F7E5E">// void (pmb has OUT parameters)</span>
      *
      * <span style="color: #3F7E5E">// traditional style</span>
-     * userBhv.outideSql().traditionalStyle().selectEntity(path, pmb, entityType);
-     * userBhv.outideSql().traditionalStyle().selectList(path, pmb, entityType);
-     * userBhv.outideSql().traditionalStyle().selectPage(path, pmb, entityType);
-     * userBhv.outideSql().traditionalStyle().selectPagedListOnly(path, pmb, entityType);
-     * userBhv.outideSql().traditionalStyle().selectCursor(path, pmb, handler);
-     * userBhv.outideSql().traditionalStyle().execute(path, pmb);
+     * prefBhv.outideSql().traditionalStyle().selectEntity(path, pmb, entityType);
+     * prefBhv.outideSql().traditionalStyle().selectList(path, pmb, entityType);
+     * prefBhv.outideSql().traditionalStyle().selectPage(path, pmb, entityType);
+     * prefBhv.outideSql().traditionalStyle().selectPagedListOnly(path, pmb, entityType);
+     * prefBhv.outideSql().traditionalStyle().selectCursor(path, pmb, handler);
+     * prefBhv.outideSql().traditionalStyle().execute(path, pmb);
      *
      * <span style="color: #3F7E5E">// options</span>
-     * userBhv.outideSql().removeBlockComment().selectList()
-     * userBhv.outideSql().removeLineComment().selectList()
-     * userBhv.outideSql().formatSql().selectList()
+     * prefBhv.outideSql().removeBlockComment().selectList()
+     * prefBhv.outideSql().removeLineComment().selectList()
+     * prefBhv.outideSql().formatSql().selectList()
      * </pre>
      * <p>The invoker of behavior command should be not null when you call this method.</p>
      * @return The new-created all facade executor of outside-SQL. (NotNull)
      */
-    public OutsideSqlAllFacadeExecutor<UserBhv> outsideSql() {
+    public OutsideSqlAllFacadeExecutor<PrefBhv> outsideSql() {
         return doOutsideSql();
     }
 
     // ===================================================================================
     //                                                                         Type Helper
     //                                                                         ===========
-    protected Class<? extends User> typeOfSelectedEntity() { return User.class; }
-    protected Class<User> typeOfHandlingEntity() { return User.class; }
-    protected Class<UserCB> typeOfHandlingConditionBean() { return UserCB.class; }
+    protected Class<? extends Pref> typeOfSelectedEntity() { return Pref.class; }
+    protected Class<Pref> typeOfHandlingEntity() { return Pref.class; }
+    protected Class<PrefCB> typeOfHandlingConditionBean() { return PrefCB.class; }
 
     // ===================================================================================
     //                                                                            Accessor

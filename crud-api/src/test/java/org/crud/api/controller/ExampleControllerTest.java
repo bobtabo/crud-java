@@ -22,7 +22,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
- * PmbサンプルControllerTestクラスです。<br/>
+ * 外部SQLサンプルControllerTestクラスです。<br/>
  *
  * @author <a href="mailto:bobtabo.buhibuhi@gmail.com">Satoshi Nagashiba</a>
  */
@@ -47,12 +47,10 @@ public class ExampleControllerTest {
     public void testIndex() throws Exception {
         when(exampleService.search(1L)).thenReturn(getExampleDto());
         this.mockMvc.perform(get("/api/v1/user/{userId}/example", 1)).andExpect(status().isOk())
-                .andExpect(jsonPath("$.user.id").value(1L))
-                .andExpect(jsonPath("$.user.token").value("xxxxxxx"))
-                .andExpect(jsonPath("$.user.user_name").value("ユーザー名"))
-                .andExpect(jsonPath("$.users[0].id").value(1L))
-                .andExpect(jsonPath("$.users[0].token").value("xxxxxxx"))
-                .andExpect(jsonPath("$.users[0].user_name").value("ユーザー名"));
+                .andExpect(jsonPath("$.pref.id").value(1))
+                .andExpect(jsonPath("$.pref.pref_name").value("ユーザー名"))
+                .andExpect(jsonPath("$.prefs[0].id").value(1))
+                .andExpect(jsonPath("$.prefs[0].pref_name").value("ユーザー名"));
     }
 
     /**
@@ -63,17 +61,15 @@ public class ExampleControllerTest {
     private ExampleDto getExampleDto() {
         ExampleDto dto = new ExampleDto();
 
-        dto.setUser(new ExampleEntity());
-        dto.getUser().setId(1L);
-        dto.getUser().setToken("xxxxxxx");
-        dto.getUser().setUserName("ユーザー名");
+        dto.setPref(new ExampleEntity());
+        dto.getPref().setId(1);
+        dto.getPref().setPrefName("ユーザー名");
 
-        dto.setUsers(new LinkedList<>());
+        dto.setPrefs(new LinkedList<>());
         ExampleList entity2 = new ExampleList();
-        entity2.setId(1L);
-        entity2.setToken("xxxxxxx");
-        entity2.setUserName("ユーザー名");
-        dto.getUsers().add(entity2);
+        entity2.setId(1);
+        entity2.setPrefName("ユーザー名");
+        dto.getPrefs().add(entity2);
 
         return dto;
     }

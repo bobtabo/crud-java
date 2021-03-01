@@ -11,7 +11,6 @@ import java.util.List;
 
 /**
  * 外部SQLサンプルDTOクラスです。<br/>
- * そのうち削除します。
  *
  * @author <a href="mailto:bobtabo.buhibuhi@gmail.com">Satoshi Nagashiba</a>
  */
@@ -21,6 +20,6 @@ import java.util.List;
 public class ExampleDto implements Dto {
     private static final long serialVersionUID = -287897202411437584L;
 
-    private ExampleEntity user;
-    private List<ExampleList> users;
+    private ExampleEntity pref;
+    private List<ExampleList> prefs;
 }

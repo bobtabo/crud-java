@@ -7,13 +7,13 @@ import org.crud.db.dbflute.exbhv.*;
 import org.crud.db.dbflute.exentity.*;
 
 /**
- * The referrer loader of user as TABLE. <br>
+ * The referrer loader of customer as TABLE. <br>
  * <pre>
  * [primary key]
  *     id
  *
  * [column]
- *     id, token, created_at, updated_at, deleted_at
+ *     id, last_name, first_name, last_kana, first_kana, gender, birthday, post_code, pref_id, address, building, tel, mobile, email, remarks, created_at, updated_at, deleted_at
  *
  * [sequence]
  *     
@@ -25,43 +25,50 @@ import org.crud.db.dbflute.exentity.*;
  *     
  *
  * [foreign table]
- *     
+ *     pref
  *
  * [referrer table]
  *     
  *
  * [foreign property]
- *     
+ *     pref
  *
  * [referrer property]
  *     
  * </pre>
  * @author DBFlute(AutoGenerator)
  */
-public class LoaderOfUser {
+public class LoaderOfCustomer {
 
     // ===================================================================================
     //                                                                           Attribute
     //                                                                           =========
-    protected List<User> _selectedList;
+    protected List<Customer> _selectedList;
     protected BehaviorSelector _selector;
-    protected UserBhv _myBhv; // lazy-loaded
+    protected CustomerBhv _myBhv; // lazy-loaded
 
     // ===================================================================================
     //                                                                   Ready for Loading
     //                                                                   =================
-    public LoaderOfUser ready(List<User> selectedList, BehaviorSelector selector)
+    public LoaderOfCustomer ready(List<Customer> selectedList, BehaviorSelector selector)
     { _selectedList = selectedList; _selector = selector; return this; }
 
-    protected UserBhv myBhv()
-    { if (_myBhv != null) { return _myBhv; } else { _myBhv = _selector.select(UserBhv.class); return _myBhv; } }
+    protected CustomerBhv myBhv()
+    { if (_myBhv != null) { return _myBhv; } else { _myBhv = _selector.select(CustomerBhv.class); return _myBhv; } }
 
     // ===================================================================================
     //                                                                    Pull out Foreign
     //                                                                    ================
+    protected LoaderOfPref _foreignPrefLoader;
+    public LoaderOfPref pulloutPref() {
+        if (_foreignPrefLoader == null)
+        { _foreignPrefLoader = new LoaderOfPref().ready(myBhv().pulloutPref(_selectedList), _selector); }
+        return _foreignPrefLoader;
+    }
+
     // ===================================================================================
     //                                                                            Accessor
     //                                                                            ========
-    public List<User> getSelectedList() { return _selectedList; }
+    public List<Customer> getSelectedList() { return _selectedList; }
     public BehaviorSelector getSelector() { return _selector; }
 }

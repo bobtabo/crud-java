@@ -20,20 +20,20 @@ import org.crud.db.dbflute.cbean.*;
 import org.crud.db.dbflute.cbean.cq.*;
 
 /**
- * The base condition-bean of user.
+ * The base condition-bean of customer.
  * @author DBFlute(AutoGenerator)
  */
-public class BsUserCB extends AbstractConditionBean {
+public class BsCustomerCB extends AbstractConditionBean {
 
     // ===================================================================================
     //                                                                           Attribute
     //                                                                           =========
-    protected UserCQ _conditionQuery;
+    protected CustomerCQ _conditionQuery;
 
     // ===================================================================================
     //                                                                         Constructor
     //                                                                         ===========
-    public BsUserCB() {
+    public BsCustomerCB() {
         if (DBFluteConfig.getInstance().isPagingCountLater()) {
             enablePagingCountLater();
         }
@@ -76,7 +76,7 @@ public class BsUserCB extends AbstractConditionBean {
     }
 
     public String asTableDbName() {
-        return "user";
+        return "customer";
     }
 
     // ===================================================================================
@@ -87,11 +87,23 @@ public class BsUserCB extends AbstractConditionBean {
      * @param id : PK, ID, NotNull, BIGINT UNSIGNED(20). (NotNull)
      * @return this. (NotNull)
      */
-    public UserCB acceptPK(Long id) {
+    public CustomerCB acceptPK(Long id) {
         assertObjectNotNull("id", id);
-        BsUserCB cb = this;
+        BsCustomerCB cb = this;
         cb.query().setId_Equal(id);
-        return (UserCB)this;
+        return (CustomerCB)this;
+    }
+
+    /**
+     * Accept the query condition of unique key as equal.
+     * @param email : UQ, NotNull, VARCHAR(255). (NotNull)
+     * @return this. (NotNull)
+     */
+    public CustomerCB acceptUniqueOf(String email) {
+        assertObjectNotNull("email", email);
+        BsCustomerCB cb = this;
+        cb.query().setEmail_Equal(email);
+        return (CustomerCB)this;
     }
 
     public ConditionBean addOrderBy_PK_Asc() {
@@ -164,34 +176,34 @@ public class BsUserCB extends AbstractConditionBean {
      * </pre>
      * @return The instance of condition-query for base-point table to set up query. (NotNull)
      */
-    public UserCQ query() {
+    public CustomerCQ query() {
         assertQueryPurpose(); // assert only when user-public query
         return doGetConditionQuery();
     }
 
-    public UserCQ xdfgetConditionQuery() { // public for parameter comment and internal
+    public CustomerCQ xdfgetConditionQuery() { // public for parameter comment and internal
         return doGetConditionQuery();
     }
 
-    protected UserCQ doGetConditionQuery() {
+    protected CustomerCQ doGetConditionQuery() {
         if (_conditionQuery == null) {
             _conditionQuery = createLocalCQ();
         }
         return _conditionQuery;
     }
 
-    protected UserCQ createLocalCQ() {
+    protected CustomerCQ createLocalCQ() {
         return xcreateCQ(null, getSqlClause(), getSqlClause().getBasePointAliasName(), 0);
     }
 
-    protected UserCQ xcreateCQ(ConditionQuery childQuery, SqlClause sqlClause, String aliasName, int nestLevel) {
-        UserCQ cq = xnewCQ(childQuery, sqlClause, aliasName, nestLevel);
+    protected CustomerCQ xcreateCQ(ConditionQuery childQuery, SqlClause sqlClause, String aliasName, int nestLevel) {
+        CustomerCQ cq = xnewCQ(childQuery, sqlClause, aliasName, nestLevel);
         cq.xsetBaseCB(this);
         return cq;
     }
 
-    protected UserCQ xnewCQ(ConditionQuery childQuery, SqlClause sqlClause, String aliasName, int nestLevel) {
-        return new UserCQ(childQuery, sqlClause, aliasName, nestLevel);
+    protected CustomerCQ xnewCQ(ConditionQuery childQuery, SqlClause sqlClause, String aliasName, int nestLevel) {
+        return new CustomerCQ(childQuery, sqlClause, aliasName, nestLevel);
     }
 
     /**
@@ -215,10 +227,10 @@ public class BsUserCB extends AbstractConditionBean {
      * </pre>
      * @param unionCBLambda The callback for query of 'union'. (NotNull)
      */
-    public void union(UnionQuery<UserCB> unionCBLambda) {
-        final UserCB cb = new UserCB(); cb.xsetupForUnion(this); xsyncUQ(cb);
+    public void union(UnionQuery<CustomerCB> unionCBLambda) {
+        final CustomerCB cb = new CustomerCB(); cb.xsetupForUnion(this); xsyncUQ(cb);
         try { lock(); unionCBLambda.query(cb); } finally { unlock(); } xsaveUCB(cb);
-        final UserCQ cq = cb.query(); query().xsetUnionQuery(cq);
+        final CustomerCQ cq = cb.query(); query().xsetUnionQuery(cq);
     }
 
     /**
@@ -232,15 +244,35 @@ public class BsUserCB extends AbstractConditionBean {
      * </pre>
      * @param unionCBLambda The callback for query of 'union all'. (NotNull)
      */
-    public void unionAll(UnionQuery<UserCB> unionCBLambda) {
-        final UserCB cb = new UserCB(); cb.xsetupForUnion(this); xsyncUQ(cb);
+    public void unionAll(UnionQuery<CustomerCB> unionCBLambda) {
+        final CustomerCB cb = new CustomerCB(); cb.xsetupForUnion(this); xsyncUQ(cb);
         try { lock(); unionCBLambda.query(cb); } finally { unlock(); } xsaveUCB(cb);
-        final UserCQ cq = cb.query(); query().xsetUnionAllQuery(cq);
+        final CustomerCQ cq = cb.query(); query().xsetUnionAllQuery(cq);
     }
 
     // ===================================================================================
     //                                                                         SetupSelect
     //                                                                         ===========
+    /**
+     * Set up relation columns to select clause. <br>
+     * pref by my pref_id, named 'pref'.
+     * <pre>
+     * <span style="color: #0000C0">customerBhv</span>.selectEntity(<span style="color: #553000">cb</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     <span style="color: #553000">cb</span>.<span style="color: #CC4747">setupSelect_Pref()</span>; <span style="color: #3F7E5E">// ...().with[nested-relation]()</span>
+     *     <span style="color: #553000">cb</span>.query().set...
+     * }).alwaysPresent(<span style="color: #553000">customer</span> <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     ... = <span style="color: #553000">customer</span>.<span style="color: #CC4747">getPref()</span>; <span style="color: #3F7E5E">// you can get by using SetupSelect</span>
+     * });
+     * </pre>
+     */
+    public void setupSelect_Pref() {
+        assertSetupSelectPurpose("pref");
+        if (hasSpecifiedLocalColumn()) {
+            specify().columnPrefId();
+        }
+        doSetupSelect(() -> query().queryPref());
+    }
+
     // [DBFlute-0.7.4]
     // ===================================================================================
     //                                                                             Specify
@@ -281,8 +313,9 @@ public class BsUserCB extends AbstractConditionBean {
         return _specification != null && _specification.hasSpecifiedColumn();
     }
 
-    public static class HpSpecification extends HpAbstractSpecification<UserCQ> {
-        public HpSpecification(ConditionBean baseCB, HpSpQyCall<UserCQ> qyCall
+    public static class HpSpecification extends HpAbstractSpecification<CustomerCQ> {
+        protected PrefCB.HpSpecification _pref;
+        public HpSpecification(ConditionBean baseCB, HpSpQyCall<CustomerCQ> qyCall
                              , HpCBPurpose purpose, DBMetaProvider dbmetaProvider
                              , HpSDRFunctionFactory sdrFuncFactory)
         { super(baseCB, qyCall, purpose, dbmetaProvider, sdrFuncFactory); }
@@ -292,10 +325,75 @@ public class BsUserCB extends AbstractConditionBean {
          */
         public SpecifiedColumn columnId() { return doColumn("id"); }
         /**
-         * token: {VARCHAR(255)}
+         * last_name: {NotNull, VARCHAR(255)}
          * @return The information object of specified column. (NotNull)
          */
-        public SpecifiedColumn columnToken() { return doColumn("token"); }
+        public SpecifiedColumn columnLastName() { return doColumn("last_name"); }
+        /**
+         * first_name: {NotNull, VARCHAR(255)}
+         * @return The information object of specified column. (NotNull)
+         */
+        public SpecifiedColumn columnFirstName() { return doColumn("first_name"); }
+        /**
+         * last_kana: {NotNull, VARCHAR(255)}
+         * @return The information object of specified column. (NotNull)
+         */
+        public SpecifiedColumn columnLastKana() { return doColumn("last_kana"); }
+        /**
+         * first_kana: {NotNull, VARCHAR(255)}
+         * @return The information object of specified column. (NotNull)
+         */
+        public SpecifiedColumn columnFirstKana() { return doColumn("first_kana"); }
+        /**
+         * gender: {NotNull, INT UNSIGNED(10)}
+         * @return The information object of specified column. (NotNull)
+         */
+        public SpecifiedColumn columnGender() { return doColumn("gender"); }
+        /**
+         * birthday: {NotNull, DATETIME(19)}
+         * @return The information object of specified column. (NotNull)
+         */
+        public SpecifiedColumn columnBirthday() { return doColumn("birthday"); }
+        /**
+         * post_code: {NotNull, VARCHAR(255)}
+         * @return The information object of specified column. (NotNull)
+         */
+        public SpecifiedColumn columnPostCode() { return doColumn("post_code"); }
+        /**
+         * pref_id: {IX, NotNull, INT UNSIGNED(10), FK to pref}
+         * @return The information object of specified column. (NotNull)
+         */
+        public SpecifiedColumn columnPrefId() { return doColumn("pref_id"); }
+        /**
+         * address: {NotNull, VARCHAR(255)}
+         * @return The information object of specified column. (NotNull)
+         */
+        public SpecifiedColumn columnAddress() { return doColumn("address"); }
+        /**
+         * building: {VARCHAR(255)}
+         * @return The information object of specified column. (NotNull)
+         */
+        public SpecifiedColumn columnBuilding() { return doColumn("building"); }
+        /**
+         * tel: {NotNull, VARCHAR(255)}
+         * @return The information object of specified column. (NotNull)
+         */
+        public SpecifiedColumn columnTel() { return doColumn("tel"); }
+        /**
+         * mobile: {NotNull, VARCHAR(255)}
+         * @return The information object of specified column. (NotNull)
+         */
+        public SpecifiedColumn columnMobile() { return doColumn("mobile"); }
+        /**
+         * email: {UQ, NotNull, VARCHAR(255)}
+         * @return The information object of specified column. (NotNull)
+         */
+        public SpecifiedColumn columnEmail() { return doColumn("email"); }
+        /**
+         * remarks: {TEXT(65535)}
+         * @return The information object of specified column. (NotNull)
+         */
+        public SpecifiedColumn columnRemarks() { return doColumn("remarks"); }
         /**
          * created_at: {NotNull, TIMESTAMP(19), default=[CURRENT_TIMESTAMP]}
          * @return The information object of specified column. (NotNull)
@@ -316,16 +414,40 @@ public class BsUserCB extends AbstractConditionBean {
         @Override
         protected void doSpecifyRequiredColumn() {
             columnId(); // PK
+            if (qyCall().qy().hasConditionQueryPref()
+                    || qyCall().qy().xgetReferrerQuery() instanceof PrefCQ) {
+                columnPrefId(); // FK or one-to-one referrer
+            }
         }
         @Override
-        protected String getTableDbName() { return "user"; }
+        protected String getTableDbName() { return "customer"; }
+        /**
+         * Prepare to specify functions about relation table. <br>
+         * pref by my pref_id, named 'pref'.
+         * @return The instance for specification for relation table to specify. (NotNull)
+         */
+        public PrefCB.HpSpecification specifyPref() {
+            assertRelation("pref");
+            if (_pref == null) {
+                _pref = new PrefCB.HpSpecification(_baseCB
+                    , xcreateSpQyCall(() -> _qyCall.has() && _qyCall.qy().hasConditionQueryPref()
+                                    , () -> _qyCall.qy().queryPref())
+                    , _purpose, _dbmetaProvider, xgetSDRFnFc());
+                if (xhasSyncQyCall()) { // inherits it
+                    _pref.xsetSyncQyCall(xcreateSpQyCall(
+                        () -> xsyncQyCall().has() && xsyncQyCall().qy().hasConditionQueryPref()
+                      , () -> xsyncQyCall().qy().queryPref()));
+                }
+            }
+            return _pref;
+        }
         /**
          * Prepare for (Specify)MyselfDerived (SubQuery).
          * @return The object to set up a function for myself table. (NotNull)
          */
-        public HpSDRFunction<UserCB, UserCQ> myselfDerived() {
+        public HpSDRFunction<CustomerCB, CustomerCQ> myselfDerived() {
             assertDerived("myselfDerived"); if (xhasSyncQyCall()) { xsyncQyCall().qy(); } // for sync (for example, this in ColumnQuery)
-            return cHSDRF(_baseCB, _qyCall.qy(), (String fn, SubQuery<UserCB> sq, UserCQ cq, String al, DerivedReferrerOption op)
+            return cHSDRF(_baseCB, _qyCall.qy(), (String fn, SubQuery<CustomerCB> sq, CustomerCQ cq, String al, DerivedReferrerOption op)
                     -> cq.xsmyselfDerive(fn, sq, al, op), _dbmetaProvider);
         }
     }
@@ -338,9 +460,9 @@ public class BsUserCB extends AbstractConditionBean {
      * This is very specialty so you can get the frontier spirit. Bon voyage!
      * @return The condition-bean for dream cruise, which is linked to main condition-bean.
      */
-    public UserCB dreamCruiseCB() {
-        UserCB cb = new UserCB();
-        cb.xsetupForDreamCruise((UserCB) this);
+    public CustomerCB dreamCruiseCB() {
+        CustomerCB cb = new CustomerCB();
+        cb.xsetupForDreamCruise((CustomerCB) this);
         return cb;
     }
 
@@ -365,15 +487,15 @@ public class BsUserCB extends AbstractConditionBean {
      * @param colCBLambda The callback for specify-query of left column. (NotNull)
      * @return The object for setting up operand and right column. (NotNull)
      */
-    public HpColQyOperand<UserCB> columnQuery(final SpecifyQuery<UserCB> colCBLambda) {
+    public HpColQyOperand<CustomerCB> columnQuery(final SpecifyQuery<CustomerCB> colCBLambda) {
         return xcreateColQyOperand((rightSp, operand) -> {
             return xcolqy(xcreateColumnQueryCB(), xcreateColumnQueryCB(), colCBLambda, rightSp, operand);
         });
     }
 
-    protected UserCB xcreateColumnQueryCB() {
-        UserCB cb = new UserCB();
-        cb.xsetupForColumnQuery((UserCB)this);
+    protected CustomerCB xcreateColumnQueryCB() {
+        CustomerCB cb = new CustomerCB();
+        cb.xsetupForColumnQuery((CustomerCB)this);
         return cb;
     }
 
@@ -393,8 +515,8 @@ public class BsUserCB extends AbstractConditionBean {
      * </pre>
      * @param orCBLambda The callback for query of or-condition. (NotNull)
      */
-    public void orScopeQuery(OrQuery<UserCB> orCBLambda) {
-        xorSQ((UserCB)this, orCBLambda);
+    public void orScopeQuery(OrQuery<CustomerCB> orCBLambda) {
+        xorSQ((CustomerCB)this, orCBLambda);
     }
 
     /**
@@ -412,8 +534,8 @@ public class BsUserCB extends AbstractConditionBean {
      * </pre>
      * @param andCBLambda The callback for query of and-condition. (NotNull)
      */
-    public void orScopeQueryAndPart(AndQuery<UserCB> andCBLambda) {
-        xorSQAP((UserCB)this, andCBLambda);
+    public void orScopeQueryAndPart(AndQuery<CustomerCB> andCBLambda) {
+        xorSQAP((CustomerCB)this, andCBLambda);
     }
 
     // ===================================================================================
@@ -443,11 +565,11 @@ public class BsUserCB extends AbstractConditionBean {
     //                                                                        ============
     @Override
     protected void xprepareSyncQyCall(ConditionBean mainCB) {
-        final UserCB cb;
+        final CustomerCB cb;
         if (mainCB != null) {
-            cb = (UserCB)mainCB;
+            cb = (CustomerCB)mainCB;
         } else {
-            cb = new UserCB();
+            cb = new CustomerCB();
         }
         specify().xsetSyncQyCall(xcreateSpQyCall(() -> true, () -> cb.query()));
     }
@@ -456,8 +578,8 @@ public class BsUserCB extends AbstractConditionBean {
     //                                                                            Internal
     //                                                                            ========
     // very internal (for suppressing warn about 'Not Use Import')
-    protected String xgetConditionBeanClassNameInternally() { return UserCB.class.getName(); }
-    protected String xgetConditionQueryClassNameInternally() { return UserCQ.class.getName(); }
+    protected String xgetConditionBeanClassNameInternally() { return CustomerCB.class.getName(); }
+    protected String xgetConditionQueryClassNameInternally() { return CustomerCQ.class.getName(); }
     protected String xgetSubQueryClassNameInternally() { return SubQuery.class.getName(); }
     protected String xgetConditionOptionClassNameInternally() { return ConditionOption.class.getName(); }
 }

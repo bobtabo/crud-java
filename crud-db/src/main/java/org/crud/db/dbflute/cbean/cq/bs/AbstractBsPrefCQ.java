@@ -16,15 +16,15 @@ import org.crud.db.dbflute.cbean.*;
 import org.crud.db.dbflute.cbean.cq.*;
 
 /**
- * The abstract condition-query of user.
+ * The abstract condition-query of pref.
  * @author DBFlute(AutoGenerator)
  */
-public abstract class AbstractBsUserCQ extends AbstractConditionQuery {
+public abstract class AbstractBsPrefCQ extends AbstractConditionQuery {
 
     // ===================================================================================
     //                                                                         Constructor
     //                                                                         ===========
-    public AbstractBsUserCQ(ConditionQuery referrerQuery, SqlClause sqlClause, String aliasName, int nestLevel) {
+    public AbstractBsPrefCQ(ConditionQuery referrerQuery, SqlClause sqlClause, String aliasName, int nestLevel) {
         super(referrerQuery, sqlClause, aliasName, nestLevel);
     }
 
@@ -37,7 +37,7 @@ public abstract class AbstractBsUserCQ extends AbstractConditionQuery {
     }
 
     public String asTableDbName() {
-        return "user";
+        return "pref";
     }
 
     // ===================================================================================
@@ -45,63 +45,63 @@ public abstract class AbstractBsUserCQ extends AbstractConditionQuery {
     //                                                                               =====
     /**
      * Equal(=). And NullIgnored, OnlyOnceRegistered. <br>
-     * id: {PK, ID, NotNull, BIGINT UNSIGNED(20)}
+     * id: {PK, NotNull, INT UNSIGNED(10)}
      * @param id The value of id as equal. (basically NotNull: error as default, or no condition as option)
      */
-    public void setId_Equal(Long id) {
+    public void setId_Equal(Integer id) {
         doSetId_Equal(id);
     }
 
-    protected void doSetId_Equal(Long id) {
+    protected void doSetId_Equal(Integer id) {
         regId(CK_EQ, id);
     }
 
     /**
      * NotEqual(&lt;&gt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * id: {PK, ID, NotNull, BIGINT UNSIGNED(20)}
+     * id: {PK, NotNull, INT UNSIGNED(10)}
      * @param id The value of id as notEqual. (basically NotNull: error as default, or no condition as option)
      */
-    public void setId_NotEqual(Long id) {
+    public void setId_NotEqual(Integer id) {
         doSetId_NotEqual(id);
     }
 
-    protected void doSetId_NotEqual(Long id) {
+    protected void doSetId_NotEqual(Integer id) {
         regId(CK_NES, id);
     }
 
     /**
      * GreaterThan(&gt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * id: {PK, ID, NotNull, BIGINT UNSIGNED(20)}
+     * id: {PK, NotNull, INT UNSIGNED(10)}
      * @param id The value of id as greaterThan. (basically NotNull: error as default, or no condition as option)
      */
-    public void setId_GreaterThan(Long id) {
+    public void setId_GreaterThan(Integer id) {
         regId(CK_GT, id);
     }
 
     /**
      * LessThan(&lt;). And NullIgnored, OnlyOnceRegistered. <br>
-     * id: {PK, ID, NotNull, BIGINT UNSIGNED(20)}
+     * id: {PK, NotNull, INT UNSIGNED(10)}
      * @param id The value of id as lessThan. (basically NotNull: error as default, or no condition as option)
      */
-    public void setId_LessThan(Long id) {
+    public void setId_LessThan(Integer id) {
         regId(CK_LT, id);
     }
 
     /**
      * GreaterEqual(&gt;=). And NullIgnored, OnlyOnceRegistered. <br>
-     * id: {PK, ID, NotNull, BIGINT UNSIGNED(20)}
+     * id: {PK, NotNull, INT UNSIGNED(10)}
      * @param id The value of id as greaterEqual. (basically NotNull: error as default, or no condition as option)
      */
-    public void setId_GreaterEqual(Long id) {
+    public void setId_GreaterEqual(Integer id) {
         regId(CK_GE, id);
     }
 
     /**
      * LessEqual(&lt;=). And NullIgnored, OnlyOnceRegistered. <br>
-     * id: {PK, ID, NotNull, BIGINT UNSIGNED(20)}
+     * id: {PK, NotNull, INT UNSIGNED(10)}
      * @param id The value of id as lessEqual. (basically NotNull: error as default, or no condition as option)
      */
-    public void setId_LessEqual(Long id) {
+    public void setId_LessEqual(Integer id) {
         regId(CK_LE, id);
     }
 
@@ -109,12 +109,12 @@ public abstract class AbstractBsUserCQ extends AbstractConditionQuery {
      * RangeOf with various options. (versatile) <br>
      * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
      * And NullIgnored, OnlyOnceRegistered. <br>
-     * id: {PK, ID, NotNull, BIGINT UNSIGNED(20)}
+     * id: {PK, NotNull, INT UNSIGNED(10)}
      * @param minNumber The min number of id. (basically NotNull: if op.allowOneSide(), null allowed)
      * @param maxNumber The max number of id. (basically NotNull: if op.allowOneSide(), null allowed)
      * @param opLambda The callback for option of range-of. (NotNull)
      */
-    public void setId_RangeOf(Long minNumber, Long maxNumber, ConditionOptionCall<RangeOfOption> opLambda) {
+    public void setId_RangeOf(Integer minNumber, Integer maxNumber, ConditionOptionCall<RangeOfOption> opLambda) {
         setId_RangeOf(minNumber, maxNumber, xcROOP(opLambda));
     }
 
@@ -122,50 +122,123 @@ public abstract class AbstractBsUserCQ extends AbstractConditionQuery {
      * RangeOf with various options. (versatile) <br>
      * {(default) minNumber &lt;= column &lt;= maxNumber} <br>
      * And NullIgnored, OnlyOnceRegistered. <br>
-     * id: {PK, ID, NotNull, BIGINT UNSIGNED(20)}
+     * id: {PK, NotNull, INT UNSIGNED(10)}
      * @param minNumber The min number of id. (basically NotNull: if op.allowOneSide(), null allowed)
      * @param maxNumber The max number of id. (basically NotNull: if op.allowOneSide(), null allowed)
      * @param rangeOfOption The option of range-of. (NotNull)
      */
-    protected void setId_RangeOf(Long minNumber, Long maxNumber, RangeOfOption rangeOfOption) {
+    protected void setId_RangeOf(Integer minNumber, Integer maxNumber, RangeOfOption rangeOfOption) {
         regROO(minNumber, maxNumber, xgetCValueId(), "id", rangeOfOption);
     }
 
     /**
      * InScope {in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br>
-     * id: {PK, ID, NotNull, BIGINT UNSIGNED(20)}
+     * id: {PK, NotNull, INT UNSIGNED(10)}
      * @param idList The collection of id as inScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    public void setId_InScope(Collection<Long> idList) {
+    public void setId_InScope(Collection<Integer> idList) {
         doSetId_InScope(idList);
     }
 
-    protected void doSetId_InScope(Collection<Long> idList) {
+    protected void doSetId_InScope(Collection<Integer> idList) {
         regINS(CK_INS, cTL(idList), xgetCValueId(), "id");
     }
 
     /**
      * NotInScope {not in (1, 2)}. And NullIgnored, NullElementIgnored, SeveralRegistered. <br>
-     * id: {PK, ID, NotNull, BIGINT UNSIGNED(20)}
+     * id: {PK, NotNull, INT UNSIGNED(10)}
      * @param idList The collection of id as notInScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    public void setId_NotInScope(Collection<Long> idList) {
+    public void setId_NotInScope(Collection<Integer> idList) {
         doSetId_NotInScope(idList);
     }
 
-    protected void doSetId_NotInScope(Collection<Long> idList) {
+    protected void doSetId_NotInScope(Collection<Integer> idList) {
         regINS(CK_NINS, cTL(idList), xgetCValueId(), "id");
     }
 
     /**
+     * Set up ExistsReferrer (correlated sub-query). <br>
+     * {exists (select pref_id from customer where ...)} <br>
+     * customer by pref_id, named 'customerAsOne'.
+     * <pre>
+     * cb.query().<span style="color: #CC4747">existsCustomer</span>(customerCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     customerCB.query().set...
+     * });
+     * </pre>
+     * @param subCBLambda The callback for sub-query of CustomerList for 'exists'. (NotNull)
+     */
+    public void existsCustomer(SubQuery<CustomerCB> subCBLambda) {
+        assertObjectNotNull("subCBLambda", subCBLambda);
+        CustomerCB cb = new CustomerCB(); cb.xsetupForExistsReferrer(this);
+        lockCall(() -> subCBLambda.query(cb)); String pp = keepId_ExistsReferrer_CustomerList(cb.query());
+        registerExistsReferrer(cb.query(), "id", "pref_id", pp, "customerList");
+    }
+    public abstract String keepId_ExistsReferrer_CustomerList(CustomerCQ sq);
+
+    /**
+     * Set up NotExistsReferrer (correlated sub-query). <br>
+     * {not exists (select pref_id from customer where ...)} <br>
+     * customer by pref_id, named 'customerAsOne'.
+     * <pre>
+     * cb.query().<span style="color: #CC4747">notExistsCustomer</span>(customerCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     customerCB.query().set...
+     * });
+     * </pre>
+     * @param subCBLambda The callback for sub-query of Id_NotExistsReferrer_CustomerList for 'not exists'. (NotNull)
+     */
+    public void notExistsCustomer(SubQuery<CustomerCB> subCBLambda) {
+        assertObjectNotNull("subCBLambda", subCBLambda);
+        CustomerCB cb = new CustomerCB(); cb.xsetupForExistsReferrer(this);
+        lockCall(() -> subCBLambda.query(cb)); String pp = keepId_NotExistsReferrer_CustomerList(cb.query());
+        registerNotExistsReferrer(cb.query(), "id", "pref_id", pp, "customerList");
+    }
+    public abstract String keepId_NotExistsReferrer_CustomerList(CustomerCQ sq);
+
+    public void xsderiveCustomerList(String fn, SubQuery<CustomerCB> sq, String al, DerivedReferrerOption op) {
+        assertObjectNotNull("subQuery", sq);
+        CustomerCB cb = new CustomerCB(); cb.xsetupForDerivedReferrer(this);
+        lockCall(() -> sq.query(cb)); String pp = keepId_SpecifyDerivedReferrer_CustomerList(cb.query());
+        registerSpecifyDerivedReferrer(fn, cb.query(), "id", "pref_id", pp, "customerList", al, op);
+    }
+    public abstract String keepId_SpecifyDerivedReferrer_CustomerList(CustomerCQ sq);
+
+    /**
+     * Prepare for (Query)DerivedReferrer (correlated sub-query). <br>
+     * {FOO &lt;= (select max(BAR) from customer where ...)} <br>
+     * customer by pref_id, named 'customerAsOne'.
+     * <pre>
+     * cb.query().<span style="color: #CC4747">derivedCustomer()</span>.<span style="color: #CC4747">max</span>(customerCB <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> {
+     *     customerCB.specify().<span style="color: #CC4747">columnFoo...</span> <span style="color: #3F7E5E">// derived column by function</span>
+     *     customerCB.query().setBar... <span style="color: #3F7E5E">// referrer condition</span>
+     * }).<span style="color: #CC4747">greaterEqual</span>(123); <span style="color: #3F7E5E">// condition to derived column</span>
+     * </pre>
+     * @return The object to set up a function for referrer table. (NotNull)
+     */
+    public HpQDRFunction<CustomerCB> derivedCustomer() {
+        return xcreateQDRFunctionCustomerList();
+    }
+    protected HpQDRFunction<CustomerCB> xcreateQDRFunctionCustomerList() {
+        return xcQDRFunc((fn, sq, rd, vl, op) -> xqderiveCustomerList(fn, sq, rd, vl, op));
+    }
+    public void xqderiveCustomerList(String fn, SubQuery<CustomerCB> sq, String rd, Object vl, DerivedReferrerOption op) {
+        assertObjectNotNull("subQuery", sq);
+        CustomerCB cb = new CustomerCB(); cb.xsetupForDerivedReferrer(this);
+        lockCall(() -> sq.query(cb)); String sqpp = keepId_QueryDerivedReferrer_CustomerList(cb.query()); String prpp = keepId_QueryDerivedReferrer_CustomerListParameter(vl);
+        registerQueryDerivedReferrer(fn, cb.query(), "id", "pref_id", sqpp, "customerList", rd, vl, prpp, op);
+    }
+    public abstract String keepId_QueryDerivedReferrer_CustomerList(CustomerCQ sq);
+    public abstract String keepId_QueryDerivedReferrer_CustomerListParameter(Object vl);
+
+    /**
      * IsNull {is null}. And OnlyOnceRegistered. <br>
-     * id: {PK, ID, NotNull, BIGINT UNSIGNED(20)}
+     * id: {PK, NotNull, INT UNSIGNED(10)}
      */
     public void setId_IsNull() { regId(CK_ISN, DOBJ); }
 
     /**
      * IsNotNull {is not null}. And OnlyOnceRegistered. <br>
-     * id: {PK, ID, NotNull, BIGINT UNSIGNED(20)}
+     * id: {PK, NotNull, INT UNSIGNED(10)}
      */
     public void setId_IsNotNull() { regId(CK_ISNN, DOBJ); }
 
@@ -174,156 +247,138 @@ public abstract class AbstractBsUserCQ extends AbstractConditionQuery {
 
     /**
      * Equal(=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * token: {VARCHAR(255)}
-     * @param token The value of token as equal. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * name: {NotNull, VARCHAR(128)}
+     * @param name The value of name as equal. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    public void setToken_Equal(String token) {
-        doSetToken_Equal(fRES(token));
+    public void setName_Equal(String name) {
+        doSetName_Equal(fRES(name));
     }
 
-    protected void doSetToken_Equal(String token) {
-        regToken(CK_EQ, token);
+    protected void doSetName_Equal(String name) {
+        regName(CK_EQ, name);
     }
 
     /**
      * NotEqual(&lt;&gt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * token: {VARCHAR(255)}
-     * @param token The value of token as notEqual. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * name: {NotNull, VARCHAR(128)}
+     * @param name The value of name as notEqual. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    public void setToken_NotEqual(String token) {
-        doSetToken_NotEqual(fRES(token));
+    public void setName_NotEqual(String name) {
+        doSetName_NotEqual(fRES(name));
     }
 
-    protected void doSetToken_NotEqual(String token) {
-        regToken(CK_NES, token);
+    protected void doSetName_NotEqual(String name) {
+        regName(CK_NES, name);
     }
 
     /**
      * GreaterThan(&gt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * token: {VARCHAR(255)}
-     * @param token The value of token as greaterThan. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * name: {NotNull, VARCHAR(128)}
+     * @param name The value of name as greaterThan. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    public void setToken_GreaterThan(String token) {
-        regToken(CK_GT, fRES(token));
+    public void setName_GreaterThan(String name) {
+        regName(CK_GT, fRES(name));
     }
 
     /**
      * LessThan(&lt;). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * token: {VARCHAR(255)}
-     * @param token The value of token as lessThan. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * name: {NotNull, VARCHAR(128)}
+     * @param name The value of name as lessThan. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    public void setToken_LessThan(String token) {
-        regToken(CK_LT, fRES(token));
+    public void setName_LessThan(String name) {
+        regName(CK_LT, fRES(name));
     }
 
     /**
      * GreaterEqual(&gt;=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * token: {VARCHAR(255)}
-     * @param token The value of token as greaterEqual. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * name: {NotNull, VARCHAR(128)}
+     * @param name The value of name as greaterEqual. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    public void setToken_GreaterEqual(String token) {
-        regToken(CK_GE, fRES(token));
+    public void setName_GreaterEqual(String name) {
+        regName(CK_GE, fRES(name));
     }
 
     /**
      * LessEqual(&lt;=). And NullOrEmptyIgnored, OnlyOnceRegistered. <br>
-     * token: {VARCHAR(255)}
-     * @param token The value of token as lessEqual. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * name: {NotNull, VARCHAR(128)}
+     * @param name The value of name as lessEqual. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    public void setToken_LessEqual(String token) {
-        regToken(CK_LE, fRES(token));
+    public void setName_LessEqual(String name) {
+        regName(CK_LE, fRES(name));
     }
 
     /**
      * InScope {in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
-     * token: {VARCHAR(255)}
-     * @param tokenList The collection of token as inScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * name: {NotNull, VARCHAR(128)}
+     * @param nameList The collection of name as inScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    public void setToken_InScope(Collection<String> tokenList) {
-        doSetToken_InScope(tokenList);
+    public void setName_InScope(Collection<String> nameList) {
+        doSetName_InScope(nameList);
     }
 
-    protected void doSetToken_InScope(Collection<String> tokenList) {
-        regINS(CK_INS, cTL(tokenList), xgetCValueToken(), "token");
+    protected void doSetName_InScope(Collection<String> nameList) {
+        regINS(CK_INS, cTL(nameList), xgetCValueName(), "name");
     }
 
     /**
      * NotInScope {not in ('a', 'b')}. And NullOrEmptyIgnored, NullOrEmptyElementIgnored, SeveralRegistered. <br>
-     * token: {VARCHAR(255)}
-     * @param tokenList The collection of token as notInScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * name: {NotNull, VARCHAR(128)}
+     * @param nameList The collection of name as notInScope. (basically NotNull, NotEmpty: error as default, or no condition as option)
      */
-    public void setToken_NotInScope(Collection<String> tokenList) {
-        doSetToken_NotInScope(tokenList);
+    public void setName_NotInScope(Collection<String> nameList) {
+        doSetName_NotInScope(nameList);
     }
 
-    protected void doSetToken_NotInScope(Collection<String> tokenList) {
-        regINS(CK_NINS, cTL(tokenList), xgetCValueToken(), "token");
+    protected void doSetName_NotInScope(Collection<String> nameList) {
+        regINS(CK_NINS, cTL(nameList), xgetCValueName(), "name");
     }
 
     /**
      * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * token: {VARCHAR(255)} <br>
-     * <pre>e.g. setToken_LikeSearch("xxx", op <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> op.<span style="color: #CC4747">likeContain()</span>);</pre>
-     * @param token The value of token as likeSearch. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * name: {NotNull, VARCHAR(128)} <br>
+     * <pre>e.g. setName_LikeSearch("xxx", op <span style="color: #90226C; font-weight: bold"><span style="font-size: 120%">-</span>&gt;</span> op.<span style="color: #CC4747">likeContain()</span>);</pre>
+     * @param name The value of name as likeSearch. (basically NotNull, NotEmpty: error as default, or no condition as option)
      * @param opLambda The callback for option of like-search. (NotNull)
      */
-    public void setToken_LikeSearch(String token, ConditionOptionCall<LikeSearchOption> opLambda) {
-        setToken_LikeSearch(token, xcLSOP(opLambda));
+    public void setName_LikeSearch(String name, ConditionOptionCall<LikeSearchOption> opLambda) {
+        setName_LikeSearch(name, xcLSOP(opLambda));
     }
 
     /**
      * LikeSearch with various options. (versatile) {like '%xxx%' escape ...}. And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * token: {VARCHAR(255)} <br>
-     * <pre>e.g. setToken_LikeSearch("xxx", new <span style="color: #CC4747">LikeSearchOption</span>().likeContain());</pre>
-     * @param token The value of token as likeSearch. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * name: {NotNull, VARCHAR(128)} <br>
+     * <pre>e.g. setName_LikeSearch("xxx", new <span style="color: #CC4747">LikeSearchOption</span>().likeContain());</pre>
+     * @param name The value of name as likeSearch. (basically NotNull, NotEmpty: error as default, or no condition as option)
      * @param likeSearchOption The option of like-search. (NotNull)
      */
-    protected void setToken_LikeSearch(String token, LikeSearchOption likeSearchOption) {
-        regLSQ(CK_LS, fRES(token), xgetCValueToken(), "token", likeSearchOption);
+    protected void setName_LikeSearch(String name, LikeSearchOption likeSearchOption) {
+        regLSQ(CK_LS, fRES(name), xgetCValueName(), "name", likeSearchOption);
     }
 
     /**
      * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
      * And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * token: {VARCHAR(255)}
-     * @param token The value of token as notLikeSearch. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * name: {NotNull, VARCHAR(128)}
+     * @param name The value of name as notLikeSearch. (basically NotNull, NotEmpty: error as default, or no condition as option)
      * @param opLambda The callback for option of like-search. (NotNull)
      */
-    public void setToken_NotLikeSearch(String token, ConditionOptionCall<LikeSearchOption> opLambda) {
-        setToken_NotLikeSearch(token, xcLSOP(opLambda));
+    public void setName_NotLikeSearch(String name, ConditionOptionCall<LikeSearchOption> opLambda) {
+        setName_NotLikeSearch(name, xcLSOP(opLambda));
     }
 
     /**
      * NotLikeSearch with various options. (versatile) {not like 'xxx%' escape ...} <br>
      * And NullOrEmptyIgnored, SeveralRegistered. <br>
-     * token: {VARCHAR(255)}
-     * @param token The value of token as notLikeSearch. (basically NotNull, NotEmpty: error as default, or no condition as option)
+     * name: {NotNull, VARCHAR(128)}
+     * @param name The value of name as notLikeSearch. (basically NotNull, NotEmpty: error as default, or no condition as option)
      * @param likeSearchOption The option of not-like-search. (NotNull)
      */
-    protected void setToken_NotLikeSearch(String token, LikeSearchOption likeSearchOption) {
-        regLSQ(CK_NLS, fRES(token), xgetCValueToken(), "token", likeSearchOption);
+    protected void setName_NotLikeSearch(String name, LikeSearchOption likeSearchOption) {
+        regLSQ(CK_NLS, fRES(name), xgetCValueName(), "name", likeSearchOption);
     }
 
-    /**
-     * IsNull {is null}. And OnlyOnceRegistered. <br>
-     * token: {VARCHAR(255)}
-     */
-    public void setToken_IsNull() { regToken(CK_ISN, DOBJ); }
-
-    /**
-     * IsNullOrEmpty {is null or empty}. And OnlyOnceRegistered. <br>
-     * token: {VARCHAR(255)}
-     */
-    public void setToken_IsNullOrEmpty() { regToken(CK_ISNOE, DOBJ); }
-
-    /**
-     * IsNotNull {is not null}. And OnlyOnceRegistered. <br>
-     * token: {VARCHAR(255)}
-     */
-    public void setToken_IsNotNull() { regToken(CK_ISNN, DOBJ); }
-
-    protected void regToken(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueToken(), "token"); }
-    protected abstract ConditionValue xgetCValueToken();
+    protected void regName(ConditionKey ky, Object vl) { regQ(ky, vl, xgetCValueName(), "name"); }
+    protected abstract ConditionValue xgetCValueName();
 
     /**
      * Equal(=). And NullIgnored, OnlyOnceRegistered. <br>
@@ -576,8 +631,8 @@ public abstract class AbstractBsUserCQ extends AbstractConditionQuery {
      * </pre>
      * @return The object to set up a function. (NotNull)
      */
-    public HpSLCFunction<UserCB> scalar_Equal() {
-        return xcreateSLCFunction(CK_EQ, UserCB.class);
+    public HpSLCFunction<PrefCB> scalar_Equal() {
+        return xcreateSLCFunction(CK_EQ, PrefCB.class);
     }
 
     /**
@@ -591,8 +646,8 @@ public abstract class AbstractBsUserCQ extends AbstractConditionQuery {
      * </pre>
      * @return The object to set up a function. (NotNull)
      */
-    public HpSLCFunction<UserCB> scalar_NotEqual() {
-        return xcreateSLCFunction(CK_NES, UserCB.class);
+    public HpSLCFunction<PrefCB> scalar_NotEqual() {
+        return xcreateSLCFunction(CK_NES, PrefCB.class);
     }
 
     /**
@@ -606,8 +661,8 @@ public abstract class AbstractBsUserCQ extends AbstractConditionQuery {
      * </pre>
      * @return The object to set up a function. (NotNull)
      */
-    public HpSLCFunction<UserCB> scalar_GreaterThan() {
-        return xcreateSLCFunction(CK_GT, UserCB.class);
+    public HpSLCFunction<PrefCB> scalar_GreaterThan() {
+        return xcreateSLCFunction(CK_GT, PrefCB.class);
     }
 
     /**
@@ -621,8 +676,8 @@ public abstract class AbstractBsUserCQ extends AbstractConditionQuery {
      * </pre>
      * @return The object to set up a function. (NotNull)
      */
-    public HpSLCFunction<UserCB> scalar_LessThan() {
-        return xcreateSLCFunction(CK_LT, UserCB.class);
+    public HpSLCFunction<PrefCB> scalar_LessThan() {
+        return xcreateSLCFunction(CK_LT, PrefCB.class);
     }
 
     /**
@@ -636,16 +691,16 @@ public abstract class AbstractBsUserCQ extends AbstractConditionQuery {
      * </pre>
      * @return The object to set up a function. (NotNull)
      */
-    public HpSLCFunction<UserCB> scalar_GreaterEqual() {
-        return xcreateSLCFunction(CK_GE, UserCB.class);
+    public HpSLCFunction<PrefCB> scalar_GreaterEqual() {
+        return xcreateSLCFunction(CK_GE, PrefCB.class);
     }
 
     /**
      * Prepare ScalarCondition as lessEqual. <br>
      * {where FOO &lt;= (select max(BAR) from ...)}
      * <pre>
-     * cb.query().<span style="color: #CC4747">scalar_LessEqual()</span>.max(new SubQuery&lt;UserCB&gt;() {
-     *     public void query(UserCB subCB) {
+     * cb.query().<span style="color: #CC4747">scalar_LessEqual()</span>.max(new SubQuery&lt;PrefCB&gt;() {
+     *     public void query(PrefCB subCB) {
      *         subCB.specify().setFoo... <span style="color: #3F7E5E">// derived column for function</span>
      *         subCB.query().setBar...
      *     }
@@ -653,56 +708,56 @@ public abstract class AbstractBsUserCQ extends AbstractConditionQuery {
      * </pre>
      * @return The object to set up a function. (NotNull)
      */
-    public HpSLCFunction<UserCB> scalar_LessEqual() {
-        return xcreateSLCFunction(CK_LE, UserCB.class);
+    public HpSLCFunction<PrefCB> scalar_LessEqual() {
+        return xcreateSLCFunction(CK_LE, PrefCB.class);
     }
 
     @SuppressWarnings("unchecked")
     protected <CB extends ConditionBean> void xscalarCondition(String fn, SubQuery<CB> sq, String rd, HpSLCCustomized<CB> cs, ScalarConditionOption op) {
         assertObjectNotNull("subQuery", sq);
-        UserCB cb = xcreateScalarConditionCB(); sq.query((CB)cb);
+        PrefCB cb = xcreateScalarConditionCB(); sq.query((CB)cb);
         String pp = keepScalarCondition(cb.query()); // for saving query-value
         cs.setPartitionByCBean((CB)xcreateScalarConditionPartitionByCB()); // for using partition-by
         registerScalarCondition(fn, cb.query(), pp, rd, cs, op);
     }
-    public abstract String keepScalarCondition(UserCQ sq);
+    public abstract String keepScalarCondition(PrefCQ sq);
 
-    protected UserCB xcreateScalarConditionCB() {
-        UserCB cb = newMyCB(); cb.xsetupForScalarCondition(this); return cb;
+    protected PrefCB xcreateScalarConditionCB() {
+        PrefCB cb = newMyCB(); cb.xsetupForScalarCondition(this); return cb;
     }
 
-    protected UserCB xcreateScalarConditionPartitionByCB() {
-        UserCB cb = newMyCB(); cb.xsetupForScalarConditionPartitionBy(this); return cb;
+    protected PrefCB xcreateScalarConditionPartitionByCB() {
+        PrefCB cb = newMyCB(); cb.xsetupForScalarConditionPartitionBy(this); return cb;
     }
 
     // ===================================================================================
     //                                                                       MyselfDerived
     //                                                                       =============
-    public void xsmyselfDerive(String fn, SubQuery<UserCB> sq, String al, DerivedReferrerOption op) {
+    public void xsmyselfDerive(String fn, SubQuery<PrefCB> sq, String al, DerivedReferrerOption op) {
         assertObjectNotNull("subQuery", sq);
-        UserCB cb = new UserCB(); cb.xsetupForDerivedReferrer(this);
+        PrefCB cb = new PrefCB(); cb.xsetupForDerivedReferrer(this);
         lockCall(() -> sq.query(cb)); String pp = keepSpecifyMyselfDerived(cb.query()); String pk = "id";
         registerSpecifyMyselfDerived(fn, cb.query(), pk, pk, pp, "myselfDerived", al, op);
     }
-    public abstract String keepSpecifyMyselfDerived(UserCQ sq);
+    public abstract String keepSpecifyMyselfDerived(PrefCQ sq);
 
     /**
      * Prepare for (Query)MyselfDerived (correlated sub-query).
      * @return The object to set up a function for myself table. (NotNull)
      */
-    public HpQDRFunction<UserCB> myselfDerived() {
-        return xcreateQDRFunctionMyselfDerived(UserCB.class);
+    public HpQDRFunction<PrefCB> myselfDerived() {
+        return xcreateQDRFunctionMyselfDerived(PrefCB.class);
     }
     @SuppressWarnings("unchecked")
     protected <CB extends ConditionBean> void xqderiveMyselfDerived(String fn, SubQuery<CB> sq, String rd, Object vl, DerivedReferrerOption op) {
         assertObjectNotNull("subQuery", sq);
-        UserCB cb = new UserCB(); cb.xsetupForDerivedReferrer(this); sq.query((CB)cb);
+        PrefCB cb = new PrefCB(); cb.xsetupForDerivedReferrer(this); sq.query((CB)cb);
         String pk = "id";
         String sqpp = keepQueryMyselfDerived(cb.query()); // for saving query-value.
         String prpp = keepQueryMyselfDerivedParameter(vl);
         registerQueryMyselfDerived(fn, cb.query(), pk, pk, sqpp, "myselfDerived", rd, vl, prpp, op);
     }
-    public abstract String keepQueryMyselfDerived(UserCQ sq);
+    public abstract String keepQueryMyselfDerived(PrefCQ sq);
     public abstract String keepQueryMyselfDerivedParameter(Object vl);
 
     // ===================================================================================
@@ -712,13 +767,13 @@ public abstract class AbstractBsUserCQ extends AbstractConditionQuery {
      * Prepare for MyselfExists (correlated sub-query).
      * @param subCBLambda The implementation of sub-query. (NotNull)
      */
-    public void myselfExists(SubQuery<UserCB> subCBLambda) {
+    public void myselfExists(SubQuery<PrefCB> subCBLambda) {
         assertObjectNotNull("subCBLambda", subCBLambda);
-        UserCB cb = new UserCB(); cb.xsetupForMyselfExists(this);
+        PrefCB cb = new PrefCB(); cb.xsetupForMyselfExists(this);
         lockCall(() -> subCBLambda.query(cb)); String pp = keepMyselfExists(cb.query());
         registerMyselfExists(cb.query(), pp);
     }
-    public abstract String keepMyselfExists(UserCQ sq);
+    public abstract String keepMyselfExists(PrefCQ sq);
 
     // ===================================================================================
     //                                                                        Manual Order
@@ -762,12 +817,12 @@ public abstract class AbstractBsUserCQ extends AbstractConditionQuery {
     // ===================================================================================
     //                                                                       Very Internal
     //                                                                       =============
-    protected UserCB newMyCB() {
-        return new UserCB();
+    protected PrefCB newMyCB() {
+        return new PrefCB();
     }
     // very internal (for suppressing warn about 'Not Use Import')
     protected String xabUDT() { return Date.class.getName(); }
-    protected String xabCQ() { return UserCQ.class.getName(); }
+    protected String xabCQ() { return PrefCQ.class.getName(); }
     protected String xabLSO() { return LikeSearchOption.class.getName(); }
     protected String xabSLCS() { return HpSLCSetupper.class.getName(); }
     protected String xabSCP() { return SubQuery.class.getName(); }

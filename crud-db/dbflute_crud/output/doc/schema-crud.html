@@ -528,12 +528,22 @@ pre.spolicyviodisp {
 	</tr>
 	<tr>
 		<td class="rownumcell">2</td>
-		<td class="namecell" data-name="user"><a href="#user" title="type=TABLE, primaryKey={id}, nameLength=4, columnCount=5">user</a></td>
+		<td class="namecell" data-name="customer"><a href="#customer" title="type=TABLE, primaryKey={id}, nameLength=8, columnCount=18">customer</a></td>
+		<td class="typecell">TABLE</td>
+		<td class="relcell"><a href="#pref" title="customer_ibfk_1">pref</a></td>
+		<td class="relcell">&nbsp;</td>
+		<td class="commentcell customer_comment"><pre>顧客</pre></td>
+		<td class="subcell">Customer</td>
+		<td class="subcell">2021/03/01</td>
+	</tr>
+	<tr>
+		<td class="rownumcell">3</td>
+		<td class="namecell" data-name="pref"><a href="#pref" title="type=TABLE, primaryKey={id}, nameLength=4, columnCount=5">pref</a></td>
 		<td class="typecell">TABLE</td>
 		<td class="relcell">&nbsp;</td>
-		<td class="relcell">&nbsp;</td>
-		<td class="commentcell user_comment"><pre>ユーザー</pre></td>
-		<td class="subcell">User</td>
+		<td class="relcell"><a href="#customer" title="customer_ibfk_1">customer</a></td>
+		<td class="commentcell pref_comment"><pre>都道府県</pre></td>
+		<td class="subcell">Pref</td>
 		<td class="subcell">2021/03/01</td>
 	</tr>
 	</tbody>
@@ -624,13 +634,12 @@ CHANGELOG
 	</tbody>
 </table>
 
-<h2 id="user" title="type=TABLE, primaryKey={id}, nameLength=4, columnCount=5">
-user
+<h2 id="customer" title="type=TABLE, primaryKey={id}, nameLength=8, columnCount=18">
+customer
 &nbsp;<span class="tablefirstdatetitle">since 2021/03/01</span>
-&nbsp;<span class="bqpcount"><a href="#user_sql">(outsideSql=2)</a></span>
 </h2>
-<div class="tablecomment user_comment" data-name="user"><pre>ユーザー</pre></div>
-<input type="hidden" value="user">
+<div class="tablecomment customer_comment" data-name="customer"><pre>顧客</pre></div>
+<input type="hidden" value="customer">
 <table class="tablecontent">
 	<thead>
 	<tr>
@@ -653,7 +662,7 @@ user
 		<th>Since</th>
 	</tr>
 	</thead>
-	<tbody id="user-body">
+	<tbody id="customer-body">
 	<tr>
 		<td class="rownumcell">1</td>
 		<td class="flgcell" title="PRIMARY">o</td>
@@ -661,7 +670,7 @@ user
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
-		<td class=" columnnamecell" id="user_id">id</td>
+		<td class=" columnnamecell" id="customer_id">id</td>
 		<td class="typecell">BIGINT UNSIGNED</td>
 		<td class="sizecell"> 20 </td>
 		<td class="defvalcell"> &nbsp;</td>
@@ -679,16 +688,16 @@ user
 		<td class="flgcell"> &nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
-		<td class="flgcell"> &nbsp;</td>
-		<td class=" columnnamecell" id="user_token">token</td>
+		<td class="flgcell">*</td>
+		<td class=" columnnamecell" id="customer_last_name">last_name</td>
 		<td class="typecell">VARCHAR</td>
 		<td class="sizecell"> 255 </td>
 		<td class="defvalcell"> &nbsp;</td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"><pre>ログイントークン</pre></td>
-		<td class="subcell">token</td>
+		<td class="commentcell"><pre>姓</pre></td>
+		<td class="subcell">lastName</td>
 		<td class="subcell">String</td>
 		<td class="subcell">first</td>
 	</tr>
@@ -699,7 +708,382 @@ user
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
-		<td class=" columnnamecell" id="user_created_at">created_at</td>
+		<td class=" columnnamecell" id="customer_first_name">first_name</td>
+		<td class="typecell">VARCHAR</td>
+		<td class="sizecell"> 255 </td>
+		<td class="defvalcell"> &nbsp;</td>
+		<td class="relcell">&nbsp;&nbsp;</td>
+		<td class="relcell">&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"><pre>名</pre></td>
+		<td class="subcell">firstName</td>
+		<td class="subcell">String</td>
+		<td class="subcell">first</td>
+	</tr>
+	<tr>
+		<td class="rownumcell">4</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">*</td>
+		<td class=" columnnamecell" id="customer_last_kana">last_kana</td>
+		<td class="typecell">VARCHAR</td>
+		<td class="sizecell"> 255 </td>
+		<td class="defvalcell"> &nbsp;</td>
+		<td class="relcell">&nbsp;&nbsp;</td>
+		<td class="relcell">&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"><pre>姓かな</pre></td>
+		<td class="subcell">lastKana</td>
+		<td class="subcell">String</td>
+		<td class="subcell">first</td>
+	</tr>
+	<tr>
+		<td class="rownumcell">5</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">*</td>
+		<td class=" columnnamecell" id="customer_first_kana">first_kana</td>
+		<td class="typecell">VARCHAR</td>
+		<td class="sizecell"> 255 </td>
+		<td class="defvalcell"> &nbsp;</td>
+		<td class="relcell">&nbsp;&nbsp;</td>
+		<td class="relcell">&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"><pre>名かな</pre></td>
+		<td class="subcell">firstKana</td>
+		<td class="subcell">String</td>
+		<td class="subcell">first</td>
+	</tr>
+	<tr>
+		<td class="rownumcell">6</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">*</td>
+		<td class=" columnnamecell" id="customer_gender">gender</td>
+		<td class="typecell">INT UNSIGNED</td>
+		<td class="sizecell"> 10 </td>
+		<td class="defvalcell"> &nbsp;</td>
+		<td class="relcell">&nbsp;&nbsp;</td>
+		<td class="relcell">&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"><pre>性別</pre></td>
+		<td class="subcell">gender</td>
+		<td class="subcell">Integer</td>
+		<td class="subcell">first</td>
+	</tr>
+	<tr>
+		<td class="rownumcell">7</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">*</td>
+		<td class=" columnnamecell" id="customer_birthday">birthday</td>
+		<td class="typecell">DATETIME</td>
+		<td class="sizecell"> 19 </td>
+		<td class="defvalcell"> &nbsp;</td>
+		<td class="relcell">&nbsp;&nbsp;</td>
+		<td class="relcell">&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"><pre>生年月日</pre></td>
+		<td class="subcell">birthday</td>
+		<td class="subcell">LocalDateTime</td>
+		<td class="subcell">first</td>
+	</tr>
+	<tr>
+		<td class="rownumcell">8</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">*</td>
+		<td class=" columnnamecell" id="customer_post_code">post_code</td>
+		<td class="typecell">VARCHAR</td>
+		<td class="sizecell"> 255 </td>
+		<td class="defvalcell"> &nbsp;</td>
+		<td class="relcell">&nbsp;&nbsp;</td>
+		<td class="relcell">&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"><pre>郵便番号</pre></td>
+		<td class="subcell">postCode</td>
+		<td class="subcell">String</td>
+		<td class="subcell">first</td>
+	</tr>
+	<tr>
+		<td class="rownumcell">9</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell" title="pref_id(pref_id)">o</td>
+		<td class="flgcell">*</td>
+		<td class=" columnnamecell" id="customer_pref_id">pref_id</td>
+		<td class="typecell">INT UNSIGNED</td>
+		<td class="sizecell"> 10 </td>
+		<td class="defvalcell"> &nbsp;</td>
+		<td class="relcell"><a href="#pref" title="customer_ibfk_1">pref</a>&nbsp;</td>
+		<td class="relcell">&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"><pre>都道府県ID</pre></td>
+		<td class="subcell">prefId</td>
+		<td class="subcell">Integer</td>
+		<td class="subcell">first</td>
+	</tr>
+	<tr>
+		<td class="rownumcell">10</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">*</td>
+		<td class=" columnnamecell" id="customer_address">address</td>
+		<td class="typecell">VARCHAR</td>
+		<td class="sizecell"> 255 </td>
+		<td class="defvalcell"> &nbsp;</td>
+		<td class="relcell">&nbsp;&nbsp;</td>
+		<td class="relcell">&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"><pre>住所</pre></td>
+		<td class="subcell">address</td>
+		<td class="subcell">String</td>
+		<td class="subcell">first</td>
+	</tr>
+	<tr>
+		<td class="rownumcell">11</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class=" columnnamecell" id="customer_building">building</td>
+		<td class="typecell">VARCHAR</td>
+		<td class="sizecell"> 255 </td>
+		<td class="defvalcell"> &nbsp;</td>
+		<td class="relcell">&nbsp;&nbsp;</td>
+		<td class="relcell">&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"><pre>建物名</pre></td>
+		<td class="subcell">building</td>
+		<td class="subcell">String</td>
+		<td class="subcell">first</td>
+	</tr>
+	<tr>
+		<td class="rownumcell">12</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">*</td>
+		<td class=" columnnamecell" id="customer_tel">tel</td>
+		<td class="typecell">VARCHAR</td>
+		<td class="sizecell"> 255 </td>
+		<td class="defvalcell"> &nbsp;</td>
+		<td class="relcell">&nbsp;&nbsp;</td>
+		<td class="relcell">&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"><pre>電話番号</pre></td>
+		<td class="subcell">tel</td>
+		<td class="subcell">String</td>
+		<td class="subcell">first</td>
+	</tr>
+	<tr>
+		<td class="rownumcell">13</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">*</td>
+		<td class=" columnnamecell" id="customer_mobile">mobile</td>
+		<td class="typecell">VARCHAR</td>
+		<td class="sizecell"> 255 </td>
+		<td class="defvalcell"> &nbsp;</td>
+		<td class="relcell">&nbsp;&nbsp;</td>
+		<td class="relcell">&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"><pre>携帯番号</pre></td>
+		<td class="subcell">mobile</td>
+		<td class="subcell">String</td>
+		<td class="subcell">first</td>
+	</tr>
+	<tr>
+		<td class="rownumcell">14</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell" title="customer_email_unique(email)">o</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">*</td>
+		<td class=" columnnamecell" id="customer_email">email</td>
+		<td class="typecell">VARCHAR</td>
+		<td class="sizecell"> 255 </td>
+		<td class="defvalcell"> &nbsp;</td>
+		<td class="relcell">&nbsp;&nbsp;</td>
+		<td class="relcell">&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"><pre>メールアドレス</pre></td>
+		<td class="subcell">email</td>
+		<td class="subcell">String</td>
+		<td class="subcell">first</td>
+	</tr>
+	<tr>
+		<td class="rownumcell">15</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class=" columnnamecell" id="customer_remarks">remarks</td>
+		<td class="typecell">TEXT</td>
+		<td class="sizecell"> 65535 </td>
+		<td class="defvalcell"> &nbsp;</td>
+		<td class="relcell">&nbsp;&nbsp;</td>
+		<td class="relcell">&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"><pre>備考</pre></td>
+		<td class="subcell">remarks</td>
+		<td class="subcell">String</td>
+		<td class="subcell">first</td>
+	</tr>
+	<tr>
+		<td class="rownumcell">16</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">*</td>
+		<td class=" columnnamecell" id="customer_created_at">created_at</td>
+		<td class="typecell">TIMESTAMP</td>
+		<td class="sizecell"> 19 </td>
+		<td class="defvalcell"> CURRENT_TIMESTAMP</td>
+		<td class="relcell">&nbsp;&nbsp;</td>
+		<td class="relcell">&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"><pre>作成日時</pre></td>
+		<td class="subcell">createdAt</td>
+		<td class="subcell">LocalDateTime</td>
+		<td class="subcell">first</td>
+	</tr>
+	<tr>
+		<td class="rownumcell">17</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">*</td>
+		<td class=" columnnamecell" id="customer_updated_at">updated_at</td>
+		<td class="typecell">TIMESTAMP</td>
+		<td class="sizecell"> 19 </td>
+		<td class="defvalcell"> CURRENT_TIMESTAMP</td>
+		<td class="relcell">&nbsp;&nbsp;</td>
+		<td class="relcell">&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"><pre>更新日時</pre></td>
+		<td class="subcell">updatedAt</td>
+		<td class="subcell">LocalDateTime</td>
+		<td class="subcell">first</td>
+	</tr>
+	<tr>
+		<td class="rownumcell">18</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class=" columnnamecell" id="customer_deleted_at">deleted_at</td>
+		<td class="typecell">TIMESTAMP</td>
+		<td class="sizecell"> 19 </td>
+		<td class="defvalcell"> &nbsp;</td>
+		<td class="relcell">&nbsp;&nbsp;</td>
+		<td class="relcell">&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"><pre>削除日時</pre></td>
+		<td class="subcell">deletedAt</td>
+		<td class="subcell">LocalDateTime</td>
+		<td class="subcell">first</td>
+	</tr>
+	</tbody>
+</table>
+
+<h2 id="pref" title="type=TABLE, primaryKey={id}, nameLength=4, columnCount=5">
+pref
+&nbsp;<span class="tablefirstdatetitle">since 2021/03/01</span>
+&nbsp;<span class="bqpcount"><a href="#pref_sql">(outsideSql=2)</a></span>
+</h2>
+<div class="tablecomment pref_comment" data-name="pref"><pre>都道府県</pre></div>
+<input type="hidden" value="pref">
+<table class="tablecontent">
+	<thead>
+	<tr>
+		<th class="rownumhead">No.</th>
+		<th>PK</th>
+		<th>ID</th>
+		<th>UQ</th>
+		<th>IX</th>
+		<th>Not<br />Null</th>
+		<th>Name</th>
+		<th>Type</th>
+		<th>Size</th>
+		<th>Default</th>
+		<th>ForeignTable</th>
+		<th>ReferrerTable</th>
+		<th>Classification</th>
+		<th>ColumnComment</th>
+		<th>PropertyName</th>
+		<th>JavaType</th>
+		<th>Since</th>
+	</tr>
+	</thead>
+	<tbody id="pref-body">
+	<tr>
+		<td class="rownumcell">1</td>
+		<td class="flgcell" title="PRIMARY">o</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">*</td>
+		<td class=" columnnamecell" id="pref_id">id</td>
+		<td class="typecell">INT UNSIGNED</td>
+		<td class="sizecell"> 10 </td>
+		<td class="defvalcell"> &nbsp;</td>
+		<td class="relcell">&nbsp;&nbsp;</td>
+		<td class="relcell"><a href="#customer" title="customer_ibfk_1">customer</a>&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"><pre>ID</pre></td>
+		<td class="subcell">id</td>
+		<td class="subcell">Integer</td>
+		<td class="subcell">first</td>
+	</tr>
+	<tr>
+		<td class="rownumcell">2</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">*</td>
+		<td class=" columnnamecell" id="pref_name">name</td>
+		<td class="typecell">VARCHAR</td>
+		<td class="sizecell"> 128 </td>
+		<td class="defvalcell"> &nbsp;</td>
+		<td class="relcell">&nbsp;&nbsp;</td>
+		<td class="relcell">&nbsp;</td>
+		<td class="relcell"> &nbsp;</td>
+		<td class="commentcell"><pre>都道府県名</pre></td>
+		<td class="subcell">name</td>
+		<td class="subcell">String</td>
+		<td class="subcell">first</td>
+	</tr>
+	<tr>
+		<td class="rownumcell">3</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell"> &nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">&nbsp;</td>
+		<td class="flgcell">*</td>
+		<td class=" columnnamecell" id="pref_created_at">created_at</td>
 		<td class="typecell">TIMESTAMP</td>
 		<td class="sizecell"> 19 </td>
 		<td class="defvalcell"> CURRENT_TIMESTAMP</td>
@@ -718,7 +1102,7 @@ user
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">*</td>
-		<td class=" columnnamecell" id="user_updated_at">updated_at</td>
+		<td class=" columnnamecell" id="pref_updated_at">updated_at</td>
 		<td class="typecell">TIMESTAMP</td>
 		<td class="sizecell"> 19 </td>
 		<td class="defvalcell"> CURRENT_TIMESTAMP</td>
@@ -737,14 +1121,14 @@ user
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell">&nbsp;</td>
 		<td class="flgcell"> &nbsp;</td>
-		<td class=" columnnamecell" id="user_deleted_at">deleted_at</td>
+		<td class=" columnnamecell" id="pref_deleted_at">deleted_at</td>
 		<td class="typecell">TIMESTAMP</td>
 		<td class="sizecell"> 19 </td>
 		<td class="defvalcell"> &nbsp;</td>
 		<td class="relcell">&nbsp;&nbsp;</td>
 		<td class="relcell">&nbsp;</td>
 		<td class="relcell"> &nbsp;</td>
-		<td class="commentcell"><pre>論理削除実行日時</pre></td>
+		<td class="commentcell"><pre>削除日時</pre></td>
 		<td class="subcell">deletedAt</td>
 		<td class="subcell">LocalDateTime</td>
 		<td class="subcell">first</td>
@@ -755,23 +1139,23 @@ user
 
 
 <h2 id="outsidesql">OutsideSql List</h2>
-<h3 id="user_sql"><a href="#user">user</a></h3>
+<h3 id="pref_sql"><a href="#pref">pref</a></h3>
 <dl class="bqplist">
-	<dt>(ユーザー検索)selectExampleEntity</dt>
+	<dt>(都道府県検索)selectExampleEntity</dt>
 	<dd>
-		<pre class="commentdesc"> ユーザー検索の説明</pre>
+		<pre class="commentdesc"> 都道府県検索の説明</pre>
 	</dd>
 	<dd class="subinfo">
-		<span class="file">UserBhv_selectExampleEntity.sql</span>
+		<span class="file">PrefBhv_selectExampleEntity.sql</span>
 		<span class="ctet">(df:entity)</span>
 		<span class="pmb">(df:pmb)</span>
 	</dd>
-	<dt>(ユーザーリスト検索)selectExampleList</dt>
+	<dt>(都道府県リスト検索)selectExampleList</dt>
 	<dd>
-		<pre class="commentdesc"> ユーザーリスト検索の説明</pre>
+		<pre class="commentdesc"> 都道府県リスト検索の説明</pre>
 	</dd>
 	<dd class="subinfo">
-		<span class="file">UserBhv_selectExampleList.sql</span>
+		<span class="file">PrefBhv_selectExampleList.sql</span>
 		<span class="ctet">(df:entity)</span>
 		<span class="pmb">(df:pmb)</span>
 	</dd>
@@ -1319,14 +1703,53 @@ function StoreClient() {
 				}
 			}
 		}
-		, 'user': {
-			'databaseComment': 'ユーザー'
+		, 'customer': {
+			'databaseComment': '顧客'
 			, 'columns': {
 				'id': {
 					'databaseComment': 'ID'
 				}
-				, 'token': {
-					'databaseComment': 'ログイントークン'
+				, 'last_name': {
+					'databaseComment': '姓'
+				}
+				, 'first_name': {
+					'databaseComment': '名'
+				}
+				, 'last_kana': {
+					'databaseComment': '姓かな'
+				}
+				, 'first_kana': {
+					'databaseComment': '名かな'
+				}
+				, 'gender': {
+					'databaseComment': '性別'
+				}
+				, 'birthday': {
+					'databaseComment': '生年月日'
+				}
+				, 'post_code': {
+					'databaseComment': '郵便番号'
+				}
+				, 'pref_id': {
+					'databaseComment': '都道府県ID'
+				}
+				, 'address': {
+					'databaseComment': '住所'
+				}
+				, 'building': {
+					'databaseComment': '建物名'
+				}
+				, 'tel': {
+					'databaseComment': '電話番号'
+				}
+				, 'mobile': {
+					'databaseComment': '携帯番号'
+				}
+				, 'email': {
+					'databaseComment': 'メールアドレス'
+				}
+				, 'remarks': {
+					'databaseComment': '備考'
 				}
 				, 'created_at': {
 					'databaseComment': '作成日時'
@@ -1335,7 +1758,27 @@ function StoreClient() {
 					'databaseComment': '更新日時'
 				}
 				, 'deleted_at': {
-					'databaseComment': '論理削除実行日時'
+					'databaseComment': '削除日時'
+				}
+			}
+		}
+		, 'pref': {
+			'databaseComment': '都道府県'
+			, 'columns': {
+				'id': {
+					'databaseComment': 'ID'
+				}
+				, 'name': {
+					'databaseComment': '都道府県名'
+				}
+				, 'created_at': {
+					'databaseComment': '作成日時'
+				}
+				, 'updated_at': {
+					'databaseComment': '更新日時'
+				}
+				, 'deleted_at': {
+					'databaseComment': '削除日時'
 				}
 			}
 		}
