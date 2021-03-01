@@ -128,12 +128,12 @@ public abstract class $myClassName extends AbstractEntity implements ${myEntityI
     //                                                                           =========
 #foreach ($col in $table.columns)
     /** ${col.aliasExpression}${col.name}: {${col.columnDefinitionLineDisp}} */
-    protected ${col.javaNative} _${col.uncapitalisedJavaName};
+    protected ${col.javaNative} ${col.uncapitalisedJavaName};
 
 #end
 #if (${table.canBeColumnNullObject()})
     /** Is the handling of column null object enabled? */
-    protected boolean _columnNullObjectEnabled;
+    protected boolean columnNullObjectEnabled;
 
 #end
     // ===================================================================================
@@ -160,7 +160,7 @@ public abstract class $myClassName extends AbstractEntity implements ${myEntityI
     /** {@inheritDoc} */
     public boolean hasPrimaryKeyValue() {
 #foreach ($col in $table.primaryKey)
-        if (_${col.uncapitalisedJavaName} == null) { return false; }
+        if (this.${col.uncapitalisedJavaName} == null) { return false; }
 #end
         return ${table.hasPrimaryKey()};
     }
@@ -334,7 +334,7 @@ public abstract class $myClassName extends AbstractEntity implements ${myEntityI
     //                                                                    ================
 #foreach ($fk in $table.foreignKeys)
 #set ($foreignEntityClassName = "${fk.foreignPropertyEntityDefinitionType}")
-#set ($foreignVariableName = "_${fk.foreignPropertyName}")
+#set ($foreignVariableName = "${fk.foreignPropertyName}")
     /** ${fk.foreignSimpleDisp}. */
     protected ${foreignEntityClassName} ${foreignVariableName};
 
@@ -349,16 +349,16 @@ public abstract class $myClassName extends AbstractEntity implements ${myEntityI
      */
     public ${foreignEntityClassName} get${fk.foreignJavaBeansRulePropertyNameInitCap}() {
 #if ($fk.isForeignPropertyOptionalEntity())
-        if (${foreignVariableName} == null) { ${foreignVariableName} = ${database.relationOptionalEntitySimpleName}.relationEmpty(this, "${fk.foreignJavaBeansRulePropertyName}"); }
+        if (this.${foreignVariableName} == null) { ${foreignVariableName} = ${database.relationOptionalEntitySimpleName}.relationEmpty(this, "${fk.foreignJavaBeansRulePropertyName}"); }
 #end
 #if ($fk.canBeRelationalNullObjectForeign())
 #if ($fk.isForeignPropertyOptionalEntity())
-        if (${foreignVariableName}.${fk.relationalNullObjectForeignEmptyExp}) { ${foreignVariableName} = ${fk.relationalNullObjectForeignProviderExp}; }
+        if (this.${foreignVariableName}.${fk.relationalNullObjectForeignEmptyExp}) { this.${foreignVariableName} = ${fk.relationalNullObjectForeignProviderExp}; }
 #else
-        if (${foreignVariableName} == null) { ${foreignVariableName} = ${fk.relationalNullObjectForeignProviderExp}; }
+        if (this.${foreignVariableName} == null) { ${foreignVariableName} = ${fk.relationalNullObjectForeignProviderExp}; }
 #end
 #end
-        return ${foreignVariableName};
+        return this.${foreignVariableName};
     }
 
     /**
@@ -366,7 +366,7 @@ public abstract class $myClassName extends AbstractEntity implements ${myEntityI
      * @param ${fk.foreignPropertyName} The entity of foreign property '${fk.foreignJavaBeansRulePropertyName}'. (NullAllowed)
      */
     public void set${fk.foreignJavaBeansRulePropertyNameInitCap}(${foreignEntityClassName} ${fk.foreignPropertyName}) {
-        ${foreignVariableName} = ${fk.foreignPropertyName};
+        this.${foreignVariableName} = ${fk.foreignPropertyName};
     }
 
 #end
@@ -413,7 +413,7 @@ public abstract class $myClassName extends AbstractEntity implements ${myEntityI
     //                                                                   =================
 #foreach ($referrer in $table.referrerAsManyList)
 #set ($referrerEntityClassName = "${referrer.referrerTableExtendedEntityClassName}")
-#set ($referrerVariableName = "_${referrer.referrerPropertyName}")
+#set ($referrerVariableName = "${referrer.referrerPropertyName}")
     /** ${referrer.referrerSimpleDisp}. */
     protected List<${referrerEntityClassName}> ${referrerVariableName};
 
@@ -422,8 +422,8 @@ public abstract class $myClassName extends AbstractEntity implements ${myEntityI
      * @return The entity list of referrer property '${referrer.referrerJavaBeansRulePropertyName}'. (NotNull: even if no loading, returns empty list)
      */
     public List<${referrerEntityClassName}> get${referrer.referrerJavaBeansRulePropertyNameInitCap}() {
-        if (${referrerVariableName} == null) { ${referrerVariableName} = newReferrerList(); }
-        return ${referrerVariableName};
+        if (this.${referrerVariableName} == null) { this.${referrerVariableName} = newReferrerList(); }
+        return this.${referrerVariableName};
     }
 
     /**
@@ -431,7 +431,7 @@ public abstract class $myClassName extends AbstractEntity implements ${myEntityI
      * @param ${referrer.referrerPropertyName} The entity list of referrer property '${referrer.referrerJavaBeansRulePropertyName}'. (NullAllowed)
      */
     public void set${referrer.referrerJavaBeansRulePropertyNameInitCap}(List<${referrerEntityClassName}> ${referrer.referrerPropertyName}) {
-        ${referrerVariableName} = ${referrer.referrerPropertyName};
+        this.${referrerVariableName} = ${referrer.referrerPropertyName};
     }
 
 #end
@@ -511,7 +511,7 @@ public abstract class $myClassName extends AbstractEntity implements ${myEntityI
         if (obj instanceof $myClassName) {
             $myClassName other = ($myClassName)obj;
 #foreach ($col in $table.equalsHashcodeColumnList)
-            if (!xSV(_${col.uncapitalisedJavaName}, other._${col.uncapitalisedJavaName})) { return false; }
+            if (!xSV(this.${col.uncapitalisedJavaName}, other.${col.uncapitalisedJavaName})) { return false; }
 #end
             return true;
         } else {
@@ -524,7 +524,7 @@ public abstract class $myClassName extends AbstractEntity implements ${myEntityI
         int hs = initial;
         hs = xCH(hs, asTableDbName());
 #foreach ($col in $table.equalsHashcodeColumnList)
-        hs = xCH(hs, _${col.uncapitalisedJavaName});
+        hs = xCH(hs, this.${col.uncapitalisedJavaName});
 #end
         return hs;
     }
@@ -534,26 +534,26 @@ public abstract class $myClassName extends AbstractEntity implements ${myEntityI
 #if ($table.hasRelation())
         StringBuilder sb = new StringBuilder();
 #foreach ($fk in $table.foreignKeys)
-#set ($foreignVariableName = "_${fk.foreignPropertyName}")
+#set ($foreignVariableName = "${fk.foreignPropertyName}")
 #if ($fk.isForeignPropertyOptionalEntity())
-        if (${foreignVariableName} != null && ${foreignVariableName}.isPresent())
+        if (this.${foreignVariableName} != null && ${foreignVariableName}.isPresent())
 #else
-        if (${foreignVariableName} != null)
+        if (this.${foreignVariableName} != null)
 #end
-        { sb.append(li).append(xbRDS(${foreignVariableName}, "${fk.foreignPropertyName}")); }
+        { sb.append(li).append(xbRDS(this.${foreignVariableName}, "${fk.foreignPropertyName}")); }
 #end
 #foreach ($referrer in $table.referrerAsOneList)
-#set ($referrerVariableName = "_${referrer.referrerPropertyNameAsOne}")
+#set ($referrerVariableName = "${referrer.referrerPropertyNameAsOne}")
 #if ($referrer.isReferrerPropertyOptionalEntityAsOne())
-        if (${referrerVariableName} != null && ${referrerVariableName}.isPresent())
+        if (this.${referrerVariableName} != null && this.${referrerVariableName}.isPresent())
 #else
-        if (${referrerVariableName} != null)
+        if (this.${referrerVariableName} != null)
 #end
-        { sb.append(li).append(xbRDS(${referrerVariableName}, "${referrer.referrerPropertyNameAsOne}")); }
+        { sb.append(li).append(xbRDS(this.${referrerVariableName}, "${referrer.referrerPropertyNameAsOne}")); }
 #end
 #foreach ($referrer in $table.referrerAsManyList)
-#set ($referrerVariableName = "_${referrer.referrerPropertyName}")
-        if (${referrerVariableName} != null) { for (${referrer.referrerTableExtendedEntityClassName} et : ${referrerVariableName})
+#set ($referrerVariableName = "${referrer.referrerPropertyName}")
+        if (this.${referrerVariableName} != null) { for (${referrer.referrerTableExtendedEntityClassName} et : this.${referrerVariableName})
         { if (et != null) { sb.append(li).append(xbRDS(et, "${referrer.referrerPropertyName}")); } } }
 #end
         return sb.toString();
@@ -572,11 +572,11 @@ public abstract class $myClassName extends AbstractEntity implements ${myEntityI
         StringBuilder sb = new StringBuilder();
 #foreach ($col in $table.columns)
 #if ($col.isJavaNativeUtilDate())
-        sb.append(dm).append(xfUD(_${col.uncapitalisedJavaName}));
+        sb.append(dm).append(xfUD(this.${col.uncapitalisedJavaName}));
 #elseif ($col.isJavaNativeByteArray())
-        sb.append(dm).append(xfBA(_${col.uncapitalisedJavaName}));
+        sb.append(dm).append(xfBA(this.${col.uncapitalisedJavaName}));
 #else
-        sb.append(dm).append(xfND(_${col.uncapitalisedJavaName}));
+        sb.append(dm).append(xfND(this.${col.uncapitalisedJavaName}));
 #end
 #end
         if (sb.length() > dm.length()) {
@@ -591,26 +591,26 @@ public abstract class $myClassName extends AbstractEntity implements ${myEntityI
 #if ($table.hasRelation())
         StringBuilder sb = new StringBuilder();
 #foreach ($fk in $table.foreignKeys)
-#set ($foreignVariableName = "_${fk.foreignPropertyName}")
+#set ($foreignVariableName = "${fk.foreignPropertyName}")
 #if ($fk.isForeignPropertyOptionalEntity())
-        if (${foreignVariableName} != null && ${foreignVariableName}.isPresent())
+        if (this.${foreignVariableName} != null && ${foreignVariableName}.isPresent())
 #else
-        if (${foreignVariableName} != null)
+        if (this.${foreignVariableName} != null)
 #end
         { sb.append(dm).append("${fk.foreignPropertyName}"); }
 #end
 #foreach ($referrer in $table.referrerAsOneList)
-#set ($referrerVariableName = "_${referrer.referrerPropertyNameAsOne}")
+#set ($referrerVariableName = "${referrer.referrerPropertyNameAsOne}")
 #if ($referrer.isReferrerPropertyOptionalEntityAsOne())
-        if (${referrerVariableName} != null && ${referrerVariableName}.isPresent())
+        if (this.${referrerVariableName} != null && this.${referrerVariableName}.isPresent())
 #else
         if (${referrerVariableName} != null)
 #end
         { sb.append(dm).append("${referrer.referrerPropertyNameAsOne}"); }
 #end
 #foreach ($referrer in $table.referrerAsManyList)
-#set ($referrerVariableName = "_${referrer.referrerPropertyName}")
-        if (${referrerVariableName} != null && !${referrerVariableName}.isEmpty())
+#set ($referrerVariableName = "${referrer.referrerPropertyName}")
+        if (this.${referrerVariableName} != null && !this.${referrerVariableName}.isEmpty())
         { sb.append(dm).append("${referrer.referrerPropertyName}"); }
 #end
         if (sb.length() > dm.length()) {
@@ -663,17 +663,17 @@ public abstract class $myClassName extends AbstractEntity implements ${myEntityI
         checkSpecifiedProperty("${col.javaBeansRulePropertyName}");
 #if ($col.canBeColumnNullObject())
 #if ($col.isEntityConvertEmptyStringToNull())
-        if (_columnNullObjectEnabled && convertEmptyToNull(_${col.uncapitalisedJavaName}) == null)
-        { _${col.uncapitalisedJavaName} = ${col.columnNullObjectProviderExp}; }
+        if (_columnNullObjectEnabled && convertEmptyToNull(this.${col.uncapitalisedJavaName}) == null)
+        { this.${col.uncapitalisedJavaName} = ${col.columnNullObjectProviderExp}; }
 #else
-        if (_columnNullObjectEnabled && _${col.uncapitalisedJavaName} == null)
-        { _${col.uncapitalisedJavaName} = ${col.columnNullObjectProviderExp}; }
+        if (_columnNullObjectEnabled && this.${col.uncapitalisedJavaName} == null)
+        { this.${col.uncapitalisedJavaName} = ${col.columnNullObjectProviderExp}; }
 #end
 #end
 #if ($col.isEntityConvertEmptyStringToNull())
-        return convertEmptyToNull(_${col.uncapitalisedJavaName});
+        return convertEmptyToNull(this.${col.uncapitalisedJavaName});
 #else
-        return _${col.uncapitalisedJavaName};
+        return this.${col.uncapitalisedJavaName};
 #end
     }
 
@@ -693,7 +693,7 @@ public abstract class $myClassName extends AbstractEntity implements ${myEntityI
         checkClassificationCode("${col.name}", ${glCDef}.DefMeta.${col.classificationName}, ${col.uncapitalisedJavaName});
 #end
         registerModifiedProperty("${col.javaBeansRulePropertyName}");
-        _${col.uncapitalisedJavaName} = ${col.uncapitalisedJavaName};
+        this.${col.uncapitalisedJavaName} = ${col.uncapitalisedJavaName};
     }
 #set ($propertyLoopIndex = $propertyLoopIndex + 1)
 #end

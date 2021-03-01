@@ -64,13 +64,13 @@ public abstract class BsChangelog extends AbstractEntity implements DomainEntity
     //                                                                           Attribute
     //                                                                           =========
     /** ID: {PK, NotNull, DECIMAL(20)} */
-    protected java.math.BigDecimal _id;
+    protected java.math.BigDecimal id;
 
     /** APPLIED_AT: {NotNull, VARCHAR(25)} */
-    protected String _appliedAt;
+    protected String appliedAt;
 
     /** DESCRIPTION: {NotNull, VARCHAR(255)} */
-    protected String _description;
+    protected String description;
 
     // ===================================================================================
     //                                                                             DB Meta
@@ -90,7 +90,7 @@ public abstract class BsChangelog extends AbstractEntity implements DomainEntity
     //                                                                        ============
     /** {@inheritDoc} */
     public boolean hasPrimaryKeyValue() {
-        if (_id == null) { return false; }
+        if (this.id == null) { return false; }
         return true;
     }
 
@@ -111,7 +111,7 @@ public abstract class BsChangelog extends AbstractEntity implements DomainEntity
     protected boolean doEquals(Object obj) {
         if (obj instanceof BsChangelog) {
             BsChangelog other = (BsChangelog)obj;
-            if (!xSV(_id, other._id)) { return false; }
+            if (!xSV(this.id, other.id)) { return false; }
             return true;
         } else {
             return false;
@@ -122,7 +122,7 @@ public abstract class BsChangelog extends AbstractEntity implements DomainEntity
     protected int doHashCode(int initial) {
         int hs = initial;
         hs = xCH(hs, asTableDbName());
-        hs = xCH(hs, _id);
+        hs = xCH(hs, this.id);
         return hs;
     }
 
@@ -134,9 +134,9 @@ public abstract class BsChangelog extends AbstractEntity implements DomainEntity
     @Override
     protected String doBuildColumnString(String dm) {
         StringBuilder sb = new StringBuilder();
-        sb.append(dm).append(xfND(_id));
-        sb.append(dm).append(xfND(_appliedAt));
-        sb.append(dm).append(xfND(_description));
+        sb.append(dm).append(xfND(this.id));
+        sb.append(dm).append(xfND(this.appliedAt));
+        sb.append(dm).append(xfND(this.description));
         if (sb.length() > dm.length()) {
             sb.delete(0, dm.length());
         }
@@ -163,7 +163,7 @@ public abstract class BsChangelog extends AbstractEntity implements DomainEntity
      */
     public java.math.BigDecimal getId() {
         checkSpecifiedProperty("id");
-        return _id;
+        return this.id;
     }
 
     /**
@@ -172,7 +172,7 @@ public abstract class BsChangelog extends AbstractEntity implements DomainEntity
      */
     public void setId(java.math.BigDecimal id) {
         registerModifiedProperty("id");
-        _id = id;
+        this.id = id;
     }
 
     /**
@@ -181,7 +181,7 @@ public abstract class BsChangelog extends AbstractEntity implements DomainEntity
      */
     public String getAppliedAt() {
         checkSpecifiedProperty("appliedAt");
-        return _appliedAt;
+        return this.appliedAt;
     }
 
     /**
@@ -190,7 +190,7 @@ public abstract class BsChangelog extends AbstractEntity implements DomainEntity
      */
     public void setAppliedAt(String appliedAt) {
         registerModifiedProperty("appliedAt");
-        _appliedAt = appliedAt;
+        this.appliedAt = appliedAt;
     }
 
     /**
@@ -199,7 +199,7 @@ public abstract class BsChangelog extends AbstractEntity implements DomainEntity
      */
     public String getDescription() {
         checkSpecifiedProperty("description");
-        return _description;
+        return this.description;
     }
 
     /**
@@ -208,6 +208,6 @@ public abstract class BsChangelog extends AbstractEntity implements DomainEntity
      */
     public void setDescription(String description) {
         registerModifiedProperty("description");
-        _description = description;
+        this.description = description;
     }
 }

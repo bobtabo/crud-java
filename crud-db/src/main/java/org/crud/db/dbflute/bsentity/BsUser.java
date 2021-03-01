@@ -68,19 +68,19 @@ public abstract class BsUser extends AbstractEntity implements DomainEntity {
     //                                                                           Attribute
     //                                                                           =========
     /** id: {PK, ID, NotNull, BIGINT UNSIGNED(20)} */
-    protected Long _id;
+    protected Long id;
 
     /** token: {VARCHAR(255)} */
-    protected String _token;
+    protected String token;
 
     /** created_at: {NotNull, TIMESTAMP(19), default=[CURRENT_TIMESTAMP]} */
-    protected java.time.LocalDateTime _createdAt;
+    protected java.time.LocalDateTime createdAt;
 
     /** updated_at: {NotNull, TIMESTAMP(19), default=[CURRENT_TIMESTAMP]} */
-    protected java.time.LocalDateTime _updatedAt;
+    protected java.time.LocalDateTime updatedAt;
 
     /** deleted_at: {TIMESTAMP(19)} */
-    protected java.time.LocalDateTime _deletedAt;
+    protected java.time.LocalDateTime deletedAt;
 
     // ===================================================================================
     //                                                                             DB Meta
@@ -100,7 +100,7 @@ public abstract class BsUser extends AbstractEntity implements DomainEntity {
     //                                                                        ============
     /** {@inheritDoc} */
     public boolean hasPrimaryKeyValue() {
-        if (_id == null) { return false; }
+        if (this.id == null) { return false; }
         return true;
     }
 
@@ -121,7 +121,7 @@ public abstract class BsUser extends AbstractEntity implements DomainEntity {
     protected boolean doEquals(Object obj) {
         if (obj instanceof BsUser) {
             BsUser other = (BsUser)obj;
-            if (!xSV(_id, other._id)) { return false; }
+            if (!xSV(this.id, other.id)) { return false; }
             return true;
         } else {
             return false;
@@ -132,7 +132,7 @@ public abstract class BsUser extends AbstractEntity implements DomainEntity {
     protected int doHashCode(int initial) {
         int hs = initial;
         hs = xCH(hs, asTableDbName());
-        hs = xCH(hs, _id);
+        hs = xCH(hs, this.id);
         return hs;
     }
 
@@ -144,11 +144,11 @@ public abstract class BsUser extends AbstractEntity implements DomainEntity {
     @Override
     protected String doBuildColumnString(String dm) {
         StringBuilder sb = new StringBuilder();
-        sb.append(dm).append(xfND(_id));
-        sb.append(dm).append(xfND(_token));
-        sb.append(dm).append(xfND(_createdAt));
-        sb.append(dm).append(xfND(_updatedAt));
-        sb.append(dm).append(xfND(_deletedAt));
+        sb.append(dm).append(xfND(this.id));
+        sb.append(dm).append(xfND(this.token));
+        sb.append(dm).append(xfND(this.createdAt));
+        sb.append(dm).append(xfND(this.updatedAt));
+        sb.append(dm).append(xfND(this.deletedAt));
         if (sb.length() > dm.length()) {
             sb.delete(0, dm.length());
         }
@@ -176,7 +176,7 @@ public abstract class BsUser extends AbstractEntity implements DomainEntity {
      */
     public Long getId() {
         checkSpecifiedProperty("id");
-        return _id;
+        return this.id;
     }
 
     /**
@@ -186,7 +186,7 @@ public abstract class BsUser extends AbstractEntity implements DomainEntity {
      */
     public void setId(Long id) {
         registerModifiedProperty("id");
-        _id = id;
+        this.id = id;
     }
 
     /**
@@ -196,7 +196,7 @@ public abstract class BsUser extends AbstractEntity implements DomainEntity {
      */
     public String getToken() {
         checkSpecifiedProperty("token");
-        return _token;
+        return this.token;
     }
 
     /**
@@ -206,7 +206,7 @@ public abstract class BsUser extends AbstractEntity implements DomainEntity {
      */
     public void setToken(String token) {
         registerModifiedProperty("token");
-        _token = token;
+        this.token = token;
     }
 
     /**
@@ -216,7 +216,7 @@ public abstract class BsUser extends AbstractEntity implements DomainEntity {
      */
     public java.time.LocalDateTime getCreatedAt() {
         checkSpecifiedProperty("createdAt");
-        return _createdAt;
+        return this.createdAt;
     }
 
     /**
@@ -226,7 +226,7 @@ public abstract class BsUser extends AbstractEntity implements DomainEntity {
      */
     public void setCreatedAt(java.time.LocalDateTime createdAt) {
         registerModifiedProperty("createdAt");
-        _createdAt = createdAt;
+        this.createdAt = createdAt;
     }
 
     /**
@@ -236,7 +236,7 @@ public abstract class BsUser extends AbstractEntity implements DomainEntity {
      */
     public java.time.LocalDateTime getUpdatedAt() {
         checkSpecifiedProperty("updatedAt");
-        return _updatedAt;
+        return this.updatedAt;
     }
 
     /**
@@ -246,7 +246,7 @@ public abstract class BsUser extends AbstractEntity implements DomainEntity {
      */
     public void setUpdatedAt(java.time.LocalDateTime updatedAt) {
         registerModifiedProperty("updatedAt");
-        _updatedAt = updatedAt;
+        this.updatedAt = updatedAt;
     }
 
     /**
@@ -256,7 +256,7 @@ public abstract class BsUser extends AbstractEntity implements DomainEntity {
      */
     public java.time.LocalDateTime getDeletedAt() {
         checkSpecifiedProperty("deletedAt");
-        return _deletedAt;
+        return this.deletedAt;
     }
 
     /**
@@ -266,6 +266,6 @@ public abstract class BsUser extends AbstractEntity implements DomainEntity {
      */
     public void setDeletedAt(java.time.LocalDateTime deletedAt) {
         registerModifiedProperty("deletedAt");
-        _deletedAt = deletedAt;
+        this.deletedAt = deletedAt;
     }
 }

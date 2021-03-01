@@ -91,7 +91,7 @@ public class ImplementedBehaviorSelector implements BehaviorSelector {
                 // or reading might failed by same-time writing
                 return bhv;
             }
-            bhv = (BEHAVIOR) getComponent(behaviorType);
+            bhv = getComponent(behaviorType);
             _behaviorCache.put(behaviorType, bhv);
             return bhv;
         }

@@ -62,13 +62,13 @@ public abstract class BsExampleEntity extends AbstractEntity implements Customiz
     //                                                                           Attribute
     //                                                                           =========
     /** id: {BIGINT UNSIGNED(20), refers to user.id} */
-    protected Long _id;
+    protected Long id;
 
     /** token: {VARCHAR(255), refers to user.token} */
-    protected String _token;
+    protected String token;
 
     /** user_name: {VARCHAR(2)} */
-    protected String _userName;
+    protected String userName;
 
     // ===================================================================================
     //                                                                             DB Meta
@@ -108,9 +108,9 @@ public abstract class BsExampleEntity extends AbstractEntity implements Customiz
     protected boolean doEquals(Object obj) {
         if (obj instanceof BsExampleEntity) {
             BsExampleEntity other = (BsExampleEntity)obj;
-            if (!xSV(_id, other._id)) { return false; }
-            if (!xSV(_token, other._token)) { return false; }
-            if (!xSV(_userName, other._userName)) { return false; }
+            if (!xSV(this.id, other.id)) { return false; }
+            if (!xSV(this.token, other.token)) { return false; }
+            if (!xSV(this.userName, other.userName)) { return false; }
             return true;
         } else {
             return false;
@@ -121,9 +121,9 @@ public abstract class BsExampleEntity extends AbstractEntity implements Customiz
     protected int doHashCode(int initial) {
         int hs = initial;
         hs = xCH(hs, asTableDbName());
-        hs = xCH(hs, _id);
-        hs = xCH(hs, _token);
-        hs = xCH(hs, _userName);
+        hs = xCH(hs, this.id);
+        hs = xCH(hs, this.token);
+        hs = xCH(hs, this.userName);
         return hs;
     }
 
@@ -135,9 +135,9 @@ public abstract class BsExampleEntity extends AbstractEntity implements Customiz
     @Override
     protected String doBuildColumnString(String dm) {
         StringBuilder sb = new StringBuilder();
-        sb.append(dm).append(xfND(_id));
-        sb.append(dm).append(xfND(_token));
-        sb.append(dm).append(xfND(_userName));
+        sb.append(dm).append(xfND(this.id));
+        sb.append(dm).append(xfND(this.token));
+        sb.append(dm).append(xfND(this.userName));
         if (sb.length() > dm.length()) {
             sb.delete(0, dm.length());
         }
@@ -165,7 +165,7 @@ public abstract class BsExampleEntity extends AbstractEntity implements Customiz
      */
     public Long getId() {
         checkSpecifiedProperty("id");
-        return _id;
+        return this.id;
     }
 
     /**
@@ -175,7 +175,7 @@ public abstract class BsExampleEntity extends AbstractEntity implements Customiz
      */
     public void setId(Long id) {
         registerModifiedProperty("id");
-        _id = id;
+        this.id = id;
     }
 
     /**
@@ -185,7 +185,7 @@ public abstract class BsExampleEntity extends AbstractEntity implements Customiz
      */
     public String getToken() {
         checkSpecifiedProperty("token");
-        return _token;
+        return this.token;
     }
 
     /**
@@ -195,7 +195,7 @@ public abstract class BsExampleEntity extends AbstractEntity implements Customiz
      */
     public void setToken(String token) {
         registerModifiedProperty("token");
-        _token = token;
+        this.token = token;
     }
 
     /**
@@ -204,7 +204,7 @@ public abstract class BsExampleEntity extends AbstractEntity implements Customiz
      */
     public String getUserName() {
         checkSpecifiedProperty("userName");
-        return _userName;
+        return this.userName;
     }
 
     /**
@@ -213,6 +213,6 @@ public abstract class BsExampleEntity extends AbstractEntity implements Customiz
      */
     public void setUserName(String userName) {
         registerModifiedProperty("userName");
-        _userName = userName;
+        this.userName = userName;
     }
 }
