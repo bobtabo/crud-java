@@ -52,5 +52,10 @@ map:{
     #        ; comment=DESCRIPTION; orderBy=DISPLAY_ORDER
     #    }
     #}
+    ; GenderType = list:{
+        ; map:{topComment=性別; codeType=Number}
+        ; map:{code=1;name=MEN;alias=M;comment=男; sisterCode=1}
+        ; map:{code=2;name=WOMEN;alias=W;comment=女; sisterCode=2}
+    }
 }
 # ----------------/

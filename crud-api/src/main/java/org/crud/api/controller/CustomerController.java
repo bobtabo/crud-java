@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(path = "/api/v1/user")
+@RequestMapping(path = "/api/v1/customer")
 public class CustomerController extends ControllerSupport {
     @Autowired
     private CustomerService customerService;
@@ -36,7 +36,7 @@ public class CustomerController extends ControllerSupport {
     @GetMapping("/{customerId}/index")
     public ResponseEntity<String> index() {
         CustomerDto dto = customerService.index();
-        return getResponse(HttpStatus.OK, dto);
+        return getResponse(HttpStatus.OK, dto.getCustomers());
     }
 
     /**
@@ -47,7 +47,7 @@ public class CustomerController extends ControllerSupport {
     @GetMapping("/{customerId}/search")
     public ResponseEntity<String> search(@ModelAttribute @Validated CustomerSearchForm form) {
         CustomerDto dto = customerService.search(form.getLastKana(), form.getFirstKana(), form.getGenders(), form.getPrefId());
-        return getResponse(HttpStatus.OK, dto);
+        return getResponse(HttpStatus.OK, dto.getCustomers());
     }
 
     /**

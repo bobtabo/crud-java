@@ -1,5 +1,8 @@
 package org.crud.core.repository;
 
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.ObjectUtils;
+import org.apache.commons.lang.StringUtils;
 import org.crud.db.dbflute.exbhv.CustomerBhv;
 import org.crud.db.dbflute.exentity.Customer;
 import org.dbflute.cbean.coption.LikeSearchOption;
@@ -23,14 +26,30 @@ public class CustomerRepository extends AbstractRepository<CustomerBhv, Customer
         });
     }
 
+    /**
+     *
+     * @param lastKana
+     * @param firstKana
+     * @param genders
+     * @param prefId
+     * @return
+     */
     public ListResultBean<Customer> search(String lastKana, String firstKana, List genders, Integer prefId) {
         return getBehavior().selectList(cb -> {
             cb.setupSelect_Pref();
             cb.query().setDeletedAt_IsNull();
-            cb.query().setLastKana_LikeSearch(lastKana, LikeSearchOption::likeContain);
-            cb.query().setFirstKana_LikeSearch(firstKana, LikeSearchOption::likeContain);
-            cb.query().setGender_InScope(genders);
-            cb.query().setPrefId_Equal(prefId);
+            if (StringUtils.isNotEmpty(lastKana)) {
+                cb.query().setLastKana_LikeSearch(lastKana, LikeSearchOption::likeContain);
+            }
+            if (StringUtils.isNotEmpty(firstKana)) {
+                cb.query().setFirstKana_LikeSearch(firstKana, LikeSearchOption::likeContain);
+            }
+            if (CollectionUtils.isNotEmpty(genders)) {
+                cb.query().setGender_InScope(genders);
+            }
+            if (prefId != null) {
+                cb.query().setPrefId_Equal(prefId);
+            }
         });
     }
 }

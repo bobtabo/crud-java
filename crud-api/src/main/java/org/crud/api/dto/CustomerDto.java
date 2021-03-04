@@ -19,7 +19,6 @@ import java.util.List;
 public class CustomerDto implements Dto {
     private static final long serialVersionUID = -6051489655858470681L;
 
-    private Customer customer;
     private List<Customer> customers;
 
     private Long id;

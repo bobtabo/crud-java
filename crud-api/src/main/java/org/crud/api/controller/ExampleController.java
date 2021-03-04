@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 /**
  * PmbサンプルControllerクラスです。<br/>
- * そのうち削除します。
  *
  * @author <a href="mailto:bobtabo.buhibuhi@gmail.com">Satoshi Nagashiba</a>
  */
