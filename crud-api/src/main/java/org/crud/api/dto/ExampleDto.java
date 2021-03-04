@@ -18,7 +18,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 public class ExampleDto implements Dto {
-    private static final long serialVersionUID = -287897202411437584L;
+    private static final long serialVersionUID = -2576441731376892785L;
 
     private ExampleEntity pref;
     private List<ExampleList> prefs;
