@@ -17,7 +17,6 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoField;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import java.util.TimeZone;
 
 /**
@@ -672,20 +671,6 @@ public class DateUtil {
         long fromTime = from.toEpochDay();
         long toTime = to.toEpochDay();
         return fromTime <= toTime;
-    }
-
-    /**
-     * 時間リストを取得します。
-     *
-     * @return 時間リスト
-     */
-    public static List<String> getTimeList() {
-        List<String> result = CollectionUtil.newArrayList();
-        DecimalFormat formatter = new DecimalFormat("00");
-        for (int i = 0; i < 24; i++) {
-            result.add(formatter.format(i));
-        }
-        return result;
     }
 
     /**

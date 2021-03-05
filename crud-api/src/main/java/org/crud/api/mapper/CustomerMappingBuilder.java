@@ -1,4 +1,4 @@
-package org.crud.api.dxo;
+package org.crud.api.mapper;
 
 import com.github.dozermapper.core.loader.api.BeanMappingBuilder;
 import com.github.dozermapper.core.loader.api.TypeMappingOptions;
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
  * @author <a href="mailto:bobtabo.buhibuhi@gmail.com">Satoshi Nagashiba</a>
  */
 @Component
-public class CustomerDxo extends BeanMappingBuilder {
+public class CustomerMappingBuilder extends BeanMappingBuilder {
     @Override
     protected void configure() {
         mapping(CustomerSearchForm.class, CustomerDto.class, TypeMappingOptions.mapNull(true))

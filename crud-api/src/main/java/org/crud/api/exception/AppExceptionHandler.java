@@ -1,9 +1,6 @@
 package org.crud.api.exception;
 
 import org.crud.core.exception.AppException;
-import org.crud.core.exception.DataNotFoundException;
-import org.crud.core.exception.ForbiddenException;
-import org.crud.core.exception.ForeignKeyViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,39 +26,6 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler {
      */
     @ExceptionHandler(AppException.class)
     public ResponseEntity<Object> handleAppException(AppException e, WebRequest request) {
-        return super.handleExceptionInternal(e, e.getMessage(), null, HttpStatus.BAD_REQUEST, request);
-    }
-
-    /**
-     *
-     * @param e
-     * @param request
-     * @return
-     */
-    @ExceptionHandler(DataNotFoundException.class)
-    public ResponseEntity<Object> handleDataNotFoundException(DataNotFoundException e, WebRequest request) {
-        return super.handleExceptionInternal(e, e.getMessage(), null, HttpStatus.BAD_REQUEST, request);
-    }
-
-    /**
-     *
-     * @param e
-     * @param request
-     * @return
-     */
-    @ExceptionHandler(ForbiddenException.class)
-    public ResponseEntity<Object> handleForbiddenException(ForbiddenException e, WebRequest request) {
-        return super.handleExceptionInternal(e, e.getMessage(), null, HttpStatus.BAD_REQUEST, request);
-    }
-
-    /**
-     *
-     * @param e
-     * @param request
-     * @return
-     */
-    @ExceptionHandler(ForeignKeyViolationException.class)
-    public ResponseEntity<Object> handleForeignKeyViolationException(ForeignKeyViolationException e, WebRequest request) {
         return super.handleExceptionInternal(e, e.getMessage(), null, HttpStatus.BAD_REQUEST, request);
     }
 

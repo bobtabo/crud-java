@@ -3,7 +3,7 @@ package org.crud.api.service;
 import com.github.dozermapper.core.Mapper;
 import lombok.RequiredArgsConstructor;
 import org.crud.api.dto.CustomerDto;
-import org.crud.api.dxo.CustomerDxo;
+import org.crud.api.mapper.CustomerMappingBuilder;
 import org.crud.core.repository.CustomerRepository;
 import org.crud.core.util.DozerUtil;
 import org.crud.db.dbflute.exentity.Customer;
@@ -23,7 +23,7 @@ public class CustomerService {
     @Autowired
     private CustomerRepository customerRepository;
     @Autowired
-    private CustomerDxo customerDxo;
+    private CustomerMappingBuilder customerMappingBuilder;
 
     /**
      *
@@ -57,7 +57,7 @@ public class CustomerService {
     public CustomerDto insert(CustomerDto dto) {
         CustomerDto result = new CustomerDto();
 
-        Mapper mapper = DozerUtil.getMapper(customerDxo);
+        Mapper mapper = DozerUtil.getMapper(customerMappingBuilder);
         Customer entity = mapper.map(dto, Customer.class);
         customerRepository.insert(entity);
         result.setStore(true);
@@ -73,7 +73,7 @@ public class CustomerService {
     public CustomerDto update(CustomerDto dto) {
         CustomerDto result = new CustomerDto();
         Customer entity = customerRepository.findById(dto.getId());
-        Mapper mapper = DozerUtil.getMapper(customerDxo);
+        Mapper mapper = DozerUtil.getMapper(customerMappingBuilder);
         mapper.map(dto, entity);
         customerRepository.update(entity);
         result.setUpdate(true);

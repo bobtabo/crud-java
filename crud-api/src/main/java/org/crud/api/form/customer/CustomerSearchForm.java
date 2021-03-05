@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.Max;
 import java.io.Serializable;
 import java.util.List;
 
@@ -18,7 +19,9 @@ import java.util.List;
 public class CustomerSearchForm implements Serializable {
     private static final long serialVersionUID = 4763636794635638212L;
 
+    @Max(50)
     private String lastKana;
+    @Max(50)
     private String firstKana;
     private List<?> genders;
     private Integer prefId;
