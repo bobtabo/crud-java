@@ -34,7 +34,7 @@ public class CustomerRepository extends AbstractRepository<CustomerBhv, Customer
      * @param prefId
      * @return
      */
-    public ListResultBean<Customer> search(String lastKana, String firstKana, List genders, Integer prefId) {
+    public ListResultBean<Customer> search(String lastKana, String firstKana, List<Integer> genders, Integer prefId) {
         return getBehavior().selectList(cb -> {
             cb.setupSelect_Pref();
             cb.query().setDeletedAt_IsNull();

@@ -42,7 +42,6 @@ subprojects {
     version = rootProject.version
 
     ext['guava.version'] = '28.2-jre'
-    ext['retrofit.version'] = '2.9.0'
 
     dependencyManagement {
         imports {
@@ -51,16 +50,6 @@ subprojects {
 
         dependencies {
             dependency 'com.google.guava:guava:' + ext['guava.version']
-            dependency 'com.github.stefanbirkner:system-lambda:1.0.0'
-            dependencySet(group: 'com.squareup.retrofit2', version: ext['retrofit.version']) {
-                entry 'converter-jackson'
-                entry 'retrofit'
-            }
-            dependencySet(group: 'io.jsonwebtoken', version: '0.11.2') {
-                entry 'jjwt-api'
-                entry 'jjwt-impl'
-                entry 'jjwt-jackson'
-            }
         }
     }
 
@@ -69,7 +58,6 @@ subprojects {
         // http://docs.spring.io/spring-boot/docs/current/reference/html/configuration-metadata.html#configuration-metadata-annotation-processor
 
         testImplementation 'com.google.guava:guava'
-        testImplementation 'com.github.stefanbirkner:system-lambda'
         testImplementation 'com.squareup.okhttp3:mockwebserver'
         testImplementation 'org.hibernate.validator:hibernate-validator'
         testImplementation 'org.springframework.boot:spring-boot-starter-test' // MockHttpServletRequest
@@ -81,40 +69,6 @@ subprojects {
 
     lombok {
         version = '1.18.12'
-    }
-
-    if (!project.name.startsWith('sample-') && !project.name.startsWith('test-')) {
-        task delombok(type: io.franzbecker.gradle.lombok.task.DelombokTask, dependsOn: compileJava) {
-            ext.outputDir = file("$buildDir/delombok")
-            outputs.dir(outputDir)
-            sourceSets.main.java.srcDirs.each {
-                inputs.dir(it)
-                args(it, "-d", outputDir)
-            }
-        }
-
-        javadoc {
-            dependsOn delombok
-            source = delombok.outputDir
-            options.encoding = 'UTF-8'
-            options.locale = 'en_US'
-            options.addStringOption('Xdoclint:none', '-quiet')
-            // To create javadoc for generated method&constructor, delombok & run javadoc on delombok.outputDir.
-        }
-
-        task javadocJar(type: Jar, dependsOn: 'javadoc') {
-            archiveClassifier.set('javadoc')
-            from javadoc.destinationDir
-        }
-
-        task sourcesJar(type: Jar, dependsOn: 'classes') {
-            archiveClassifier.set('sources')
-            from sourceSets.main.allSource
-        }
-
-        artifacts {
-            archives javadocJar, sourcesJar
-        }
     }
 
     compileJava {

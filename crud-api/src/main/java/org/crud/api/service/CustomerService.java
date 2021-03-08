@@ -43,7 +43,7 @@ public class CustomerService {
      * @param prefId
      * @return
      */
-    public CustomerDto search(String lastKana, String firstKana, List<?> genders, Integer prefId) {
+    public CustomerDto search(String lastKana, String firstKana, List<Integer> genders, Integer prefId) {
         CustomerDto result = new CustomerDto();
         result.setCustomers(customerRepository.search(lastKana, firstKana, genders, prefId));
         return result;

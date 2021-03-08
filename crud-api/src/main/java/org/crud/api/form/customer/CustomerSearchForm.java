@@ -23,6 +23,6 @@ public class CustomerSearchForm implements Serializable {
     private String lastKana;
     @Max(50)
     private String firstKana;
-    private List<?> genders;
+    private List<Integer> genders;
     private Integer prefId;
 }
