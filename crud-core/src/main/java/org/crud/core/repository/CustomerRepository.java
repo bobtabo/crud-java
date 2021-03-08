@@ -1,7 +1,6 @@
 package org.crud.core.repository;
 
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang.ObjectUtils;
 import org.apache.commons.lang.StringUtils;
 import org.crud.db.dbflute.exbhv.CustomerBhv;
 import org.crud.db.dbflute.exentity.Customer;

@@ -2,15 +2,12 @@ package org.crud.api.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.crud.api.dto.CustomerDto;
-import org.crud.api.dto.ExampleDto;
 import org.crud.api.service.CustomerService;
-import org.crud.api.service.ExampleService;
 import org.crud.core.util.DateUtil;
 import org.crud.db.dbflute.allcommon.CDef;
 import org.crud.db.dbflute.exentity.Customer;
-import org.crud.db.dbflute.exentity.customize.ExampleEntity;
-import org.crud.db.dbflute.exentity.customize.ExampleList;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -18,7 +15,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
 
@@ -49,6 +45,7 @@ public class CustomerControllerTest {
         mockMvc = MockMvcBuilders.standaloneSetup(customerService).build();
     }
 
+    @Test
     public void testIndex() throws Exception {
         when(customerService.index()).thenReturn(getCustomerDto());
         this.mockMvc.perform(get("/api/v1/user/{userId}/example", 1)).andExpect(status().isOk())
@@ -58,6 +55,7 @@ public class CustomerControllerTest {
                 .andExpect(jsonPath("$.prefs[0].pref_name").value("ユーザー名"));
     }
 
+    @Test
     public void testSearch() throws Exception {
         when(customerService.search("みょうじ", "なまえ", Collections.singletonList(1), 13)).thenReturn(getCustomerDto());
         this.mockMvc.perform(get("/api/v1/user/{userId}/example", 1)).andExpect(status().isOk())
@@ -67,6 +65,7 @@ public class CustomerControllerTest {
                 .andExpect(jsonPath("$.prefs[0].pref_name").value("ユーザー名"));
     }
 
+    @Test
     public void testStore() throws Exception {
         when(customerService.insert(getStoreDto())).thenReturn(getCustomerDto());
         this.mockMvc.perform(get("/api/v1/user/{userId}/example", 1)).andExpect(status().isOk())
@@ -76,6 +75,7 @@ public class CustomerControllerTest {
                 .andExpect(jsonPath("$.prefs[0].pref_name").value("ユーザー名"));
     }
 
+    @Test
     public void testUpdate() throws Exception {
         when(customerService.update(getUpdateDto())).thenReturn(getCustomerDto());
         this.mockMvc.perform(get("/api/v1/user/{userId}/example", 1)).andExpect(status().isOk())
@@ -85,6 +85,7 @@ public class CustomerControllerTest {
                 .andExpect(jsonPath("$.prefs[0].pref_name").value("ユーザー名"));
     }
 
+    @Test
     public void testDelete() throws Exception {
         when(customerService.delete(1L)).thenReturn(getCustomerDto());
         this.mockMvc.perform(get("/api/v1/user/{userId}/example", 1)).andExpect(status().isOk())

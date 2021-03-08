@@ -47,8 +47,8 @@ public class ExampleControllerTest {
     public void testIndex() throws Exception {
         when(exampleService.search(1L)).thenReturn(getExampleDto());
         this.mockMvc.perform(get("/api/v1/user/{userId}/example", 1)).andExpect(status().isOk())
-                .andExpect(jsonPath("$.pref.id").value(1))
-                .andExpect(jsonPath("$.pref.pref_name").value("ユーザー名"))
+                .andExpect(jsonPath("$.pref.id").value(13))
+                .andExpect(jsonPath("$.pref.pref_name").value("東京都"))
                 .andExpect(jsonPath("$.prefs[0].id").value(1))
                 .andExpect(jsonPath("$.prefs[0].pref_name").value("ユーザー名"));
     }
@@ -62,8 +62,8 @@ public class ExampleControllerTest {
         ExampleDto dto = new ExampleDto();
 
         dto.setPref(new ExampleEntity());
-        dto.getPref().setId(1);
-        dto.getPref().setPrefName("ユーザー名");
+        dto.getPref().setId(13);
+        dto.getPref().setPrefName("東京都");
 
         dto.setPrefs(new LinkedList<>());
         ExampleList entity2 = new ExampleList();

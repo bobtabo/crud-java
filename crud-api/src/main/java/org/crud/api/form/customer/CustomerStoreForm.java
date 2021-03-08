@@ -3,7 +3,6 @@ package org.crud.api.form.customer;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.beans.factory.annotation.Required;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.Email;
