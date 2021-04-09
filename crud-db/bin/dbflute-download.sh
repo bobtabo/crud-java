@@ -1,4 +1,7 @@
 #!/bin/bash
+#
+# DBFlute本体をダウンロードして、生成テンプレートを置換する
+#
 
 mvn -e dbflute:download
 wait
